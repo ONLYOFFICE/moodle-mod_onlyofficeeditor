@@ -86,12 +86,7 @@ jobs:
           echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
 
       - name: Install moodle-plugin-ci
-        run: |
-          if nc -z mariadb 3306; then
-            moodle-plugin-ci install --plugin ./plugin --db-host=${{ matrix.database }}
-          else
-            moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
-          fi
+        run: moodle-plugin-ci install --plugin ./plugin --db-host=${{ matrix.database }}
         env:
           DB: ${{ matrix.database }}
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
