@@ -39,29 +39,37 @@ jobs:
           - php: 8.2
             moodle-branch: MOODLE_402_STABLE
             database: pgsql
+            port: 5432
           - php: 8.2
             moodle-branch: MOODLE_402_STABLE
             database: mariadb
+            port: 3306
           - php: 8.1
             moodle-branch: MOODLE_401_STABLE
             database: pgsql
+            port: 5432
           - php: 8.1
             moodle-branch: MOODLE_401_STABLE
             database: mariadb
+            port: 3306
 
           # Lowest php versions supported by each branch
           - php: 8.0
             moodle-branch: MOODLE_402_STABLE
             database: pgsql
+            port: 5432
           - php: 8.0
             moodle-branch: MOODLE_402_STABLE
             database: mariadb
+            port: 3306
           - php: 7.4
             moodle-branch: MOODLE_401_STABLE
             database: pgsql
+            port: 5432
           - php: 7.4
             moodle-branch: MOODLE_401_STABLE
             database: mariadb
+            port: 3306
 
     steps:
       - name: Check out repository code
@@ -87,10 +95,10 @@ jobs:
 
       - name: Install moodle-plugin-ci
         run: |
-          if nc -z mariadb 3306; then
+          if nc -z mariadb 3306 || nc -z pgsql 5432; then
             moodle-plugin-ci install --plugin ./plugin --db-host=${{ matrix.database }}
           else
-            moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
+            moodle-plugin-ci install --plugin ./plugin --db-host 127.0.0.1 --db-port ${{ job.services[matrix.database].ports[matrix.port] }}
           fi
         env:
           DB: ${{ matrix.database }}
