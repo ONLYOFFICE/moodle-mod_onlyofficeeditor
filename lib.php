@@ -200,7 +200,7 @@ function onlyofficeeditor_get_coursemodule_info($coursemodule) {
 /**
  * Called when viewing course page. Shows extra details after the link if
  * enabled.
- * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
+ * @todo Custom module instance display
  * @param cm_info $cm Course module information
  */
 function onlyofficeeditor_cm_info_view(cm_info $cm) {
@@ -214,7 +214,7 @@ function onlyofficeeditor_cm_info_view(cm_info $cm) {
  *
  * This function is called from cm_info when displaying the module.
  *
- * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
+ * @todo Custom module instance display
  * @param cm_info $cm
  */
 function onlyofficeeditor_cm_info_dynamic(cm_info $cm) {
