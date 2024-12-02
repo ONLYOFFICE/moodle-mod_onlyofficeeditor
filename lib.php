@@ -125,9 +125,12 @@ function onlyofficeeditor_update_instance(stdClass $data, ?mod_onlyofficeeditor_
     \core_completion\api::update_completion_date_event($data->coursemodule, 'onlyofficeeditor', $data->id, $completiontimeexpected);
 
     $result = $DB->update_record('onlyofficeeditor', $data);
-    $modinfo = get_fast_modinfo($data->course);
-    $cm = $modinfo->get_cm($data->coursemodule);
-    \mod_onlyofficeeditor\document::set_key($cm);
+
+    if ($data->file) {
+        $modinfo = get_fast_modinfo($data->course);
+        $cm = $modinfo->get_cm($data->coursemodule);
+        \mod_onlyofficeeditor\document::set_key($cm);
+    }
 
     return $result;
 }
