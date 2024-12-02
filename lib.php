@@ -126,6 +126,12 @@ function onlyofficeeditor_update_instance(stdClass $data, ?mod_onlyofficeeditor_
 
     $result = $DB->update_record('onlyofficeeditor', $data);
 
+    if ($data->file) {
+        $modinfo = get_fast_modinfo($data->course);
+        $cm = $modinfo->get_cm($data->coursemodule);
+        \mod_onlyofficeeditor\document::set_key($cm);
+    }
+
     return $result;
 }
 
