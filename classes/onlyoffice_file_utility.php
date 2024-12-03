@@ -96,7 +96,7 @@ class onlyoffice_file_utility {
     /**
      * Determine if the format is supported by onlyoffice editor
      *
-     * @param mixed $extension
+     * @param string $extension
      * @return bool
      */
     public static function is_format_supported(string $extension) {
