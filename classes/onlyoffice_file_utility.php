@@ -77,6 +77,22 @@ class onlyoffice_file_utility {
     }
 
     /**
+     * Return all the accepted formats
+     *
+     * @return array formats
+     */
+    public static function get_accepted_formats() {
+        $formats = array_unique(array_merge(
+            self::get_accepted_spreadsheet_formats(),
+            self::get_accepted_presentation_formats(),
+            self::get_accepted_document_formats(),
+            self::get_accepted_pdf_formats(),
+        ));
+
+        return $formats;
+    }
+
+    /**
      * Get document type by extension.
      * @param string $ext File extension.
      * @return string|null
