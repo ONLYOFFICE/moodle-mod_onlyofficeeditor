@@ -133,7 +133,7 @@ class util {
             foreach ($draftfiles as $file) {
                 if (!$file->is_directory()) {
                     $extension = pathinfo($file->get_filename(), PATHINFO_EXTENSION);
-                    $newfilename = $data->name . ".$extension";
+                    $newfilename = self::generate_filename($data->name, $extension);
                     if ($newfilename !== $file->get_filename()) {
                         $file->rename($file->get_filepath(), $newfilename);
                     }
