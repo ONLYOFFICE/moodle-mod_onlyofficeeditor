@@ -1,5 +1,6 @@
 # Change Log
 - fix unsuccessful file rename
+- fix unsupported file upload
 
 ## 5.0.1
 ## Added
