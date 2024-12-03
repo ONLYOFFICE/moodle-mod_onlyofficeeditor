@@ -75,6 +75,11 @@ class util {
     const DESKTOP_USER_AGENT = 'AscDesktopEditor';
 
     /**
+     * File name maximum length
+     */
+    const FILENAME_MAXIMUM_LENGTH = 255;
+
+    /**
      * Get plugin key.
      *
      * @return string plugin key from the plugin configuration.
@@ -467,5 +472,22 @@ class util {
         }
 
         return false;
+    }
+
+    /**
+     * Generate valid file name
+     *
+     * @param string $name
+     * @param string $ext
+     * @return string
+     */
+    public static function generate_filename($name, $ext) {
+        $filename = "$name.$ext";
+
+        if (strlen($filename) > static::FILENAME_MAXIMUM_LENGTH) {
+            $filename = substr($name, 0, static::FILENAME_MAXIMUM_LENGTH - strlen(".$ext")) . ".$ext";
+        }
+
+        return $filename;
     }
 }
