@@ -31,7 +31,7 @@ use renderer_base;
 use stdClass;
 
 /**
- * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
+ * @todo Custom module instance display
  */
 
 /**

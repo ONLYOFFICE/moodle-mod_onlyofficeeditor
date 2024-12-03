@@ -77,16 +77,16 @@ class onlyoffice_file_utility {
     }
 
     /**
-     * return all the supported formats by onlyoffice editor
+     * Return all the accepted formats
      *
-     * @return array
+     * @return array formats
      */
-    public static function get_all_supported_formats(): array {
+    public static function get_accepted_formats() {
         $formats = array_unique(array_merge(
-            static::get_accepted_spreadsheet_formats(),
-            static::get_accepted_presentation_formats(),
-            static::get_accepted_document_formats(),
-            static::get_accepted_pdf_formats(),
+            self::get_accepted_spreadsheet_formats(),
+            self::get_accepted_presentation_formats(),
+            self::get_accepted_document_formats(),
+            self::get_accepted_pdf_formats(),
         ));
 
         return $formats;
@@ -94,13 +94,13 @@ class onlyoffice_file_utility {
 
 
     /**
-     * determine if the format is supported by onlyoffice editor
+     * Determine if the format is supported by onlyoffice editor
      *
      * @param mixed $extension
      * @return bool
      */
     public static function is_format_supported(string $extension) {
-        $formats = static::get_all_supported_formats();
+        $formats = static::get_accepted_formats();
 
         foreach ($formats as $format) {
             if ($format === ".$extension") {

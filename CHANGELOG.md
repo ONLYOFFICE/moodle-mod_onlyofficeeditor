@@ -1,7 +1,9 @@
 # Change Log
 
+## 5.0.1
 ## Added
 - fi, he, no, sl language templates
+- default empty templates
 
 ## Changed
 - fix JWT header issue
