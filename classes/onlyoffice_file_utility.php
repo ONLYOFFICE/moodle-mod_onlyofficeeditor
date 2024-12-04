@@ -92,6 +92,25 @@ class onlyoffice_file_utility {
         return $formats;
     }
 
+
+    /**
+     * Determine if the format is supported by onlyoffice editor
+     *
+     * @param string $extension
+     * @return bool
+     */
+    public static function is_format_supported(string $extension) {
+        $formats = static::get_accepted_formats();
+
+        foreach ($formats as $format) {
+            if ($format === ".$extension") {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Get document type by extension.
      * @param string $ext File extension.

@@ -87,5 +87,6 @@ $string['saveassuccess'] = 'Document was successfully saved.';
 $string['saveastitle'] = 'Choose Course Section to Save the document';
 $string['selectfile'] = 'Select existing file or create new by clicking one of the icons';
 $string['storageurl'] = 'Server address for internal requests from ONLYOFFICE Docs';
+$string['unsupportedfileformat'] = 'File format is not supported';
 $string['uploadformname'] = 'Upload file';
 $string['xlsxformname'] = 'Spreadsheet';
