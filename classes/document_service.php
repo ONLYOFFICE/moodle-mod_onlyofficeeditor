@@ -27,6 +27,7 @@ namespace mod_onlyofficeeditor;
 
 use curl;
 use mod_onlyofficeeditor\configuration_manager;
+use mod_onlyofficeeditor\local\exceptions\command_service_exception;
 use mod_onlyofficeeditor\local\exceptions\conversion_service_exception;
 
 /**
@@ -137,6 +138,10 @@ class document_service {
         $response = $curl->post($commandurl, $commandbody);
 
         $commandjson = json_decode($response);
+
+        if (isset($commandjson->error) && $commandjson->error > 0) {
+            throw new command_service_exception($commandjson->error);
+        }
 
         return $commandjson;
     }
