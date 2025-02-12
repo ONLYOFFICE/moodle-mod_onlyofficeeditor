@@ -27,6 +27,7 @@ namespace mod_onlyofficeeditor;
 
 use curl;
 use mod_onlyofficeeditor\configuration_manager;
+use mod_onlyofficeeditor\local\exceptions\conversion_service_exception;
 
 /**
  * Document class.
@@ -89,7 +90,7 @@ class document_service {
 
         $conversionjson = json_decode($response);
         if (isset($conversionjson->error)) {
-            return '';
+            throw new conversion_service_exception(abs($conversionjson->error));
         }
 
         if (isset($conversionjson->endConvert) && $conversionjson->endConvert) {
