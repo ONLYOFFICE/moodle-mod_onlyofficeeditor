@@ -153,10 +153,6 @@ class document_service {
     public static function get_version() {
         $result = self::command('version');
 
-        if (isset($result->error) && $result->error > 0) {
-            return '';
-        }
-
         return $result->version;
     }
 }
