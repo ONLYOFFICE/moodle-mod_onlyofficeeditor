@@ -34,6 +34,26 @@ namespace mod_onlyofficeeditor;
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class configuration_manager {
+    /**
+     * Get configuration value by name
+     *
+     * @param string $name Configuration parameter name
+     * @return mixed Configuration value
+     */
+    public static function get($name) {
+        return get_config(configuration_constants::PLUGIN_NAME, $name);
+    }
+
+    /**
+     * Set configuration value
+     *
+     * @param string $name Configuration parameter name
+     * @param mixed $value Configuration value to set
+     * @return bool True if successful
+     */
+    public static function set($name, $value) {
+        return set_config($name, $value, configuration_constants::PLUGIN_NAME);
+    }
 
     /**
      * Get the document service address available from Moodle from the application configuration
