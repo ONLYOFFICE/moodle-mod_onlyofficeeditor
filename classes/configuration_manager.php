@@ -60,9 +60,9 @@ class configuration_manager {
      * @return string document server url
      */
     public static function get_document_server_internal_url() {
-        $url = get_config("onlyofficeeditor", "documentserverinternal");
+        $url = self::get(configuration_constants::CONFIG_DOCS_INTERNAL_URL);
         if (empty($url)) {
-            return get_config("onlyofficeeditor", "documentserverurl");
+            return self::get(configuration_constants::CONFIG_DOCS_PUBLIC_URL);
         }
         return $url;
     }
@@ -74,7 +74,7 @@ class configuration_manager {
      */
     public static function get_storage_url() {
         global $CFG;
-        $url = get_config("onlyofficeeditor", "storageurl");
+        $url = self::get(configuration_constants::CONFIG_STORAGE_INTERNAL_URL);
         if (empty($url)) {
             return $CFG->wwwroot;
         }
@@ -91,7 +91,7 @@ class configuration_manager {
     public static function replace_document_server_url_to_internal($url) {
         $documentserverurl = self::get_document_server_internal_url();
         if (!empty($documentserverurl)) {
-            $from = get_config("onlyofficeeditor", "documentserverurl");
+            $from = self::get(configuration_constants::CONFIG_DOCS_PUBLIC_URL);
 
             if ($from !== $documentserverurl) {
                 $url = str_replace($from, $documentserverurl, $url);
