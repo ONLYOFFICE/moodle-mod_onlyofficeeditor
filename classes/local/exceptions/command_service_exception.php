@@ -35,11 +35,22 @@ class command_service_exception extends document_server_exception {
     /**
      * Error codes for command service
      */
+    /** @var int Error code when required key is missing */
     public const ERROR_MISSING_KEY = 1;
+
+    /** @var int Error code when provided URL is invalid */
     public const ERROR_INVALID_URL = 2;
+
+    /** @var int Error code when internal server error occurs */
     public const ERROR_INTERNAL_SERVER = 3;
+
+    /** @var int Error code when no changes were made to the document */
     public const ERROR_NO_CHANGES = 4;
+
+    /** @var int Error code when command is invalid or not recognized */
     public const ERROR_INVALID_COMMAND = 5;
+
+    /** @var int Error code when provided token is invalid */
     public const ERROR_INVALID_TOKEN = 6;
 
     /**
@@ -55,7 +66,7 @@ class command_service_exception extends document_server_exception {
             self::ERROR_INTERNAL_SERVER,
             self::ERROR_NO_CHANGES,
             self::ERROR_INVALID_COMMAND,
-            self::ERROR_INVALID_TOKEN
+            self::ERROR_INVALID_TOKEN,
         ]);
     }
 

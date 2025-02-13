@@ -35,15 +35,34 @@ class conversion_service_exception extends document_server_exception {
     /**
      * Error codes for conversion service
      */
+    /** @var int Error code for unknown errors */
     public const ERROR_UNKNOWN = 1;
+
+    /** @var int Error code when document conversion times out */
     public const ERROR_CONVERSION_TIMEOUT = 2;
+
+    /** @var int Error code when document conversion fails */
     public const ERROR_CONVERSION = 3;
+
+    /** @var int Error code when document download fails */
     public const ERROR_DOWNLOAD = 4;
+
+    /** @var int Error code when provided password is incorrect */
     public const ERROR_INCORRECT_PASSWORD = 5;
+
+    /** @var int Error code when database access fails */
     public const ERROR_DATABASE_ACCESS = 6;
+
+    /** @var int Error code when input data is invalid */
     public const ERROR_INPUT = 7;
+
+    /** @var int Error code when provided token is invalid */
     public const ERROR_INVALID_TOKEN = 8;
+
+    /** @var int Error code when file format detection fails */
     public const ERROR_FORMAT_DETECTION = 9;
+
+    /** @var int Error code when file size exceeds the limit */
     public const ERROR_SIZE_LIMIT = 10;
 
     /**
@@ -63,7 +82,7 @@ class conversion_service_exception extends document_server_exception {
             self::ERROR_INPUT,
             self::ERROR_INVALID_TOKEN,
             self::ERROR_FORMAT_DETECTION,
-            self::ERROR_SIZE_LIMIT
+            self::ERROR_SIZE_LIMIT,
         ]);
     }
 
