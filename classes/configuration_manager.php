@@ -100,4 +100,13 @@ class configuration_manager {
 
         return $url;
     }
+
+    /**
+     * Check if SSL verification is disabled
+     *
+     * @return bool True if SSL verification is disabled
+     */
+    public static function is_ssl_disabled(): bool {
+        return self::get(configuration_constants::CONFIG_DISABLE_VERIFY_SSL) == 1;
+    }
 }
