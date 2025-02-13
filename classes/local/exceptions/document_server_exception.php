@@ -35,14 +35,4 @@ use Throwable;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class document_server_exception extends Exception {
-    /**
-     * Constructor
-     *
-     * @param string $message The error message
-     * @param int $code The error code
-     * @param Throwable|null $previous Previous throwable
-     */
-    public function __construct(string $message, int $code = 0, ?Throwable $previous = null) {
-        parent::__construct($message, $code, $previous);
-    }
 }
