@@ -25,7 +25,6 @@
 namespace mod_onlyofficeeditor\local\exceptions;
 
 use Exception;
-use Throwable;
 
 /**
  * Exception indicating document server errors.
