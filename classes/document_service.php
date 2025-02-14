@@ -27,6 +27,8 @@ namespace mod_onlyofficeeditor;
 
 use curl;
 use mod_onlyofficeeditor\configuration_manager;
+use mod_onlyofficeeditor\local\exceptions\command_service_exception;
+use mod_onlyofficeeditor\local\exceptions\conversion_service_exception;
 
 /**
  * Document class.
@@ -89,7 +91,7 @@ class document_service {
 
         $conversionjson = json_decode($response);
         if (isset($conversionjson->error)) {
-            return '';
+            throw new conversion_service_exception(abs($conversionjson->error));
         }
 
         if (isset($conversionjson->endConvert) && $conversionjson->endConvert) {
@@ -137,6 +139,10 @@ class document_service {
 
         $commandjson = json_decode($response);
 
+        if (isset($commandjson->error) && $commandjson->error > 0) {
+            throw new command_service_exception($commandjson->error);
+        }
+
         return $commandjson;
     }
 
@@ -146,10 +152,6 @@ class document_service {
      */
     public static function get_version() {
         $result = self::command('version');
-
-        if (isset($result->error) && $result->error > 0) {
-            return '';
-        }
 
         return $result->version;
     }
