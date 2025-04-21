@@ -29,6 +29,7 @@ use curl;
 use mod_onlyofficeeditor\configuration_manager;
 use mod_onlyofficeeditor\local\exceptions\command_service_exception;
 use mod_onlyofficeeditor\local\exceptions\conversion_service_exception;
+use mod_onlyofficeeditor\local\exceptions\document_server_exception;
 
 /**
  * Document class.
@@ -154,5 +155,31 @@ class document_service {
         $result = self::command('version');
 
         return $result->version;
+    }
+
+    /**
+     * Health check the document server
+     * @param string $url - document server url
+     * @return void
+     */
+    public static function health_check(string $url = ''): void {
+        $documentserverurl = !empty($url) ? $url : configuration_manager::get_document_server_internal_url();
+        $healthcheckurl = "$documentserverurl/healthcheck";
+        $disableverifyssl = ! configuration_manager::is_ssl_disabled();
+
+        $ch = new curl();
+        $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl]);
+        $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => $disableverifyssl]);
+
+        try {
+            $response = $ch->get($healthcheckurl);
+        } catch (\Exception $e) {
+            debugging('Connection error: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            throw new document_server_exception('Failed to connect to Document Server.', 0, $e);
+        }
+
+        if ($response !== 'true') {
+            throw new document_server_exception('Document Server has returned bad healthcheck status.');
+        }
     }
 }
