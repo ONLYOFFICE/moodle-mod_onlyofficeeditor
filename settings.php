@@ -22,7 +22,8 @@
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use mod_onlyofficeeditor\util;
+
+use mod_onlyofficeeditor\local\admin\settings\post_submit_admin_setting;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -94,4 +95,5 @@ if ($ADMIN->fulltree) {
         get_string('editor_security_plugin', 'onlyofficeeditor'), '', 1));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_security_macros',
         get_string('editor_security_macros', 'onlyofficeeditor'), '', 1));
+    $settings->add(new post_submit_admin_setting());
 }
