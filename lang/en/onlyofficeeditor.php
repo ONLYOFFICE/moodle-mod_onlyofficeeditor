@@ -89,4 +89,7 @@ $string['selectfile'] = 'Select existing file or create new by clicking one of t
 $string['storageurl'] = 'Server address for internal requests from ONLYOFFICE Docs';
 $string['unsupportedfileformat'] = 'File format is not supported';
 $string['uploadformname'] = 'Upload file';
+$string['validationerror:incorrectsecret'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the Secret key is correct.';
+$string['documentservererror'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the server is running and accessible.';
+$string['conversionserviceerror'] = 'Error occurred while checking ONLYOFFICE Docs conversion service. Please contact your system administrator.';
 $string['xlsxformname'] = 'Spreadsheet';
