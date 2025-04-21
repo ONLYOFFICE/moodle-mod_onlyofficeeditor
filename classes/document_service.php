@@ -165,11 +165,14 @@ class document_service {
     public static function health_check(string $url = ''): void {
         $documentserverurl = !empty($url) ? $url : configuration_manager::get_document_server_internal_url();
         $healthcheckurl = "$documentserverurl/healthcheck";
-        $disableverifyssl = ! configuration_manager::is_ssl_disabled();
+        $disableverifyssl = configuration_manager::is_ssl_disabled();
 
         $ch = new curl();
-        $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl]);
-        $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => $disableverifyssl]);
+
+        if ($disableverifyssl) {
+            $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+        }
 
         try {
             $response = $ch->get($healthcheckurl);
