@@ -24,6 +24,7 @@
 
 namespace mod_onlyofficeeditor\local\docs;
 
+use mod_onlyofficeeditor\configuration_manager;
 use mod_onlyofficeeditor\document_service;
 use mod_onlyofficeeditor\local\exceptions\command_service_exception;
 use mod_onlyofficeeditor\local\exceptions\document_server_exception;
@@ -50,6 +51,7 @@ class docs_settings_validator {
      * @return void
      */
     public function validate() {
+        $this->check_for_mixed_content();
         $this->check_document_server();
         $this->check_command_service();
         $this->check_conversion_service();
@@ -71,6 +73,23 @@ class docs_settings_validator {
      */
     public function get_errors() {
         return $this->errors;
+    }
+
+    /**
+     * Check for mixed content issues between Moodle and Document Server URLs.
+     *
+     * @return void
+     */
+    private function check_for_mixed_content() {
+        global $CFG;
+
+        $moodleurl = $CFG->wwwroot;
+        $docserverurl = configuration_manager::get_document_server_public_url();
+
+        if (strpos($moodleurl, 'https://') === 0 && strpos($docserverurl, 'https://') !== 0) {
+            debugging('Mixed content issue: Moodle uses HTTPS but Document Server uses HTTP', DEBUG_DEVELOPER);
+            $this->errors[] = get_string('mixedcontenterror', 'onlyofficeeditor');
+        }
     }
 
     /**
