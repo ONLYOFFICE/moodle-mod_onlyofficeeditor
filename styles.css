@@ -114,7 +114,7 @@
     margin: 12px;
 }
 
-.path-mod-onlyofficeeditor .onlyoffice-banner {
+.path-admin .onlyoffice-banner {
     border: 1px solid #e9e9e9;
     border-radius: 3px;
     display: flex;
@@ -126,7 +126,7 @@
     margin: 15px 0;
 }
 
-.path-mod-onlyofficeeditor .banner-body {
+.path-admin .onlyoffice-banner .banner-body {
     max-width: 398px;
     display: flex;
     align-items: center;
@@ -134,16 +134,16 @@
     padding-right: 24px;
 }
 
-.path-mod-onlyofficeeditor .banner-body h4,
-.path-mod-onlyofficeeditor .banner-body p {
+.path-admin .onlyoffice-banner .banner-body h4,
+.path-admin .onlyoffice-banner .banner-body p {
     margin: 0;
 }
 
-.path-mod-onlyofficeeditor .banner-body h4 {
+.path-admin .onlyoffice-banner .banner-body h4 {
     margin-bottom: 5px;
 }
 
-.path-mod-onlyofficeeditor .banner-icon img {
+.path-admin .onlyoffice-banner .banner-icon img {
     max-width: 82px;
     max-height: 79px;
     width: 82px;
@@ -151,22 +151,22 @@
     margin-right: 0;
 }
 
-.path-mod-onlyofficeeditor .banner-title {
+.path-admin .onlyoffice-banner .banner-title {
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
 }
 
-.path-mod-onlyofficeeditor .banner-description {
+.path-admin .onlyoffice-banner .banner-description {
     font-weight: 300;
     font-size: 14px;
 }
 
-.path-mod-onlyofficeeditor .banner-links {
+.path-admin .onlyoffice-banner .banner-links {
     margin-left: 24px;
 }
 
-.path-mod-onlyofficeeditor .banner-links a {
+.path-admin .onlyoffice-banner .banner-links a {
     background-color: transparent;
     color: #316ab9;
     border: 1px solid #316ab9;
@@ -177,36 +177,36 @@
     font-weight: 500;
 }
 
-.path-mod-onlyofficeeditor .banner-links a:active {
+.path-admin .onlyoffice-banner .banner-links a:active {
     background-color: transparent;
 }
 
-.path-mod-onlyofficeeditor .banner-links a:hover {
+.path-admin .onlyoffice-banner .banner-links a:hover {
     text-decoration: none;
 }
 
 @media (max-width: 603px) {
-    .path-mod-onlyofficeeditor .onlyoffice-banner {
+    .path-admin .onlyoffice-banner {
         flex-direction: column;
     }
 
-    .path-mod-onlyofficeeditor .banner-body {
+    .path-admin .onlyoffice-banner .banner-body {
         padding-right: 0;
     }
 
-    .path-mod-onlyofficeeditor .banner-links {
+    .path-admin .onlyoffice-banner .banner-links {
         margin-top: 15px;
     }
 }
 
 @media (max-width: 480px) {
-    .path-mod-onlyofficeeditor .banner-body {
+    .path-admin .onlyoffice-banner .banner-body {
         flex-direction: column;
         justify-items: center;
     }
 
-    .path-mod-onlyofficeeditor .banner-title,
-    .path-mod-onlyofficeeditor .banner-description {
+    .path-admin .onlyoffice-banner .banner-title,
+    .path-admin .onlyoffice-banner .banner-description {
         text-align: center;
     }
 }
