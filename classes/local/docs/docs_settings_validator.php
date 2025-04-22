@@ -153,6 +153,6 @@ class docs_settings_validator {
      */
     private function get_temp_file_url() {
         global $CFG;
-        return $CFG->wwwroot . '/mod/onlyofficeeditor/assets/test.docx';
+        return $CFG->wwwroot . '/mod/onlyofficeeditor/newdocs/default/new.docx';
     }
 }
