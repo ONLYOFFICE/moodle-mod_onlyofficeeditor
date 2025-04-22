@@ -1,6 +1,7 @@
 # Change Log
 - fix unsuccessful file rename
 - fix unsupported file upload
+- fix approval blockers: namespace collisions, superglobals usage
 
 ## 5.0.1
 ## Added
