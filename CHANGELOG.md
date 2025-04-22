@@ -1,6 +1,7 @@
 # Change Log
 - fix unsuccessful file rename
 - fix unsupported file upload
+- add admin settings validation for document server related fields
 
 ## 5.0.1
 ## Added
