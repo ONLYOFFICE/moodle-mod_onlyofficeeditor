@@ -154,9 +154,12 @@ class util {
     public static function get_connection_info($url) {
         $ch = new \curl();
 
-        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 0;
-        $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl]);
-        $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => $disableverifyssl]);
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 1;
+
+        if ($disableverifyssl) {
+            $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+        }
 
         $ch->get($url);
         $info = $ch->get_info();

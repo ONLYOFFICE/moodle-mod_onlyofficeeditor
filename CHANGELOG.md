@@ -2,6 +2,7 @@
 - fix unsuccessful file rename
 - fix unsupported file upload
 - fix approval blockers: namespace collisions, superglobals usage
+- fix incorrect disabling of certificate verification in curl
 
 ## 5.0.1
 ## Added
