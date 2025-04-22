@@ -53,6 +53,7 @@ $string['jwtheader'] = 'Authorization header';
 $string['mentioncontexturlname'] = 'Link to the comment.';
 $string['mentionnotifier:notification'] = '{$a->notifier} mentioned in the {$a->course}';
 $string['messageprovider:mentionnotifier'] = 'ONLYOFFICE mentioning notification in module document.';
+$string['mixedcontenterror'] = 'Mixed Active Content is not allowed. HTTPS address for ONLYOFFICE Docs is required';
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
 $string['modulenameplural'] = 'ONLYOFFICE Documents';
