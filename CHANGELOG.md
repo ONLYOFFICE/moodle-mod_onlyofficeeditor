@@ -1,6 +1,8 @@
 # Change Log
 - fix unsuccessful file rename
 - fix unsupported file upload
+- fix approval blockers: namespace collisions, superglobals usage
+- fix incorrect disabling of certificate verification in curl
 - add admin settings validation for document server related fields
 
 ## 5.0.1
