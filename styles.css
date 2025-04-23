@@ -3,12 +3,14 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/* Base styles (mobile-first) */
 .path-mod-onlyofficeeditor #page-content h2,
 .path-mod-onlyofficeeditor #page-content .activityinstance > a {
     display: inline-block;
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-container > iframe {
+    position: static !important; /* stylelint-disable-line declaration-no-important */
     height: 95vh;
     max-height: 60rem;
 }
@@ -18,12 +20,14 @@
     left: 0;
     right: 0;
     top: 0;
-    margin: 0 0 0 50px;
+    margin: 0;
+    margin-top: 61px;
+    padding: 0 1px;
     z-index: 100;
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
-    margin-right: 43px;
+    margin-right: 0;
 }
 
 .path-mod-onlyofficeeditor #onlyofficeeditor-editor.error {
@@ -108,18 +112,26 @@
 .path-mod-onlyofficeeditor #onlyofficeeditor-enter-fs-button {
     padding: 5px;
     margin-right: 10px;
+    margin-bottom: 0.5rem;
 }
 
 .path-mod-onlyofficeeditor #onlyofficeeditor-exit-fs-button {
-    margin: 12px;
+    margin: 12px 0;
 }
 
+.path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button i {
+    display: none;
+}
+
+/* Banner styles - mobile first */
 .path-admin .onlyoffice-banner {
     border: 1px solid #e9e9e9;
     border-radius: 3px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 16px 32px 21px 20px;
+    padding: 16px 20px;
     width: fit-content;
     background-image: url([[pix:onlyofficeeditor|banner_bg]]);
     background-repeat: no-repeat;
@@ -129,9 +141,10 @@
 .path-admin .onlyoffice-banner .banner-body {
     max-width: 398px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    column-gap: 35px;
-    padding-right: 24px;
+    justify-items: center;
+    padding-right: 0;
 }
 
 .path-admin .onlyoffice-banner .banner-body h4,
@@ -155,15 +168,18 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
+    text-align: center;
 }
 
 .path-admin .onlyoffice-banner .banner-description {
     font-weight: 300;
     font-size: 14px;
+    text-align: center;
 }
 
 .path-admin .onlyoffice-banner .banner-links {
-    margin-left: 24px;
+    margin-left: 0;
+    margin-top: 16px;
 }
 
 .path-admin .onlyoffice-banner .banner-links a {
@@ -185,34 +201,54 @@
     text-decoration: none;
 }
 
-@media (max-width: 589px) {
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
     .path-admin .onlyoffice-banner {
         padding: 16px 20px;
+        flex-direction: row;
+        justify-content: flex-start;
     }
-    
-    .path-admin .onlyoffice-banner .banner-body {
-        padding-right: 0;
-    }
-}
 
-@media (max-width: 577px) {
-    .path-admin .onlyoffice-banner {
-        flex-direction: column;
-        justify-content: center;
-    }
-    
     .path-admin .onlyoffice-banner .banner-body {
-        flex-direction: column;
-        justify-items: center;
+        flex-direction: row;
+        column-gap: 35px;
+        padding-right: 24px;
+        justify-items: flex-start;
     }
 
     .path-admin .onlyoffice-banner .banner-title,
     .path-admin .onlyoffice-banner .banner-description {
-        text-align: center;
+        text-align: left;
     }
 
     .path-admin .onlyoffice-banner .banner-links {
-        margin-left: 0;
-        margin-top: 16px;
+        margin-left: 22px;
+        margin-top: 0;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .path-mod-onlyofficeeditor #onlyofficeeditor-exit-fs-button {
+        margin: 12px;
+    }
+
+    .path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button i {
+        display: inline-block;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
+        margin: 0 0 0 50px;
+    }
+
+    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
+        margin-right: 43px;
+    }
+
+    .path-admin .onlyoffice-banner {
+        padding: 16px 32px 21px 20px;
     }
 }
