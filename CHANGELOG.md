@@ -2,6 +2,7 @@
 
 ## Added
 - add admin settings validation for document server related fields
+- ca, cs, da, hu, id, ro, sq, ur language templates
 
 ## Changed
 - fix unsuccessful file rename
