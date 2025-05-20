@@ -27,6 +27,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
+use mod_onlyofficeeditor\onlyoffice_file_utility;
 use mod_onlyofficeeditor\util;
 
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
@@ -144,13 +145,23 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
 
         $usercontext = \context_user::instance($USER->id);
         $fs = get_file_storage();
-        if (!$files = $fs->get_area_files($usercontext->id, 'user', 'draft', $data['file'], 'sortorder, id', false)) {
+        $files = $fs->get_area_files($usercontext->id, 'user', 'draft', $data['file'], 'sortorder, id', false);
+        if (!$files) {
             $fileformat = $data['onlyofficetemplateformat'];
             if ($fileformat != null && $fileformat != 'Upload file') {
                 util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id,
                     $data['file'], $data['name']);
             } else {
                 $errors['file'] = get_string('required');
+            }
+        } else {
+            foreach ($files as $file) {
+                $extension = pathinfo($file->get_filename(), PATHINFO_EXTENSION);
+
+                if (!onlyoffice_file_utility::is_format_supported($extension)) {
+                    $errors['file'] = get_string('unsupportedfileformat', 'onlyofficeeditor');
+                    break;
+                }
             }
         }
         return $errors;

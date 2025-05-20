@@ -34,15 +34,43 @@ namespace mod_onlyofficeeditor;
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class configuration_manager {
+    /**
+     * Get configuration value by name
+     *
+     * @param string $name Configuration parameter name
+     * @return mixed Configuration value
+     */
+    public static function get($name) {
+        return get_config(configuration_constants::PLUGIN_NAME, $name);
+    }
+
+    /**
+     * Set configuration value
+     *
+     * @param string $name Configuration parameter name
+     * @param mixed $value Configuration value to set
+     * @return bool True if successful
+     */
+    public static function set($name, $value) {
+        return set_config($name, $value, configuration_constants::PLUGIN_NAME);
+    }
+
+    /**
+     * Get the document server public url
+     * @return string document server url
+     */
+    public static function get_document_server_public_url() {
+        return self::get(configuration_constants::CONFIG_DOCS_PUBLIC_URL);
+    }
 
     /**
      * Get the document service address available from Moodle from the application configuration
      * @return string document server url
      */
     public static function get_document_server_internal_url() {
-        $url = get_config("onlyofficeeditor", "documentserverinternal");
+        $url = self::get(configuration_constants::CONFIG_DOCS_INTERNAL_URL);
         if (empty($url)) {
-            return get_config("onlyofficeeditor", "documentserverurl");
+            return self::get(configuration_constants::CONFIG_DOCS_PUBLIC_URL);
         }
         return $url;
     }
@@ -54,7 +82,7 @@ class configuration_manager {
      */
     public static function get_storage_url() {
         global $CFG;
-        $url = get_config("onlyofficeeditor", "storageurl");
+        $url = self::get(configuration_constants::CONFIG_STORAGE_INTERNAL_URL);
         if (empty($url)) {
             return $CFG->wwwroot;
         }
@@ -71,7 +99,7 @@ class configuration_manager {
     public static function replace_document_server_url_to_internal($url) {
         $documentserverurl = self::get_document_server_internal_url();
         if (!empty($documentserverurl)) {
-            $from = get_config("onlyofficeeditor", "documentserverurl");
+            $from = self::get(configuration_constants::CONFIG_DOCS_PUBLIC_URL);
 
             if ($from !== $documentserverurl) {
                 $url = str_replace($from, $documentserverurl, $url);
@@ -79,5 +107,14 @@ class configuration_manager {
         }
 
         return $url;
+    }
+
+    /**
+     * Check if SSL verification is disabled
+     *
+     * @return bool True if SSL verification is disabled
+     */
+    public static function is_ssl_disabled(): bool {
+        return self::get(configuration_constants::CONFIG_DISABLE_VERIFY_SSL) == 1;
     }
 }

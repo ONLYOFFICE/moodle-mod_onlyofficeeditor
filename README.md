@@ -1,10 +1,10 @@
-﻿# Moodle ONLYOFFICE Integration plugin
+﻿# ONLYOFFICE plugin for Moodle
 
 This plugin enables users to edit office documents from [Moodle](https://moodle.org/) using ONLYOFFICE Docs packaged as Document Server - [Community or Enterprise Edition](#onlyoffice-docs-editions).
 
 ## Features
 
-The app allows to:
+The plugin allows to:
 
 * Edit text documents, spreadsheets, presentations, and PDF forms.
 * Co-edit documents in real-time: use two co-editing modes (Fast and Strict), the Track Changes mode, comments, and the built-in chat.
@@ -25,7 +25,7 @@ To install Enterprise Edition, follow the instructions [here](https://helpcenter
 
 Community Edition vs Enterprise Edition comparison can be found [here](#onlyoffice-docs-editions).
 
-## Installing Moodle ONLYOFFICE Integration plugin
+## Installing ONLYOFFICE plugin for Moodle
 
 This plugin is an __activity module__.
 
@@ -33,9 +33,9 @@ Follow the usual Moodle plugin installation steps to install this plugin into yo
 
 The latest compiled package files are available [here](https://github.com/ONLYOFFICE/moodle-mod_onlyofficeeditor/releases).
 
-## Configuring Moodle ONLYOFFICE Integration plugin
+## Configuring ONLYOFFICE plugin for Moodle
 
-Once the plugin is installed, the plugin settings page will be opened. Alternatively, you can find the uploaded app on the `Plugins overview` page and click `Settings`.
+Once the plugin is installed, the plugin settings page will be opened. Alternatively, you can find the uploaded plugin on the `Plugins overview` page and click `Settings`.
 
 Enter the name of the server with ONLYOFFICE Document Server installed in the **Document Editing Service address** field.
 
@@ -43,7 +43,7 @@ Starting from version 7.2, JWT is enabled by default and the secret key is gener
 Specify your own **Document Server Secret** on the Moodle **Settings** page. 
 In the ONLYOFFICE Docs [config file](https://api.onlyoffice.com/editors/signature/), specify the same secret key and enable the validation.
 
-## Using Moodle ONLYOFFICE Integration plugin
+## Using ONLYOFFICE plugin for Moodle
 
 Once the plugin is installed and configured, you can add instances of ONLYOFFICE activity to your course pages as per usual Moodle practice:
 

@@ -33,11 +33,11 @@ switch ($apitype) {
     case 'mention':
         require_capability('mod/onlyofficeeditor:editdocument', $context);
         try {
-            $courseid = $_GET['courseid'];
+            $courseid = required_param('courseid', PARAM_INT);
             require_login($courseid);
-            $actionlink = $_POST['link'];
-            $emails = $_POST['emails'];
-            $comment = $_POST['comment'];
+            $actionlink = required_param('link', PARAM_URL);
+            $emails = required_param('emails', PARAM_TEXT);
+            $comment = required_param('comment', PARAM_TEXT);
             \mod_onlyofficeeditor\util::mention_user_in_comment($actionlink, $comment, $emails, $context);
             echo json_encode($comment);
         } catch (moodle_exception $e) {
@@ -46,7 +46,7 @@ switch ($apitype) {
         break;
     case 'sections':
         try {
-            $courseid = $_GET['courseid'];
+            $courseid = required_param('courseid', PARAM_INT);
             require_login($courseid);
             $moduleinfo = get_fast_modinfo($courseid);
             $sections = course_get_format($courseid)->get_sections();
@@ -65,11 +65,11 @@ switch ($apitype) {
         break;
     case 'saveas':
         try {
-            $courseid = $_POST['courseid'];
+            $courseid = required_param('courseid', PARAM_INT);
             require_login($courseid);
-            $url = $_POST['url'];
-            $title = $_POST['title'];
-            $section = $_POST['section'];
+            $url = required_param('url', PARAM_URL);
+            $title = required_param('title', PARAM_TEXT);
+            $section = required_param('section', PARAM_INT);
             \mod_onlyofficeeditor\util::save_as_document($url, $title, $context, $cmid, $courseid, $section);
             echo json_encode($title);
         } catch (\Exception $e) {

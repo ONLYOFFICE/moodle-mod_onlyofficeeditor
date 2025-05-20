@@ -1,4 +1,4 @@
-Moodle ONLYOFFICE integration plugin uses code from the following 3rd party projects:
+ONLYOFFICE plugin for Moodle uses code from the following 3rd party projects:
 
 composer      - Composer helps you declare, manage, and install dependencies of PHP projects. (https://github.com/composer/composer/blob/main/LICENSE)
 License:        MIT
