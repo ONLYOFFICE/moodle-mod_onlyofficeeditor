@@ -1,4 +1,10 @@
 # Change Log
+
+## Added
+- add admin settings validation for document server related fields
+- ca, cs, da, hu, id, ro, sq, ur language templates
+
+## Changed
 - fix unsuccessful file rename
 - fix unsupported file upload
 - fix approval blockers: namespace collisions, superglobals usage

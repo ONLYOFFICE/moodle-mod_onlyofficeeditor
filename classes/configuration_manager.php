@@ -56,6 +56,14 @@ class configuration_manager {
     }
 
     /**
+     * Get the document server public url
+     * @return string document server url
+     */
+    public static function get_document_server_public_url() {
+        return self::get(configuration_constants::CONFIG_DOCS_PUBLIC_URL);
+    }
+
+    /**
      * Get the document service address available from Moodle from the application configuration
      * @return string document server url
      */
