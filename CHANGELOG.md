@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 6.1.0
 ## Added
 - add admin settings validation for document server related fields
 - ca, cs, da, hu, id, ro, sq, ur language templates
