@@ -11,7 +11,8 @@
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-container > iframe {
     position: static !important; /* stylelint-disable-line declaration-no-important */
-    height: 95vh;
+    height: calc(100dvh - 61px);
+    height: calc(100vh - 61px); /* stylelint-disable-line declaration-block-no-duplicate-properties */
     max-height: 60rem;
 }
 
