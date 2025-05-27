@@ -44,11 +44,19 @@
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[type=radio] {
+    -webkit-appearance: none;
     margin: auto;
     appearance: none;
     position: absolute;
     top: 0;
     opacity: 0.5;
+    width: 30px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0;
+    border: none;
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[type=radio]:checked {
@@ -56,23 +64,23 @@
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="Document"] {
-    content: url([[pix:onlyofficeeditor|file_docx]]);
+    background-image: url([[pix:onlyofficeeditor|file_docx]]);
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="Presentation"] {
-    content: url([[pix:onlyofficeeditor|file_pptx]]);
+    background-image: url([[pix:onlyofficeeditor|file_pptx]]);
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="Spreadsheet"] {
-    content: url([[pix:onlyofficeeditor|file_xlsx]]);
+    background-image: url([[pix:onlyofficeeditor|file_xlsx]]);
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="PDF form"] {
-    content: url([[pix:onlyofficeeditor|file_pdf]]);
+    background-image: url([[pix:onlyofficeeditor|file_pdf]]);
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="Upload file"] {
-    content: url([[pix:onlyofficeeditor|file_upload]]);
+    background-image: url([[pix:onlyofficeeditor|file_upload]]);
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-saveas-section {
