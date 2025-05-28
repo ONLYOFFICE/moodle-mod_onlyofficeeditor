@@ -1,19 +1,17 @@
-﻿# Moodle ONLYOFFICE Integration plugin
+﻿# ONLYOFFICE plugin for Moodle
 
 This plugin enables users to edit office documents from [Moodle](https://moodle.org/) using ONLYOFFICE Docs packaged as Document Server - [Community or Enterprise Edition](#onlyoffice-docs-editions).
 
 ## Features
 
-The app allows to:
+The plugin allows to:
 
-* Edit text documents, spreadsheets, and presentations.
+* Edit text documents, spreadsheets, presentations, and PDF forms.
 * Co-edit documents in real-time: use two co-editing modes (Fast and Strict), the Track Changes mode, comments, and the built-in chat.
 
 Supported formats:
 
-* For viewing and editing: DOCX, XLSX, PPTX, TXT, CSV.
-* For viewing only: PDF.
-* For converting to Office Open XML formats: ODT, ODS, ODP, DOC, XLS, PPT, PPS, EPUB, RTF, HTML, HTM.
+* For viewing and editing: DOCX, XLSX, PPTX, PDF, TXT, CSV.
 
 ## Installing ONLYOFFICE Docs
 
@@ -21,13 +19,13 @@ You will need an instance of ONLYOFFICE Docs (Document Server) that is resolvabl
 
 You can install free Community version of ONLYOFFICE Docs or scalable Enterprise Edition with pro features.
 
-To install free Community version, use [Docker](https://github.com/onlyoffice/Docker-DocumentServer) (recommended) or follow [these instructions](https://helpcenter.onlyoffice.com/installation/docs-community-install-ubuntu.aspx) for Debian, Ubuntu, or derivatives.
+To install free Community version, use [Docker](https://github.com/onlyoffice/Docker-DocumentServer) (recommended) or follow [these instructions](https://helpcenter.onlyoffice.com/installation/docs-community-install-ubuntu.aspx) for Debian, Ubuntu, or derivatives.
 
-To install Enterprise Edition, follow the instructions [here](https://helpcenter.onlyoffice.com/installation/docs-enterprise-index.aspx).
+To install Enterprise Edition, follow the instructions [here](https://helpcenter.onlyoffice.com/installation/docs-enterprise-index.aspx).
 
 Community Edition vs Enterprise Edition comparison can be found [here](#onlyoffice-docs-editions).
 
-## Installing Moodle ONLYOFFICE Integration plugin
+## Installing ONLYOFFICE plugin for Moodle
 
 This plugin is an __activity module__.
 
@@ -35,9 +33,9 @@ Follow the usual Moodle plugin installation steps to install this plugin into yo
 
 The latest compiled package files are available [here](https://github.com/ONLYOFFICE/moodle-mod_onlyofficeeditor/releases).
 
-## Configuring Moodle ONLYOFFICE Integration plugin
+## Configuring ONLYOFFICE plugin for Moodle
 
-Once the plugin is installed, the plugin settings page will be opened. Alternatively, you can find the uploaded app on the `Plugins overview` page and click `Settings`.
+Once the plugin is installed, the plugin settings page will be opened. Alternatively, you can find the uploaded plugin on the `Plugins overview` page and click `Settings`.
 
 Enter the name of the server with ONLYOFFICE Document Server installed in the **Document Editing Service address** field.
 
@@ -45,15 +43,15 @@ Starting from version 7.2, JWT is enabled by default and the secret key is gener
 Specify your own **Document Server Secret** on the Moodle **Settings** page. 
 In the ONLYOFFICE Docs [config file](https://api.onlyoffice.com/editors/signature/), specify the same secret key and enable the validation.
 
-## Using Moodle ONLYOFFICE Integration plugin
+## Using ONLYOFFICE plugin for Moodle
 
 Once the plugin is installed and configured, you can add instances of ONLYOFFICE activity to your course pages as per usual Moodle practice:
 
 1. Open the necessary course page.
-2.  Activate the **Edit Mode** using the switcher at the top right corner.
-3. Click **Add an activity or resource**.
-4. Select the **ONLYOFFICE document** activity in the pop-up window.
-5. Type in the activity name, upload or drag-and-drop the necessary document from your PC and click the **Save and display** button.
+2.  Activate the **Edit Mode** using the switcher at the top right corner.
+3. Click **Add an activity or resource**.
+4. Select the **ONLYOFFICE document** activity in the pop-up window.
+5. Type in the activity name, upload or drag-and-drop the necessary document from your PC and click the **Save and display** button.
 
 Admins/Teachers can choose whether or not documents can be downloaded or printed from inside the ONLYOFFICE editor. This can be done in the **Document permissions** section.
 

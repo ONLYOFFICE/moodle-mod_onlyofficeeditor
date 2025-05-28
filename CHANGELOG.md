@@ -1,5 +1,38 @@
 # Change Log
 
+## 5.1.0
+## Added
+- add admin settings validation for document server related fields
+- ca, cs, da, hu, id, ro, sq, ur language templates
+
+## Changed
+- fix unsuccessful file rename
+- fix unsupported file upload
+- fix approval blockers: namespace collisions, superglobals usage
+- fix incorrect disabling of certificate verification in curl
+
+## 5.0.1
+## Added
+- fi, he, no, sl language templates
+- default empty templates
+
+## Changed
+- fix JWT header issue
+- remove trailing slashes from setting urls after update
+
+## 5.0.0
+## Added
+- link to docs cloud
+- certificate verification setting
+- advanced server settings for specifying internal addresses
+- check the url address of the save as document
+
+## Changed
+- replace docxf with pdf as a form template
+- fix exit full screan
+- disable scrolling page to editor
+- disable chat in editor for guest
+
 ## 4.3.0
 ## Added
 - desktop mode

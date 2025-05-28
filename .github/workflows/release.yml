@@ -2,7 +2,8 @@ name: Release
 
 on:
   push:
-    branches: [master]
+    tags:
+      - 'v*'
 
 jobs:
   release:
@@ -10,10 +11,10 @@ jobs:
     permissions: write-all
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 22.11.0
       - name: Get Info
         run: |
           echo "version=$(grep -Eo '[0-9]+(\.[0-9]+)+' CHANGELOG.md | head -n 1)" >> $GITHUB_OUTPUT
@@ -25,19 +26,20 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           git submodule update --init --recursive
-          mkdir -p ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          rsync -av --exclude='moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}' ./ ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          cd ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          mkdir -p ./onlyofficeeditor
+          rsync -av --exclude='onlyofficeeditor' ./ ./onlyofficeeditor
+          cd ./onlyofficeeditor
           rm -rf ./.github/
           rm -rf ./.git/
+          rm -f ./.gitmodules
       - name: Checkout Moodle
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: moodle/moodle
           path: ./moodle
       - name: Copy Plugin
         run: |
-          cp -r moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }} ./moodle/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          cp -r onlyofficeeditor ./moodle/mod/onlyofficeeditor
       - name: Build Plugin
         run: |
           cd ./moodle
@@ -46,6 +48,7 @@ jobs:
       - name: Zip Artifact
         run: |
           cd moodle/mod/
+          mv onlyofficeeditor moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
           zip -r moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}.zip moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}/
       - name: Create Release
         uses: ncipollo/release-action@v1

@@ -18,7 +18,7 @@
  * Upgrade code for the onlyoffice.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,18 +30,5 @@
  * @return bool
  */
 function xmldb_onlyofficeeditor_upgrade($oldversion) {
-    global $DB;
-    $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
-    $coretypes = core_filetypes::get_types();
-
-    if (!array_key_exists("docxf", $coretypes)) {
-        core_filetypes::add_type("docxf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document.docxf",
-            "document", array(), '', 'ONLYOFFICE docxf');
-    }
-    if (!array_key_exists("oform", $coretypes)) {
-        core_filetypes::add_type("oform", "application/vnd.openxmlformats-officedocument.wordprocessingml.document.oform",
-            "document", array(), '', 'ONLYOFFICE oform');
-    }
-
     return true;
 }

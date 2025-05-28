@@ -19,20 +19,24 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_onlyofficeeditor;
 
 use curl;
+use mod_onlyofficeeditor\configuration_manager;
+use mod_onlyofficeeditor\local\exceptions\command_service_exception;
+use mod_onlyofficeeditor\local\exceptions\conversion_service_exception;
+use mod_onlyofficeeditor\local\exceptions\document_server_exception;
 
 /**
  * Document class.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class document_service {
@@ -43,9 +47,10 @@ class document_service {
      * @param string $from original file format.
      * @param string $to format to which to convert.
      * @param string $key document key.
+     * @param array $pdf pdf conversion param
      * @return string source url for converted document
      */
-    public static function get_conversion_url($documenturi, $from, $to, $key) {
+    public static function get_conversion_url($documenturi, $from, $to, $key, $pdf = []) {
         $modconfig = get_config('onlyofficeeditor');
 
         $curl = new curl();
@@ -58,12 +63,16 @@ class document_service {
             "outputtype" => $to,
             "filetype" => $from,
             "title" => $key . '.' . $from,
-            "key" => $key
+            "key" => $key,
         ];
+
+        if ($pdf) {
+            $conversionbody['pdf']['form'] = $pdf['form'];
+        }
 
         if (!empty($modconfig->documentserversecret)) {
             $params = [
-                'payload' => $conversionbody
+                'payload' => $conversionbody,
             ];
             $token = \mod_onlyofficeeditor\jwt_wrapper::encode($params, $modconfig->documentserversecret);
             $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
@@ -74,13 +83,21 @@ class document_service {
         }
 
         $conversionbody = json_encode($conversionbody);
-        $conversionurl = rtrim($modconfig->documentserverurl, "/") . '/ConvertService.ashx';
+        $documentserverurl = configuration_manager::get_document_server_internal_url();
+        $conversionurl = rtrim($documentserverurl, "/") . '/ConvertService.ashx';
+
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 1;
+
+        if ($disableverifyssl) {
+            $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $curl->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+        }
 
         $response = $curl->post($conversionurl, $conversionbody);
 
         $conversionjson = json_decode($response);
         if (isset($conversionjson->error)) {
-            return '';
+            throw new conversion_service_exception(abs($conversionjson->error));
         }
 
         if (isset($conversionjson->endConvert) && $conversionjson->endConvert) {
@@ -103,12 +120,12 @@ class document_service {
         $curl->setHeader(['Accept: application/json']);
 
         $commandbody = [
-            'c' => $method
+            'c' => $method,
         ];
 
         if (!empty($modconfig->documentserversecret)) {
             $params = [
-                'payload' => $commandbody
+                'payload' => $commandbody,
             ];
             $token = \mod_onlyofficeeditor\jwt_wrapper::encode($params, $modconfig->documentserversecret);
             $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
@@ -119,11 +136,22 @@ class document_service {
         }
 
         $commandbody = json_encode($commandbody);
-        $commandurl = rtrim($modconfig->documentserverurl, "/") . '/coauthoring/CommandService.ashx';
+        $documentserverurl = configuration_manager::get_document_server_internal_url();
+        $commandurl = rtrim($documentserverurl, "/") . '/coauthoring/CommandService.ashx';
 
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 1;
+
+        if ($disableverifyssl) {
+            $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $curl->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+        }
         $response = $curl->post($commandurl, $commandbody);
 
         $commandjson = json_decode($response);
+
+        if (isset($commandjson->error) && $commandjson->error > 0) {
+            throw new command_service_exception($commandjson->error);
+        }
 
         return $commandjson;
     }
@@ -135,10 +163,35 @@ class document_service {
     public static function get_version() {
         $result = self::command('version');
 
-        if (isset($result->error) && $result->error > 0) {
-            return '';
+        return $result->version;
+    }
+
+    /**
+     * Health check the document server
+     * @param string $url - document server url
+     * @return void
+     */
+    public static function health_check(string $url = ''): void {
+        $documentserverurl = !empty($url) ? $url : configuration_manager::get_document_server_internal_url();
+        $healthcheckurl = "$documentserverurl/healthcheck";
+        $disableverifyssl = configuration_manager::is_ssl_disabled();
+
+        $ch = new curl();
+
+        if ($disableverifyssl) {
+            $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
         }
 
-        return $result->version;
+        try {
+            $response = $ch->get($healthcheckurl);
+        } catch (\Exception $e) {
+            debugging('Connection error: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            throw new document_server_exception('Failed to connect to Document Server.', 0, $e);
+        }
+
+        if ($response !== 'true') {
+            throw new document_server_exception('Document Server has returned bad healthcheck status.');
+        }
     }
 }

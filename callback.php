@@ -19,18 +19,20 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 /**
  * @todo Log disconnection (editor close) for respective user. note, editor open (connection) is logged in view.php
  */
+// phpcs:ignore moodle.Files.RequireLogin.Missing
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+// phpcs:enable
 
 defined('AJAX_SCRIPT') || define('AJAX_SCRIPT', true);
 
-$doc = required_param('doc', PARAM_RAW);
+$doc = required_param('doc', PARAM_TEXT);
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('X-Robots-Tag: noindex');
@@ -79,7 +81,8 @@ if (!empty($modconfig->documentserversecret)) {
         }
     } else {
         $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
-        $token = substr(getallheaders()[$jwtheader], strlen('Bearer '));
+        $headers = array_change_key_case(getallheaders(), CASE_LOWER);
+        $token = substr($headers[strtolower($jwtheader)], strlen('Bearer '));
         try {
             $decodedheader = \mod_onlyofficeeditor\jwt_wrapper::decode($token, $modconfig->documentserversecret);
 

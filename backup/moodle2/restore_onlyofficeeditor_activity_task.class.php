@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -51,9 +51,9 @@ class restore_onlyofficeeditor_activity_task extends restore_activity_task {
      * processed by the link decoder
      */
     public static function define_decode_contents() {
-        $contents = array();
+        $contents = [];
 
-        $contents[] = new restore_decode_content('onlyofficeeditor', array('intro'), 'onlyofficeeditor');
+        $contents[] = new restore_decode_content('onlyofficeeditor', ['intro'], 'onlyofficeeditor');
 
         return $contents;
     }
@@ -63,7 +63,7 @@ class restore_onlyofficeeditor_activity_task extends restore_activity_task {
      * to the activity to be executed by the link decoder
      */
     public static function define_decode_rules() {
-        $rules = array();
+        $rules = [];
 
         $rules[] = new restore_decode_rule('ONLYOFFICEEDITORVIEWBYID',
                 '/mod/onlyofficeeditor/view.php?id=$1', 'course_module');
@@ -78,7 +78,7 @@ class restore_onlyofficeeditor_activity_task extends restore_activity_task {
      * Define the restore log rules that will be applied
      */
     public static function define_restore_log_rules() {
-        $rules = array();
+        $rules = [];
 
         $rules[] = new restore_log_rule('onlyofficeeditor', 'add',
                 'view.php?id={course_module}', '{onlyofficeeditor}');
@@ -96,7 +96,7 @@ class restore_onlyofficeeditor_activity_task extends restore_activity_task {
      * Define the restore log rules that will be applied
      */
     public static function define_restore_log_rules_for_course() {
-        $rules = array();
+        $rules = [];
 
         $rules[] = new restore_log_rule('onlyofficeeditor', 'view all', 'index.php?id={course}', null);
 

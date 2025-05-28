@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,13 +30,14 @@ namespace mod_onlyofficeeditor;
 use mod_onlyofficeeditor\onlyoffice_file_utility;
 use mod_onlyofficeeditor\document;
 use mod_onlyofficeeditor\jwt_wrapper;
+use mod_onlyofficeeditor\configuration_manager;
 
 /**
  * Editor config class.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -117,6 +118,7 @@ class editor {
         // Top level config object.
         $config = [];
         $crypt = new \mod_onlyofficeeditor\hasher();
+        $storageurl = configuration_manager::get_storage_url();
 
         // Document.
         $document = [];
@@ -124,7 +126,7 @@ class editor {
         $path = '/' . $this->context->id . '/mod_onlyofficeeditor/content/'
                     . urlencode(substr($file->get_filepath(), 1) . $filename);
         $contenthash = $crypt->get_hash(['userid' => $USER->id, 'contenthash' => $file->get_contenthash()]);
-        $documenturl = $CFG->wwwroot . '/pluginfile.php' . $path . '?doc=' . $contenthash;
+        $documenturl = $storageurl . '/pluginfile.php' . $path . '?doc=' . $contenthash;
 
         $document['url'] = $documenturl;
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
@@ -137,8 +139,13 @@ class editor {
         $editorconfig = [];
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
         $editorconfig['actionLink'] = null;
-        $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
-        $editorconfig['lang'] = stristr($USER->lang, '_', true) !== false ? stristr($USER->lang, '_', true) : $USER->lang;
+        $editorconfig['callbackUrl'] = $storageurl . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
+        if (property_exists($USER, 'lang')) {
+            $lang = stristr($USER->lang, '_', true) !== false ? stristr($USER->lang, '_', true) : $USER->lang;
+        } else {
+            $lang = $CFG->lang;
+        }
+        $editorconfig['lang'] = $lang;
 
         // User.
         $user = [];
@@ -152,7 +159,7 @@ class editor {
         $customization['goback']['text'] = get_string('returntodocument', 'onlyofficeeditor');
         $customization['goback']['url'] = $CFG->wwwroot . '/course/view.php?id=' . $this->courseid;
         $customization['forcesave'] = $this->modconfig->forcesave == 1;
-        $customization['chat'] = $this->modconfig->editor_view_chat == 1;
+        $customization['chat'] = $this->modconfig->editor_view_chat == 1 && !is_guest($this->context);
         $customization['help'] = $this->modconfig->editor_view_help == 1;
         $customization['compactHeader'] = $this->modconfig->editor_view_header == 1;
         $customization['feedback'] = $this->modconfig->editor_view_feedback == 1;
@@ -160,6 +167,7 @@ class editor {
         $customization['commentAuthorOnly'] = true;
         $customization['plugins'] = $this->modconfig->editor_security_plugin == 1;
         $customization['macros'] = $this->modconfig->editor_security_macros == 1;
+        $customization['integrationMode'] = 'embed';
         $editorconfig['customization'] = $customization;
 
         // Device type.
