@@ -28,10 +28,6 @@ namespace mod_onlyofficeeditor\output;
 use plugin_renderer_base;
 
 /**
- * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
- */
-
-/**
  * Plugin renderer class.
  *
  * @package     mod_onlyofficeeditor
