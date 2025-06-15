@@ -130,7 +130,7 @@ class docs_settings_validator {
      */
     private function check_command_service() {
         try {
-            document_service::command('version');
+            document_service::command('version', ['send_body' => false]);
         } catch (command_service_exception $e) {
             debugging('Command service error: ' . $e->getMessage(), DEBUG_DEVELOPER);
             if ($e->getCode() === command_service_exception::ERROR_INVALID_TOKEN) {
