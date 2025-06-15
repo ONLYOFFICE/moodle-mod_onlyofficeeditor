@@ -197,4 +197,38 @@ class document_service {
             throw new document_server_exception('Document Server has returned bad healthcheck status.');
         }
     }
+
+    /**
+     * Check if the Document Server API JavaScript file is accessible.
+     *
+     * @throws document_server_exception if the API JavaScript file cannot be fetched.
+     */
+    public static function check_docs_api_js() {
+        $documentserverurl = configuration_manager::get_document_server_public_url();
+        $apijsurl = rtrim($documentserverurl, '/') . '/web-apps/apps/api/documents/api.js';
+
+        $curl = new curl();
+
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 1;
+
+        if ($disableverifyssl) {
+            $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $curl->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+        }
+
+        try {
+            $response = $curl->head($apijsurl);
+        } catch (\Exception $e) {
+            debugging('Connection error: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            throw new document_server_exception('Could not fetch the API JavaScript file.', 0, $e);
+        }
+
+        $headers = $curl->get_info();
+        $statuscode = $headers['http_code'] ?? 0;
+        $contenttype = $headers['content_type'] ?? '';
+        if ($curl->error || $statuscode !== 200 || strpos($contenttype, 'javascript') === false) {
+            debugging('Connection error: ' . $curl->error, DEBUG_DEVELOPER);
+            throw new document_server_exception('Could not fetch the API JavaScript file.', 0);
+        }
+    }
 }
