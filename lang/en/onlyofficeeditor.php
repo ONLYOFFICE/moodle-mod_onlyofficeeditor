@@ -23,6 +23,7 @@
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$string['apijserror'] = 'Could not load ONLYOFFICE Docs API JS file. Please check the address in the plugin settings.';
 $string['banner_description'] = 'Easily launch the editors in the cloud without downloading and installation';
 $string['banner_link_title'] = 'Get Now';
 $string['banner_title'] = 'ONLYOFFICE Docs Cloud';
@@ -92,5 +93,5 @@ $string['selectfile'] = 'Select existing file or create new by clicking one of t
 $string['storageurl'] = 'Server address for internal requests from ONLYOFFICE Docs';
 $string['unsupportedfileformat'] = 'File format is not supported';
 $string['uploadformname'] = 'Upload file';
-$string['validationerror:incorrectsecret'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the Secret key is correct.';
+$string['validationerror:incorrectsecret'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the Secret key or Authorization header is correct.';
 $string['xlsxformname'] = 'Spreadsheet';
