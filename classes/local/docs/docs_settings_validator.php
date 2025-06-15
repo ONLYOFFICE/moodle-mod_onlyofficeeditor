@@ -52,6 +52,7 @@ class docs_settings_validator {
      */
     public function validate() {
         $this->check_for_mixed_content();
+        $this->check_api_js();
         $this->check_document_server();
         $this->check_command_service();
         $this->check_conversion_service();
@@ -89,6 +90,21 @@ class docs_settings_validator {
         if (strpos($moodleurl, 'https://') === 0 && strpos($docserverurl, 'https://') !== 0) {
             debugging('Mixed content issue: Moodle uses HTTPS but Document Server uses HTTP', DEBUG_DEVELOPER);
             $this->errors[] = get_string('mixedcontenterror', 'onlyofficeeditor');
+        }
+    }
+
+    /**
+     * Check document server api js.
+     *
+     * @return void
+     */
+    private function check_api_js() {
+        try {
+            document_service::check_docs_api_js();
+        } catch (document_server_exception $e) {
+            debugging('Document server error: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            $this->errors[] = get_string('apijserror', 'onlyofficeeditor');
+            return;
         }
     }
 
