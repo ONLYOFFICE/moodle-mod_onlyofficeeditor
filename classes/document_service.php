@@ -110,9 +110,10 @@ class document_service {
     /**
      * Command request.
      * @param string $method command method.
+     * @param array $options additional options for command request.
      * @return array command result
      */
-    public static function command($method) {
+    public static function command($method, $options = []) {
         $modconfig = get_config('onlyofficeeditor');
 
         $curl = new curl();
@@ -145,7 +146,9 @@ class document_service {
             $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
             $curl->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
         }
-        $response = $curl->post($commandurl, $commandbody);
+        $response = isset($options['send_body']) && $options['send_body'] === false
+            ? $curl->post($commandurl)
+            : $curl->post($commandurl, $commandbody);
 
         $commandjson = json_decode($response);
 
