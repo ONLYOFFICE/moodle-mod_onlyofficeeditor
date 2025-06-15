@@ -383,8 +383,14 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     $modconfig = get_config('onlyofficeeditor');
     if (!empty($modconfig->documentserversecret)) {
         $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
+        $jwtheader = strtolower($jwtheader);
         $headers = array_change_key_case(getallheaders(), CASE_LOWER);
-        $token = substr($headers[strtolower($jwtheader)], strlen('Bearer '));
+
+        if (!isset($headers[$jwtheader]) || strpos($headers[$jwtheader], 'Bearer ') !== 0) {
+            return false;
+        }
+
+        $token = substr($headers[$jwtheader], strlen('Bearer '));
         try {
             $decodedheader = \mod_onlyofficeeditor\jwt_wrapper::decode($token, $modconfig->documentserversecret);
         } catch (\UnexpectedValueException $e) {
