@@ -137,7 +137,7 @@ class docs_settings_validator {
      * @return string Temporary file URL
      */
     private function get_temp_file_url() {
-        global $CFG;
-        return $CFG->wwwroot . '/mod/onlyofficeeditor/newdocs/default/new.docx';
+        $storageurl = configuration_manager::get_storage_url();
+        return $storageurl . '/mod/onlyofficeeditor/downloademptyfile.php';
     }
 }
