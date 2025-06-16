@@ -26,7 +26,6 @@ namespace mod_onlyofficeeditor\local\docs;
 
 use mod_onlyofficeeditor\configuration_manager;
 use mod_onlyofficeeditor\document_service;
-use mod_onlyofficeeditor\local\exceptions\command_service_exception;
 use mod_onlyofficeeditor\local\exceptions\document_server_exception;
 use mod_onlyofficeeditor\local\exceptions\conversion_service_exception;
 
@@ -53,7 +52,6 @@ class docs_settings_validator {
     public function validate() {
         $this->check_for_mixed_content();
         $this->check_document_server();
-        $this->check_command_service();
         $this->check_conversion_service();
     }
 
@@ -104,23 +102,6 @@ class docs_settings_validator {
             debugging('Document server error: ' . $e->getMessage(), DEBUG_DEVELOPER);
             $this->errors[] = get_string('documentservererror', 'onlyofficeeditor');
             return;
-        }
-    }
-
-    /**
-     * Check command service.
-     *
-     * @return void
-     */
-    private function check_command_service() {
-        try {
-            document_service::command('version');
-        } catch (command_service_exception $e) {
-            debugging('Command service error: ' . $e->getMessage(), DEBUG_DEVELOPER);
-            if ($e->getCode() === command_service_exception::ERROR_INVALID_TOKEN) {
-                $this->errors[] = get_string('validationerror:incorrectsecret', 'onlyofficeeditor');
-                return;
-            }
         }
     }
 
