@@ -122,8 +122,12 @@ class docs_settings_validator {
             );
         } catch (conversion_service_exception $e) {
             debugging('Conversion service error: ' . $e->getMessage(), DEBUG_DEVELOPER);
-            $this->errors[] = get_string('conversionserviceerror', 'onlyofficeeditor');
-            return;
+            // Handle specific error codes.
+            if ($e->getCode() === conversion_service_exception::ERROR_INVALID_TOKEN) {
+                $this->errors[] = get_string('validationerror:incorrectsecret', 'onlyofficeeditor');
+            } else {
+                $this->errors[] = get_string('conversionserviceerror', 'onlyofficeeditor');
+            }
         }
     }
 
