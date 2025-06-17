@@ -42,7 +42,7 @@ if ($ADMIN->fulltree) {
     ];
     $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerdata);
 
-    $documentserverurlconfigtext = new admin_setting_configtext('onlyofficeeditor/documentserverurl',
+    $documentserverurlconfigtext = new admin_setting_requiredtext('onlyofficeeditor/documentserverurl',
     get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
     $defaulthost);
     $documentserverurlconfigtext->set_updatedcallback(function () {
