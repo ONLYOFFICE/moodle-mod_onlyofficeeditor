@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use mod_onlyofficeeditor\local\admin\settings\post_submit_admin_setting;
+use mod_onlyofficeeditor\local\admin\settings\check_document_server_button;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -90,6 +90,8 @@ if ($ADMIN->fulltree) {
     });
     $settings->add($storageurlconfigtext);
 
+    $settings->add(new check_document_server_button());
+
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',
         get_string('editor_view', 'onlyofficeeditor'), ''));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_chat',
@@ -108,5 +110,4 @@ if ($ADMIN->fulltree) {
         get_string('editor_security_plugin', 'onlyofficeeditor'), '', 1));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_security_macros',
         get_string('editor_security_macros', 'onlyofficeeditor'), '', 1));
-    $settings->add(new post_submit_admin_setting());
 }
