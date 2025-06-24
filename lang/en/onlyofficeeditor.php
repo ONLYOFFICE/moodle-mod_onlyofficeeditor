@@ -46,6 +46,7 @@ $string['editor_security_macros'] = 'Run document macros';
 $string['editor_security_plugin'] = 'Enable plugins';
 $string['editor_view'] = 'Editor customization settings';
 $string['editor_view_chat'] = 'Display Chat menu button';
+$string['editor_view_description'] = 'Learn more about customizing the editor <a href="{$a->url}" target="_blank">here</a>.';
 $string['editor_view_feedback'] = 'Display Feedback & Support menu button';
 $string['editor_view_header'] = 'Display the header more compact';
 $string['editor_view_help'] = 'Display Help menu button';

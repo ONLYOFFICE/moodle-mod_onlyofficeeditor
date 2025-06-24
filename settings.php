@@ -31,6 +31,8 @@ if ($ADMIN->fulltree) {
 
     $defaulthost = 'https://documentserver.url';
     $linktodocs = 'https://www.onlyoffice.com/docs-registration.aspx?referer=moodle';
+    $customizationapiurl =
+    'https://api.onlyoffice.com/docs/docs-api/usage-api/config/editor/customization/customization-standard-branding';
     $defaultjwtheader = 'Authorization';
     $bannerdata = [
         'title' => get_string('banner_title', 'onlyofficeeditor'),
@@ -79,7 +81,8 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_heading('onlyofficeeditor/banner', '', $banner));
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',
-        get_string('editor_view', 'onlyofficeeditor'), ''));
+        get_string('editor_view', 'onlyofficeeditor'),
+        get_string('editor_view_description', 'onlyofficeeditor', ['url' => $customizationapiurl])));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_chat',
         get_string('editor_view_chat', 'onlyofficeeditor'), '', 1));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_help',
