@@ -28,6 +28,7 @@ $string['banner_link_title'] = 'Get Now';
 $string['banner_title'] = 'ONLYOFFICE Docs Cloud';
 $string['conversionserviceerror'] = 'Error occurred while checking ONLYOFFICE Docs conversion service. Please contact your system administrator.';
 $string['disable_verify_ssl'] = 'Disable certificate verification (insecure)';
+$string['disable_verify_ssl:description'] = 'Only use when accessing Document Server with a self-signed certificate';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
 $string['documentpermissions'] = 'Document permissions';
 $string['documentservererror'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the server is running and accessible.';
