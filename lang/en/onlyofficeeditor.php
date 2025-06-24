@@ -33,6 +33,7 @@ $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached.
 $string['documentpermissions'] = 'Document permissions';
 $string['documentservererror'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the server is running and accessible.';
 $string['documentserverinternal'] = 'ONLYOFFICE Docs address for internal requests from the server';
+$string['documentserverinternal:description'] = 'Fill in only when using internal routing between the Moodle server and ONLYOFFICE Docs, without relying on public addresses';
 $string['documentserversecret'] = 'Document Server Secret';
 $string['documentserversecret_desc'] = 'The secret is used to generate the token (an encrypted signature) in the browser for the document editor opening and calling the methods and the requests to the document command service and document conversion service. The token prevents the substitution of important parameters in ONLYOFFICE Document Server requests.';
 $string['documentserverurl'] = 'Document Editing Service Address';

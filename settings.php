@@ -61,7 +61,8 @@ if ($ADMIN->fulltree) {
         get_string('disable_verify_ssl', 'onlyofficeeditor'), get_string('disable_verify_ssl:description', 'onlyofficeeditor'), 0));
 
     $documentserverinternalurlconfigtext = new admin_setting_configtext('onlyofficeeditor/documentserverinternal',
-    get_string('documentserverinternal', 'onlyofficeeditor'), '', '');
+    get_string('documentserverinternal', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor'),
+    '');
     $documentserverinternalurlconfigtext->set_updatedcallback(function () {
         $documentserverinternalurl = get_config('onlyofficeeditor', 'documentserverinternal');
         set_config('documentserverinternal', rtrim($documentserverinternalurl, '/'), 'onlyofficeeditor');
@@ -69,7 +70,7 @@ if ($ADMIN->fulltree) {
     $settings->add($documentserverinternalurlconfigtext);
 
     $storageurlconfigtext = new admin_setting_configtext('onlyofficeeditor/storageurl',
-    get_string('storageurl', 'onlyofficeeditor'), '', '');
+    get_string('storageurl', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor'), '');
     $storageurlconfigtext->set_updatedcallback(function () {
         $storageurl = get_config('onlyofficeeditor', 'storageurl');
         set_config('storageurl', rtrim($storageurl, '/'), 'onlyofficeeditor');
