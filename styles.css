@@ -36,6 +36,7 @@
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-create-button {
+    display: flex;
     position: relative;
     justify-content: center;
     min-width: 85px;
