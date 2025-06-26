@@ -19,7 +19,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 /* eslint-disable no-console */
-define(['core/notification', 'mod_onlyofficeeditor/repository'], function(Notification, Repository) {
+define(
+    ['core/notification', 'core/str', 'mod_onlyofficeeditor/repository', 'mod_onlyofficeeditor/url_validator'],
+    function(Notification, Str, Repository, UrlValidator) {
     const fields = {
         'docserverurl': 'documentserverurl',
         'secret': 'documentserversecret',
@@ -33,21 +35,41 @@ define(['core/notification', 'mod_onlyofficeeditor/repository'], function(Notifi
 
     const checkDocumentServerConnection = async(event) => {
         event.preventDefault();
+
+        const docsurl = document.getElementById('id_s_onlyofficeeditor_documentserverurl').value.trim();
+        const connectionerrormessage = await Str.get_string("connectionerror", "onlyofficeeditor");
+
+        const errors = await validateDocumentServerUrl(docsurl);
+
+        if (errors.length > 0) {
+            clearValidationOutput();
+            Notification.addNotification({
+                message: connectionerrormessage,
+                type: 'error'
+            });
+            for (const error of errors) {
+                highlightErrorField(error);
+            }
+            return;
+        }
+
         await Repository.checkDocumentServerConnection(
-            document.getElementById('id_s_onlyofficeeditor_documentserverurl').value,
+            docsurl,
             document.getElementById('id_s_onlyofficeeditor_documentserversecret').value,
             document.getElementById('id_s_onlyofficeeditor_jwtheader').value,
             document.getElementById('id_s_onlyofficeeditor_documentserverinternal').value,
             document.getElementById('id_s_onlyofficeeditor_storageurl').value,
             document.getElementById('id_s_onlyofficeeditor_disable_verify_ssl').checked
         )
-        .then(response => {
-            console.log(response);
+        .then(async (response) => {
             clearValidationOutput();
             if (response.status === 'success') {
                 Notification.addNotification({message: "Connection is stable.", type: 'success'});
             } else if (response.status === 'error') {
-                Notification.addNotification({message: "Connection error.", type: 'error'});
+                Notification.addNotification({
+                    message: connectionerrormessage,
+                    type: 'error'
+                });
                 for (const error of response.errors) {
                     if (error.field === "general") {
                         Notification.addNotification({message: error.message, type: 'error'});
@@ -57,9 +79,12 @@ define(['core/notification', 'mod_onlyofficeeditor/repository'], function(Notifi
                 }
             }
             return;
-        }).catch(error => {
+        }).catch(async (error) => {
             console.error('Error checking Document Server connection:', error);
-            Notification.addNotification({message: "Unexpected error ocurred while checking connection.", type: 'error'});
+            Notification.addNotification({
+                message: await Str.get_string("connectionerror:unexpected", "onlyofficeeditor"),
+                type: 'error'
+            });
         });
     };
 
@@ -81,6 +106,29 @@ define(['core/notification', 'mod_onlyofficeeditor/repository'], function(Notifi
         validationElements.length = 0;
         const notifications = document.getElementById("user-notifications");
         notifications.innerHTML = "";
+    };
+
+    const validateDocumentServerUrl = async (url) => {
+        let error = [];
+
+        if (!url) {
+            error.push({
+                field: 'docserverurl',
+                message: await Str.get_string("validationerror:emptyurl", "onlyofficeeditor")
+            });
+        } else if (!UrlValidator.isValidUrl(url)) {
+            error.push({
+                field: 'docserverurl',
+                message: await Str.get_string("validationerror:invalidurl", "onlyofficeeditor")
+            });
+        } else if (UrlValidator.isMixedContent(url)) {
+            error.push({
+                field: 'docserverurl',
+                message: await Str.get_string("validationerror:mixedcontent", "onlyofficeeditor")
+            });
+        }
+
+        return error;
     };
 
     return {
