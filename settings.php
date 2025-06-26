@@ -53,14 +53,12 @@ if ($ADMIN->fulltree) {
     });
     $settings->add($documentserverurlconfigtext);
 
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/disable_verify_ssl',
+        get_string('disable_verify_ssl', 'onlyofficeeditor'), get_string('disable_verify_ssl:description', 'onlyofficeeditor'), 0));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserversecret',
         get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor'), ''));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/jwtheader',
         get_string('jwtheader', 'onlyofficeeditor'), '', $defaultjwtheader));
-    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/forcesave',
-        get_string('forcesave', 'onlyofficeeditor'), '', 0));
-    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/disable_verify_ssl',
-        get_string('disable_verify_ssl', 'onlyofficeeditor'), get_string('disable_verify_ssl:description', 'onlyofficeeditor'), 0));
 
     $documentserverinternalurlconfigtext = new admin_setting_configtext('onlyofficeeditor/documentserverinternal',
     get_string('documentserverinternal', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor'),
@@ -83,6 +81,8 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',
         get_string('editor_view', 'onlyofficeeditor'),
         get_string('editor_view_description', 'onlyofficeeditor', ['url' => $customizationapiurl])));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/forcesave',
+        get_string('forcesave', 'onlyofficeeditor'), '', 0));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_chat',
         get_string('editor_view_chat', 'onlyofficeeditor'), '', 1));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_help',
