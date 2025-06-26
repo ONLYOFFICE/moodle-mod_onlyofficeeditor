@@ -114,7 +114,10 @@ class docs_settings_validator {
         $moodleurl = $CFG->wwwroot;
 
         if (strpos($moodleurl, 'https://') === 0 && strpos($docserverurl, 'https://') !== 0) {
-            throw new docs_validation_exception('docserverurl', get_string('mixedcontenterror', 'onlyofficeeditor'));
+            throw new docs_validation_exception(
+                'docserverurl',
+                get_string('validationerror:mixedcontent', 'onlyofficeeditor')
+            );
         }
     }
 
@@ -138,11 +141,11 @@ class docs_settings_validator {
         try {
             $response = $ch->get($healthcheckurl);
         } catch (Exception $e) {
-            throw new docs_validation_exception('internalurl', get_string('documentservererror', 'onlyofficeeditor'));
+            throw new docs_validation_exception('general', get_string('connectionerror:unexpected', 'onlyofficeeditor'));
         }
 
         if ($response !== 'true') {
-            throw new docs_validation_exception('general', get_string('documentservererror', 'onlyofficeeditor'));
+            throw new docs_validation_exception('internalurl', get_string('validationerror:documentserverunreachable', 'onlyofficeeditor'));
         }
     }
 
@@ -186,7 +189,7 @@ class docs_settings_validator {
             } else {
                 throw new docs_validation_exception(
                     'general',
-                    get_string('commandserviceerror', 'onlyofficeeditor')
+                    get_string('connectionerror:command', 'onlyofficeeditor')
                 );
             }
         }
@@ -249,7 +252,7 @@ class docs_settings_validator {
             } else {
                 throw new docs_validation_exception(
                     'general',
-                    get_string('conversionserviceerror', 'onlyofficeeditor')
+                    get_string('connectionerror:conversion', 'onlyofficeeditor')
                 );
             }
         }
@@ -257,7 +260,7 @@ class docs_settings_validator {
         if (!(isset($conversionjson->endConvert) && $conversionjson->endConvert)) {
             throw new docs_validation_exception(
                 'general',
-                get_string('conversionserviceerror', 'onlyofficeeditor')
+                get_string('connectionerror:conversion', 'onlyofficeeditor')
             );
         }
     }
