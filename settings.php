@@ -33,6 +33,7 @@ if ($ADMIN->fulltree) {
     $linktodocs = 'https://www.onlyoffice.com/docs-registration.aspx?referer=moodle';
     $customizationapiurl =
     'https://api.onlyoffice.com/docs/docs-api/usage-api/config/editor/customization/customization-standard-branding';
+    $helpcentermoodleurl = 'https://helpcenter.onlyoffice.com/integration/moodle.aspx'; 
     $defaultjwtheader = 'Authorization';
     $bannerdata = [
         'title' => get_string('banner_title', 'onlyofficeeditor'),
@@ -43,6 +44,12 @@ if ($ADMIN->fulltree) {
         ],
     ];
     $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerdata);
+    $intro = $OUTPUT->render_from_template('mod_onlyofficeeditor/settings_intro', [
+        'readmoreurl' => $helpcentermoodleurl,
+        'suggesturl' => '#',
+    ]);
+
+    $settings->add(new admin_setting_heading('onlyofficeeditor/intro', '', $intro));
 
     $documentserverurlconfigtext = new admin_setting_configtext('onlyofficeeditor/documentserverurl',
     get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
