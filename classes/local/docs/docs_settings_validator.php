@@ -27,7 +27,6 @@ namespace mod_onlyofficeeditor\local\docs;
 use curl;
 use Exception;
 use mod_onlyofficeeditor\configuration_constants;
-use mod_onlyofficeeditor\configuration_manager;
 use mod_onlyofficeeditor\jwt_wrapper;
 use mod_onlyofficeeditor\local\exceptions\command_service_exception;
 use mod_onlyofficeeditor\local\exceptions\conversion_service_exception;
@@ -63,7 +62,7 @@ class docs_settings_validator {
         try {
             $this->check_document_server($internalurl, $disableverifyssl);
             $this->check_command_service($internalurl, $secret, $disableverifyssl);
-            $this->check_conversion_service($internalurl, $jwtheader, $secret, $disableverifyssl);
+            $this->check_conversion_service($internalurl, $jwtheader, $secret, $storageurl, $disableverifyssl);
         } catch (docs_validation_exception $e) {
             // Catch validation exceptions and store the error messages.
             $field = $e->get_field();
@@ -82,41 +81,6 @@ class docs_settings_validator {
      */
     public function get_errors(): array {
         return $this->errors;
-    }
-
-    /**
-     * Check if the Document Server url is valid.
-     * @param string $docserverurl Document Server url.
-     * @throws \mod_onlyofficeeditor\local\exceptions\docs_validation_exception
-     * @return void
-     */
-    private function check_docserverurl($docserverurl) {
-        if (empty($docserverurl)) {
-            throw new docs_validation_exception('docsserverurl', get_string('validationerror:emptyurl', 'onlyofficeeditor'));
-        }
-
-        if (!filter_var($docserverurl, FILTER_VALIDATE_URL)) {
-            throw new docs_validation_exception('docsserverurl', get_string('validationerror:invalidurl', 'onlyofficeeditor'));
-        }
-    }
-
-    /**
-     * Check for mixed content issues between Moodle and Document Server URLs.
-     *
-     * @param string $docserverurl Document Server url.
-     * @return void
-     */
-    private function check_for_mixed_content($docserverurl) {
-        global $CFG;
-
-        $moodleurl = $CFG->wwwroot;
-
-        if (strpos($moodleurl, 'https://') === 0 && strpos($docserverurl, 'https://') !== 0) {
-            throw new docs_validation_exception(
-                'docserverurl',
-                get_string('validationerror:mixedcontent', 'onlyofficeeditor')
-            );
-        }
     }
 
     /**
@@ -202,12 +166,13 @@ class docs_settings_validator {
      * @param string $internalurl Document Server internal url.
      * @param string $jwtheader JWT header.
      * @param string $secret JWT secret.
+     * @param string $storageurl Storage URL.
      * @param bool $disableverifyssl Flag for disabling ssl verification.
      *
      * @return void
      */
-    private function check_conversion_service($internalurl, $jwtheader, $secret, $disableverifyssl) {
-        $temporaryfileurl = $this->get_temp_file_url();
+    private function check_conversion_service($internalurl, $jwtheader, $secret, $storageurl, $disableverifyssl) {
+        $temporaryfileurl = $this->get_temp_file_url($storageurl);
 
         $curl = new curl();
         $curl->setHeader(['Content-type: application/json']);
@@ -269,10 +234,10 @@ class docs_settings_validator {
     /**
      * Get temporary file URL.
      *
+     * @param string $storageurl Storage URL.
      * @return string Temporary file URL
      */
-    private function get_temp_file_url() {
-        $storageurl = configuration_manager::get_storage_url();
+    private function get_temp_file_url($storageurl) {
         return $storageurl . '/mod/onlyofficeeditor/newdocs/default/new.docx';
     }
 }
