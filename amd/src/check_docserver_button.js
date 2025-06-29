@@ -20,124 +20,198 @@
  **/
 /* eslint-disable no-console */
 define(
-    ['core/notification', 'core/str', 'mod_onlyofficeeditor/repository', 'mod_onlyofficeeditor/url_validator'],
-    function(Notification, Str, Repository, UrlValidator) {
-    const fields = {
-        'docserverurl': 'documentserverurl',
-        'secret': 'documentserversecret',
-        'jwtheader': 'jwtheader',
-        'internalurl': 'documentserverinternal',
-        'storageurl': 'storageurl',
-        'disableverifyssl': 'disable_verify_ssl'
-    };
+    [
+        'core/notification',
+        'core/str',
+        'mod_onlyofficeeditor/repository',
+        'mod_onlyofficeeditor/url_validator',
+        'mod_onlyofficeeditor/docs_integration_api',
+    ],
+    function(Notification, Str, Repository, UrlValidator, DocsIntegrationAPI) {
+        let checkButton = null;
+        const fields = {};
+        const validationElements = [];
 
-    const validationElements = [];
+        const checkDocumentServerConnection = async(event) => {
+            event.preventDefault();
+            checkButton.disabled = true;
+            checkButton.classList.add('loading');
 
-    const checkDocumentServerConnection = async(event) => {
-        event.preventDefault();
+            const data = {
+                docsurl: fields.docsurl.value.trim(),
+                secret: fields.secret.value.trim(),
+                jwtheader: fields.jwtheader.value.trim(),
+                internalurl: fields.internalurl.value.trim(),
+                storageurl: fields.storageurl.value.trim(),
+                disableverifyssl: fields.disableverifyssl.checked,
+            };
 
-        const docsurl = document.getElementById('id_s_onlyofficeeditor_documentserverurl').value.trim();
-        const connectionerrormessage = await Str.get_string("connectionerror", "onlyofficeeditor");
-
-        const errors = await validateDocumentServerUrl(docsurl);
-
-        if (errors.length > 0) {
+            const errors = await validateFields(data);
             clearValidationOutput();
-            Notification.addNotification({
-                message: connectionerrormessage,
-                type: 'error'
-            });
-            for (const error of errors) {
-                highlightErrorField(error);
-            }
-            return;
-        }
 
-        await Repository.checkDocumentServerConnection(
-            docsurl,
-            document.getElementById('id_s_onlyofficeeditor_documentserversecret').value,
-            document.getElementById('id_s_onlyofficeeditor_jwtheader').value,
-            document.getElementById('id_s_onlyofficeeditor_documentserverinternal').value,
-            document.getElementById('id_s_onlyofficeeditor_storageurl').value,
-            document.getElementById('id_s_onlyofficeeditor_disable_verify_ssl').checked
-        )
-        .then(async (response) => {
-            clearValidationOutput();
-            if (response.status === 'success') {
-                Notification.addNotification({message: "Connection is stable.", type: 'success'});
-            } else if (response.status === 'error') {
+            if (errors.length > 0) {
+                await displayErrors(errors);
+            } else {
                 Notification.addNotification({
-                    message: connectionerrormessage,
-                    type: 'error'
+                    message: await Str.get_string("connectionsuccess", "onlyofficeeditor"),
+                    type: 'success',
                 });
-                for (const error of response.errors) {
-                    if (error.field === "general") {
-                        Notification.addNotification({message: error.message, type: 'error'});
-                    } else {
-                        highlightErrorField(error);
-                    }
+            }
+
+            checkButton.disabled = false;
+            checkButton.classList.remove('loading');
+        };
+
+        const highlightErrorField = (error) => {
+            const fieldForm = document.getElementById("admin-" + error.field);
+            const fieldSetting = fieldForm ? fieldForm.querySelector(".form-setting") : null;
+            if (fieldSetting) {
+                const errorElement = document.createElement("div");
+                errorElement.innerHTML = '<span class="error">' + error.message + "</span>";
+                fieldSetting.prepend(errorElement);
+                validationElements.push(errorElement);
+            }
+        };
+
+        const clearValidationOutput = () => {
+            for (const element of validationElements) {
+                element.remove();
+            }
+            validationElements.length = 0;
+            const notifications = document.getElementById("user-notifications");
+            notifications.innerHTML = "";
+        };
+
+        const displayErrors = async(errors) => {
+            for (const error of errors) {
+                if (error.field === 'general') {
+                    Notification.addNotification({
+                    message: error.message,
+                    type: 'error',
+                });
+                } else {
+                    highlightErrorField(error);
                 }
             }
-            return;
-        }).catch(async (error) => {
-            console.error('Error checking Document Server connection:', error);
+
             Notification.addNotification({
-                message: await Str.get_string("connectionerror:unexpected", "onlyofficeeditor"),
-                type: 'error'
+                message: await Str.get_string("connectionerror", "onlyofficeeditor"),
+                type: 'error',
             });
-        });
-    };
+        };
 
-    const highlightErrorField = (error) => {
-        const fieldForm = document.getElementById("admin-" + fields[error.field]);
-        const fieldSetting = fieldForm ? fieldForm.querySelector(".form-setting") : null;
-        if (fieldSetting) {
-            const errorElement = document.createElement("div");
-            errorElement.innerHTML = '<span class="error">' + error.message + "</span>";
-            fieldSetting.prepend(errorElement);
-            validationElements.push(errorElement);
-        }
-    };
+        const validateFields = async(data) => {
+            const errors = await preValidateFields(data);
 
-    const clearValidationOutput = () => {
-        for (const element of validationElements) {
-            element.remove();
-        }
-        validationElements.length = 0;
-        const notifications = document.getElementById("user-notifications");
-        notifications.innerHTML = "";
-    };
-
-    const validateDocumentServerUrl = async (url) => {
-        let error = [];
-
-        if (!url) {
-            error.push({
-                field: 'docserverurl',
-                message: await Str.get_string("validationerror:emptyurl", "onlyofficeeditor")
-            });
-        } else if (!UrlValidator.isValidUrl(url)) {
-            error.push({
-                field: 'docserverurl',
-                message: await Str.get_string("validationerror:invalidurl", "onlyofficeeditor")
-            });
-        } else if (UrlValidator.isMixedContent(url)) {
-            error.push({
-                field: 'docserverurl',
-                message: await Str.get_string("validationerror:mixedcontent", "onlyofficeeditor")
-            });
-        }
-
-        return error;
-    };
-
-    return {
-        init: function() {
-            const checkButton = document.querySelector("button[data-action='check-documentserver-connection']");
-            if (checkButton) {
-                checkButton.addEventListener('click', checkDocumentServerConnection);
+            if (errors.length > 0) {
+                return errors;
             }
-        }
-    };
-});
+
+            await Repository.checkDocumentServerConnection(
+                data.secret,
+                data.jwtheader,
+                data.internalurl.length > 0 ? data.internalurl : data.docsurl,
+                data.storageurl,
+                data.disableverifyssl,
+            )
+            .then(async(response) => {
+                if (response.status === 'error') {
+                    for (const error of response.errors) {
+                        errors.push({
+                            field: error.field,
+                            message: error.message
+                        });
+                    }
+                }
+                return;
+            }).catch(async(error) => {
+                console.error('Error checking Document Server connection:', error);
+                errors.push({
+                    field: 'general',
+                    message: await Str.get_string("connectionerror:unexpected", "onlyofficeeditor"),
+                });
+            });
+
+            return errors;
+        };
+
+        const preValidateFields = async(data) => {
+            const errors = [];
+
+            try {
+                await validateDocumentServerUrl(data.docsurl);
+            } catch (e) {
+                errors.push({
+                    field: 'documentserverurl',
+                    message: e.message
+                });
+            }
+
+            if (data.internalurl && !UrlValidator.isValidUrl(data.internalurl)) {
+                errors.push({
+                    field: 'documentserverinternal',
+                    message: await Str.get_string("validationerror:invalidurl", "onlyofficeeditor")
+                });
+            }
+
+            if (data.storageurl && !UrlValidator.isValidUrl(data.storageurl)) {
+                errors.push({
+                    field: 'storageurl',
+                    message: await Str.get_string("validationerror:invalidurl", "onlyofficeeditor")
+                });
+            }
+
+            return errors;
+        };
+
+        const validateDocumentServerUrl = async(url) => {
+            if (!url) {
+                throw new Error(await Str.get_string("validationerror:emptyurl", "onlyofficeeditor"));
+            }
+
+            if (!UrlValidator.isValidUrl(url)) {
+                throw new Error(await Str.get_string("validationerror:invalidurl", "onlyofficeeditor"));
+            }
+
+            if (UrlValidator.isMixedContent(url)) {
+                throw new Error(await Str.get_string("validationerror:mixedcontent", "onlyofficeeditor"));
+            }
+
+            await DocsIntegrationAPI.loadDocsApi(url)
+                .catch((e) => {
+                    console.log(e);
+                });
+
+            // eslint-disable-next-line no-undef
+            if (typeof DocsAPI === "undefined" || DocsAPI === null) {
+                throw new Error(await Str.get_string('validationerror:apijsunavailable', 'onlyofficeeditor'));
+            } else {
+                DocsIntegrationAPI.removeDocsApi();
+            }
+        };
+
+        return {
+            init: function() {
+                fields.docsurl = document.getElementById('id_s_onlyofficeeditor_documentserverurl');
+                fields.secret = document.getElementById('id_s_onlyofficeeditor_documentserversecret');
+                fields.jwtheader = document.getElementById('id_s_onlyofficeeditor_jwtheader');
+                fields.internalurl = document.getElementById('id_s_onlyofficeeditor_documentserverinternal');
+                fields.storageurl = document.getElementById('id_s_onlyofficeeditor_storageurl');
+                fields.disableverifyssl = document.getElementById('id_s_onlyofficeeditor_disable_verify_ssl');
+
+                if (
+                    !fields.docsurl || !fields.secret || !fields.jwtheader
+                    || !fields.internalurl || !fields.storageurl || !fields.disableverifyssl) {
+                    console.error('One or more required fields are missing in the form.');
+                    return;
+                }
+
+                checkButton = document.querySelector("button[data-action='check-documentserver-connection']");
+                if (checkButton) {
+                    checkButton.addEventListener('click', checkDocumentServerConnection);
+                }
+            }
+        };
+    }
+);
 /* eslint-enable no-console */
