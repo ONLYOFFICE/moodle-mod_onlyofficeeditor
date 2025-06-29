@@ -56,7 +56,7 @@ define([], function() {
                             clearInterval(intervalHandler);
 
                             // If DocsAPI is defined, after loading return resolve.
-                            if (DocsAPI) {
+                            if (typeof DocsAPI !== "undefined" && DocsAPI !== null) {
                                 resolve(null);
                             }
 
