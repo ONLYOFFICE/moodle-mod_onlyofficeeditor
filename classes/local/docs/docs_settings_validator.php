@@ -26,6 +26,7 @@ namespace mod_onlyofficeeditor\local\docs;
 
 use curl;
 use Exception;
+use mod_onlyofficeeditor\configuration_constants;
 use mod_onlyofficeeditor\configuration_manager;
 use mod_onlyofficeeditor\jwt_wrapper;
 use mod_onlyofficeeditor\local\exceptions\command_service_exception;
@@ -53,16 +54,13 @@ class docs_settings_validator {
      * @return array List of errors if any, empty array if validation passed.
      */
     public function validate(array $data): array {
-        $docserverurl = $data['docserverurl'] ?? '';
-        $secret = $data['secret'] ?? '';
-        $jwtheader = $data['jwtheader'] ?? '';
-        $internalurl = $data['internalurl'] ?? '';
-        $storageurl = $data['storageurl'] ?? '';
-        $disableverifyssl = $data['disableverifyssl'];
+        $secret = $data[configuration_constants::CONFIG_SECRET] ?? '';
+        $jwtheader = $data[configuration_constants::CONFIG_JWT_HEADER] ?? '';
+        $internalurl = $data[configuration_constants::CONFIG_DOCS_INTERNAL_URL] ?? '';
+        $storageurl = $data[configuration_constants::CONFIG_STORAGE_INTERNAL_URL] ?? '';
+        $disableverifyssl = $data[configuration_constants::CONFIG_DISABLE_VERIFY_SSL] ?? false;
 
         try {
-            $this->check_docserverurl($docserverurl);
-            $this->check_for_mixed_content($docserverurl);
             $this->check_document_server($internalurl, $disableverifyssl);
             $this->check_command_service($internalurl, $secret, $disableverifyssl);
             $this->check_conversion_service($internalurl, $jwtheader, $secret, $disableverifyssl);
@@ -145,7 +143,10 @@ class docs_settings_validator {
         }
 
         if ($response !== 'true') {
-            throw new docs_validation_exception('internalurl', get_string('validationerror:documentserverunreachable', 'onlyofficeeditor'));
+            throw new docs_validation_exception(
+                configuration_constants::CONFIG_DOCS_INTERNAL_URL,
+                get_string('validationerror:documentserverunreachable', 'onlyofficeeditor')
+            );
         }
     }
 
@@ -183,7 +184,7 @@ class docs_settings_validator {
         if (isset($commandjson->error) && abs($commandjson->error) > 0) {
             if ($commandjson->error === command_service_exception::ERROR_INVALID_TOKEN) {
                 throw new docs_validation_exception(
-                    'secret',
+                    configuration_constants::CONFIG_SECRET,
                     get_string('validationerror:incorrectsecret', 'onlyofficeeditor')
                 );
             } else {
@@ -246,7 +247,7 @@ class docs_settings_validator {
         if (isset($conversionjson->error) && abs($conversionjson->error) > 0) {
             if (abs($conversionjson->error) === conversion_service_exception::ERROR_INVALID_TOKEN) {
                 throw new docs_validation_exception(
-                    'jwtheader',
+                    configuration_constants::CONFIG_JWT_HEADER,
                     get_string('validationerror:incorrectjwtheader', 'onlyofficeeditor')
                 );
             } else {
