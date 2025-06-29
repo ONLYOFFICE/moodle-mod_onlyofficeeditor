@@ -32,9 +32,18 @@
     {}
 
 }}
-<button type="button"
-    data-action="check-documentserver-connection"
-    class="btn btn-primary"
-    >
-    {{#str}}checkdocserverbutton, mod_onlyofficeeditor{{/str}}
-</button>
+<div class="form-item row">
+    <div class="form-setting col-sm-9 offset-sm-3">
+        <div class="form-text defaultsnext">
+            <button type="button"
+                data-action="check-documentserver-connection"
+                class="btn btn-secondary"
+                >
+                {{#str}}checkdocserverbutton, mod_onlyofficeeditor{{/str}}
+            </button>
+        </div>
+        <div class="form-defaultinfo text-muted text-ltr">
+            {{#str}}savewarning, mod_onlyofficeeditor{{/str}}
+        </div>
+    </div>
+</div>
