@@ -218,7 +218,7 @@ class docs_settings_validator {
             } else {
                 throw new docs_validation_exception(
                     'general',
-                    get_string('connectionerror:conversion', 'onlyofficeeditor')
+                    get_string('connectionerror:convert', 'onlyofficeeditor')
                 );
             }
         }
@@ -226,7 +226,7 @@ class docs_settings_validator {
         if (!(isset($conversionjson->endConvert) && $conversionjson->endConvert)) {
             throw new docs_validation_exception(
                 'general',
-                get_string('connectionerror:conversion', 'onlyofficeeditor')
+                get_string('connectionerror:convert', 'onlyofficeeditor')
             );
         }
     }
