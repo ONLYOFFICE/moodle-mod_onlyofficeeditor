@@ -63,7 +63,7 @@ if ($ADMIN->fulltree) {
     $settings->add($documentserversecrettext);
 
     $documentserverjwtheadertext = new admin_setting_configtext('onlyofficeeditor/jwtheader',
-        get_string('jwtheader', 'onlyofficeeditor'), '', '');
+        get_string('jwtheader', 'onlyofficeeditor'), '', $defaultjwtheader);
     $documentserverjwtheadertext->set_updatedcallback(function () {
         $documentserverjwtheader = get_config('onlyofficeeditor', 'jwtheader');
         set_config('jwtheader', trim($documentserverjwtheader), 'onlyofficeeditor');
