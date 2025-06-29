@@ -26,29 +26,26 @@ import {call as fetchMany} from 'core/ajax';
 /**
  * Check connection to the Document Server.
  *
- * @param {string} docserverurl - The URL of the Document Server.
- * @param {string} secret - The secret key for the Document Server.
+ * @param {string} documentserversecret - The secret key for the Document Server.
  * @param {string} jwtheader - The JWT header for authentication.
- * @param {string} internalurl - The internal URL for the Document Server.
+ * @param {string} documentserverinternal - The internal URL for the Document Server.
  * @param {string} storageurl - The storage URL for the Document Server.
- * @param {boolean} disableverifyssl - Whether to disable SSL verification.
+ * @param {boolean} disable_verify_ssl - Whether to disable SSL verification.
  * @returns {Promise}
  */
 export const checkDocumentServerConnection = (
-    docserverurl,
-    secret,
+    documentserversecret,
     jwtheader,
-    internalurl,
+    documentserverinternal,
     storageurl,
-    disableverifyssl,
+    disable_verify_ssl, // eslint-disable-line camelcase
 ) => {
     const args = {
-        docserverurl,
-        secret,
+        documentserversecret,
         jwtheader,
-        internalurl,
+        documentserverinternal,
         storageurl,
-        disableverifyssl,
+        disable_verify_ssl, // eslint-disable-line camelcase
     };
 
     return fetchMany([{methodname: 'mod_onlyofficeeditor_check_documentserver_connection', args}])[0];
