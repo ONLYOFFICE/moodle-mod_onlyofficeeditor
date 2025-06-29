@@ -30,6 +30,7 @@ use external_multiple_structure;
 use external_single_structure;
 use external_value;
 use external_api;
+use mod_onlyofficeeditor\configuration_constants;
 use mod_onlyofficeeditor\local\docs\docs_settings_validator;
 
 /**
@@ -47,19 +48,37 @@ class check_documentserver_connection extends external_api {
      */
     public static function execute_parameters() {
         return new external_function_parameters([
-            'docserverurl' => new external_value(PARAM_URL, 'Document server URL'),
-            'secret' => new external_value(PARAM_TEXT, 'Document server secret', VALUE_DEFAULT, ''),
-            'jwtheader' => new external_value(PARAM_TEXT, 'JWT header', VALUE_DEFAULT, ''),
-            'internalurl' => new external_value(PARAM_URL, 'Internal URL for the document server', VALUE_DEFAULT, ''),
-            'storageurl' => new external_value(PARAM_URL, 'Storage URL for the document server', VALUE_DEFAULT, ''),
-            'disableverifyssl' => new external_value(PARAM_BOOL, 'Disable SSL verification', VALUE_DEFAULT, false),
+            configuration_constants::CONFIG_SECRET => new external_value(
+                PARAM_TEXT,
+                'Document server secret',
+                VALUE_DEFAULT,
+                ''),
+            configuration_constants::CONFIG_JWT_HEADER => new external_value(
+                PARAM_TEXT,
+                'JWT header',
+                VALUE_DEFAULT,
+                ''),
+            configuration_constants::CONFIG_DOCS_INTERNAL_URL => new external_value(
+                PARAM_URL,
+                'Internal URL for the document server',
+                VALUE_DEFAULT,
+                ''),
+            configuration_constants::CONFIG_STORAGE_INTERNAL_URL => new external_value(
+                PARAM_URL,
+                'Storage URL for the document server',
+                VALUE_DEFAULT,
+                ''),
+            configuration_constants::CONFIG_DISABLE_VERIFY_SSL => new external_value(
+                PARAM_BOOL,
+                'Disable SSL verification',
+                VALUE_DEFAULT,
+                false),
         ]);
     }
 
     /**
      * Execute the function to check the connection with the Document Server
      *
-     * @param string $docserverurl Document Server public url
      * @param string $secret JWT secret
      * @param string $jwtheader JWT Header
      * @param string $internalurl Document Server internal url
@@ -67,7 +86,7 @@ class check_documentserver_connection extends external_api {
      * @param bool $disableverifyssl Flag for disabling ssl verification
      * @return array
      */
-    public static function execute($docserverurl, $secret, $jwtheader, $internalurl, $storageurl, $disableverifyssl) {
+    public static function execute($documentserversecret, $jwtheader, $documentserverinternal, $storageurl, $disableverifyssl) {
         global $CFG;
         require_once("$CFG->dirroot/lib/filelib.php");
 
@@ -76,29 +95,26 @@ class check_documentserver_connection extends external_api {
         require_capability('moodle/site:config', $contextsystem);
 
         [
-            'docserverurl' => $docserverurl,
-            'secret' => $secret,
-            'jwtheader' => $jwtheader,
-            'internalurl' => $internalurl,
-            'storageurl' => $storageurl,
-            'disableverifyssl' => $disableverifyssl,
+            configuration_constants::CONFIG_SECRET => $documentserversecret,
+            configuration_constants::CONFIG_JWT_HEADER => $jwtheader,
+            configuration_constants::CONFIG_DOCS_INTERNAL_URL => $documentserverinternal,
+            configuration_constants::CONFIG_STORAGE_INTERNAL_URL => $storageurl,
+            configuration_constants::CONFIG_DISABLE_VERIFY_SSL => $disableverifyssl,
         ] = self::validate_parameters(self::execute_parameters(), [
-            'docserverurl' => $docserverurl,
-            'secret' => $secret,
-            'jwtheader' => $jwtheader,
-            'internalurl' => $internalurl,
-            'storageurl' => $storageurl,
-            'disableverifyssl' => $disableverifyssl,
+            configuration_constants::CONFIG_SECRET => $documentserversecret,
+            configuration_constants::CONFIG_JWT_HEADER => $jwtheader,
+            configuration_constants::CONFIG_DOCS_INTERNAL_URL => $documentserverinternal,
+            configuration_constants::CONFIG_STORAGE_INTERNAL_URL => $storageurl,
+            configuration_constants::CONFIG_DISABLE_VERIFY_SSL => $disableverifyssl,
         ]);
 
         $validator = new docs_settings_validator();
         $validationerrors = $validator->validate([
-            'docserverurl' => $docserverurl,
-            'secret' => $secret,
-            'jwtheader' => $jwtheader,
-            'internalurl' => $internalurl,
-            'storageurl' => $storageurl,
-            'disableverifyssl' => $disableverifyssl,
+            configuration_constants::CONFIG_SECRET => $documentserversecret,
+            configuration_constants::CONFIG_JWT_HEADER => $jwtheader,
+            configuration_constants::CONFIG_DOCS_INTERNAL_URL => $documentserverinternal,
+            configuration_constants::CONFIG_STORAGE_INTERNAL_URL => $storageurl ?? $CFG->wwwroot,
+            configuration_constants::CONFIG_DISABLE_VERIFY_SSL => $disableverifyssl,
         ]);
 
         return self::return_errors(
