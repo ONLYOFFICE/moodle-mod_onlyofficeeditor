@@ -168,6 +168,10 @@ class editor {
         $customization['plugins'] = $this->modconfig->editor_security_plugin == 1;
         $customization['macros'] = $this->modconfig->editor_security_macros == 1;
         $customization['integrationMode'] = 'embed';
+        $customization['mobile'] = [
+            'forceView' => false,
+            'standardView' => false,
+        ];
         $editorconfig['customization'] = $customization;
 
         // Device type.
