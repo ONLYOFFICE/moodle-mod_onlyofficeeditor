@@ -63,7 +63,8 @@ if ($ADMIN->fulltree) {
     $settings->add(new onlyoffice_admin_setting_text('onlyofficeeditor/jwtheader',
         get_string('jwtheader', 'onlyofficeeditor'), '', false, $defaultjwtheader));
     $settings->add(new onlyoffice_admin_setting_url('onlyofficeeditor/documentserverinternal',
-        get_string('documentserverinternal', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor')));
+        get_string('documentserverinternal', 'onlyofficeeditor'),
+        get_string('documentserverinternal:description', 'onlyofficeeditor')));
     $settings->add(new onlyoffice_admin_setting_url('onlyofficeeditor/storageurl',
         get_string('storageurl', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor')));
     $settings->add(new check_document_server_button());
