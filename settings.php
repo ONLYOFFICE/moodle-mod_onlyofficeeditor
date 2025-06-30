@@ -33,7 +33,7 @@ if ($ADMIN->fulltree) {
     $linktodocs = 'https://www.onlyoffice.com/docs-registration.aspx?referer=moodle';
     $customizationapiurl =
     'https://api.onlyoffice.com/docs/docs-api/usage-api/config/editor/customization/customization-standard-branding';
-    $helpcentermoodleurl = 'https://helpcenter.onlyoffice.com/integration/moodle.aspx'; 
+    $helpcentermoodleurl = 'https://helpcenter.onlyoffice.com/integration/moodle.aspx';
     $defaultjwtheader = 'Authorization';
     $bannerdata = [
         'title' => get_string('banner_title', 'onlyofficeeditor'),
