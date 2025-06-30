@@ -66,6 +66,9 @@ define(
             const fieldForm = document.getElementById("admin-" + error.field);
             const fieldSetting = fieldForm ? fieldForm.querySelector(".form-setting") : null;
             if (fieldSetting) {
+                fieldSetting.querySelectorAll(".error").forEach((el) => {
+                    el.remove();
+                });
                 const errorElement = document.createElement("div");
                 errorElement.innerHTML = '<span class="error">' + error.message + "</span>";
                 fieldSetting.prepend(errorElement);
