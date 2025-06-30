@@ -1,4 +1,9 @@
 # Change Log
+## Added
+- add docs check connection button in settings to test connectivity with the document server
+
+## Changed
+- rewrite admin settings validation logic to validate only for input validity
 
 ## 5.1.0
 ## Added
