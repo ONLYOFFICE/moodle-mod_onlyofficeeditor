@@ -23,7 +23,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use mod_onlyofficeeditor\local\admin\settings\post_submit_admin_setting;
+use mod_onlyofficeeditor\local\admin\settings\check_document_server_button;
+use mod_onlyofficeeditor\local\admin\settings\onlyoffice_admin_setting_text;
+use mod_onlyofficeeditor\local\admin\settings\onlyoffice_admin_setting_url;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -51,40 +53,23 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_heading('onlyofficeeditor/intro', '', $intro));
 
-    $documentserverurlconfigtext = new admin_setting_configtext('onlyofficeeditor/documentserverurl',
-    get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
-    $defaulthost);
-    $documentserverurlconfigtext->set_updatedcallback(function () {
-        $documentserverurl = get_config('onlyofficeeditor', 'documentserverurl');
-        set_config('documentserverurl', rtrim($documentserverurl, '/'), 'onlyofficeeditor');
-    });
-    $settings->add($documentserverurlconfigtext);
-
+    $settings->add(new onlyoffice_admin_setting_url('onlyofficeeditor/documentserverurl',
+        get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
+        true, $defaulthost));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/disable_verify_ssl',
         get_string('disable_verify_ssl', 'onlyofficeeditor'), get_string('disable_verify_ssl:description', 'onlyofficeeditor'), 0));
-    $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserversecret',
-        get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor'), ''));
-    $settings->add(new admin_setting_configtext('onlyofficeeditor/jwtheader',
-        get_string('jwtheader', 'onlyofficeeditor'), '', $defaultjwtheader));
-
-    $documentserverinternalurlconfigtext = new admin_setting_configtext('onlyofficeeditor/documentserverinternal',
-    get_string('documentserverinternal', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor'),
-    '');
-    $documentserverinternalurlconfigtext->set_updatedcallback(function () {
-        $documentserverinternalurl = get_config('onlyofficeeditor', 'documentserverinternal');
-        set_config('documentserverinternal', rtrim($documentserverinternalurl, '/'), 'onlyofficeeditor');
-    });
-    $settings->add($documentserverinternalurlconfigtext);
-
-    $storageurlconfigtext = new admin_setting_configtext('onlyofficeeditor/storageurl',
-    get_string('storageurl', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor'), '');
-    $storageurlconfigtext->set_updatedcallback(function () {
-        $storageurl = get_config('onlyofficeeditor', 'storageurl');
-        set_config('storageurl', rtrim($storageurl, '/'), 'onlyofficeeditor');
-    });
-    $settings->add($storageurlconfigtext);
-
+    $settings->add(new onlyoffice_admin_setting_text('onlyofficeeditor/documentserversecret',
+        get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor')));
+    $settings->add(new onlyoffice_admin_setting_text('onlyofficeeditor/jwtheader',
+        get_string('jwtheader', 'onlyofficeeditor'), '', false, $defaultjwtheader));
+    $settings->add(new onlyoffice_admin_setting_url('onlyofficeeditor/documentserverinternal',
+        get_string('documentserverinternal', 'onlyofficeeditor'),
+        get_string('documentserverinternal:description', 'onlyofficeeditor')));
+    $settings->add(new onlyoffice_admin_setting_url('onlyofficeeditor/storageurl',
+        get_string('storageurl', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor')));
+    $settings->add(new check_document_server_button());
     $settings->add(new admin_setting_heading('onlyofficeeditor/banner', '', $banner));
+
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',
         get_string('editor_view', 'onlyofficeeditor'),
         get_string('editor_view_description', 'onlyofficeeditor', ['url' => $customizationapiurl])));
@@ -100,11 +85,11 @@ if ($ADMIN->fulltree) {
         get_string('editor_view_feedback', 'onlyofficeeditor'), '', 1));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_toolbar',
         get_string('editor_view_toolbar', 'onlyofficeeditor'), '', 0));
+
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_security',
         get_string('editor_security', 'onlyofficeeditor'), ''));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_security_plugin',
         get_string('editor_security_plugin', 'onlyofficeeditor'), '', 1));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_security_macros',
         get_string('editor_security_macros', 'onlyofficeeditor'), '', 1));
-    $settings->add(new post_submit_admin_setting());
 }

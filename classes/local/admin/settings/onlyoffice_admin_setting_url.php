@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Post-submit admin setting.
+ * Url admin setting.
  *
  * @package    mod_onlyofficeeditor
  * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
@@ -24,40 +24,14 @@
 
 namespace mod_onlyofficeeditor\local\admin\settings;
 
-use admin_setting;
-use mod_onlyofficeeditor\local\docs\docs_settings_validator;
-use core\notification;
-
 /**
- * Post-submit admin setting.
+ * Url admin setting.
  *
  * @package    mod_onlyofficeeditor
  * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class post_submit_admin_setting extends admin_setting {
-    /**
-     * Constructor.
-     */
-    public function __construct() {
-        $this->nosave = true;
-        parent::__construct(
-            'onlyofficeeditor_post_submit_admin_setting',
-            '',
-            '',
-            ''
-        );
-    }
-
-    /**
-     * Get setting.
-     *
-     * @return bool True
-     */
-    public function get_setting() {
-        return true;
-    }
-
+class onlyoffice_admin_setting_url extends onlyoffice_admin_setting_text {
     /**
      * Write setting.
      *
@@ -65,26 +39,24 @@ class post_submit_admin_setting extends admin_setting {
      * @return string Empty string
      */
     public function write_setting($data) {
-        // Validate settings after every form submission.
-        $docssettingsvalidator = new docs_settings_validator();
-        $docssettingsvalidator->validate();
-        if ($docssettingsvalidator->has_errors()) {
-            foreach ($docssettingsvalidator->get_errors() as $error) {
-                notification::error($error);
-            }
-        }
+        // Clean up the data before saving.
+        $data = rtrim(trim($data), '/');
+        $data = clean_param($data, PARAM_URL);
 
-        return '';
+        return parent::write_setting($data);
     }
 
     /**
-     * Output HTML.
+     * Validate data before storage.
      *
-     * @param string $data Data to output
-     * @param string $query Query string
-     * @return string HTML output
+     * @param string $data The string to be validated.
+     * @return bool|string true for success or error string if invalid.
      */
-    public function output_html($data, $query='') {
-        return '<div><input type="hidden" name="' . $this->get_full_name() . '" value="1"/></div>';
+    public function validate($data) {
+        if (!empty($data) && filter_var($data, FILTER_VALIDATE_URL) === false) {
+            return get_string('validationerror:invalidurl', 'onlyofficeeditor');
+        }
+
+        return parent::validate($data);
     }
 }
