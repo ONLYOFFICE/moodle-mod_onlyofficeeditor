@@ -31,6 +31,9 @@ if ($ADMIN->fulltree) {
 
     $defaulthost = 'https://documentserver.url';
     $linktodocs = 'https://www.onlyoffice.com/docs-registration.aspx?referer=moodle';
+    $customizationapiurl =
+    'https://api.onlyoffice.com/docs/docs-api/usage-api/config/editor/customization/customization-standard-branding';
+    $helpcentermoodleurl = 'https://helpcenter.onlyoffice.com/integration/moodle.aspx';
     $defaultjwtheader = 'Authorization';
     $bannerdata = [
         'title' => get_string('banner_title', 'onlyofficeeditor'),
@@ -41,6 +44,12 @@ if ($ADMIN->fulltree) {
         ],
     ];
     $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerdata);
+    $intro = $OUTPUT->render_from_template('mod_onlyofficeeditor/settings_intro', [
+        'readmoreurl' => $helpcentermoodleurl,
+        'suggesturl' => '#',
+    ]);
+
+    $settings->add(new admin_setting_heading('onlyofficeeditor/intro', '', $intro));
 
     $documentserverurlconfigtext = new admin_setting_configtext('onlyofficeeditor/documentserverurl',
     get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
@@ -52,17 +61,15 @@ if ($ADMIN->fulltree) {
     $settings->add($documentserverurlconfigtext);
 
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/disable_verify_ssl',
-        get_string('disable_verify_ssl', 'onlyofficeeditor'), '', 0));
+        get_string('disable_verify_ssl', 'onlyofficeeditor'), get_string('disable_verify_ssl:description', 'onlyofficeeditor'), 0));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserversecret',
         get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor'), ''));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/jwtheader',
         get_string('jwtheader', 'onlyofficeeditor'), '', $defaultjwtheader));
-    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/forcesave',
-        get_string('forcesave', 'onlyofficeeditor'), '', 0));
-    $settings->add(new admin_setting_heading('onlyofficeeditor/banner', '', $banner));
 
     $documentserverinternalurlconfigtext = new admin_setting_configtext('onlyofficeeditor/documentserverinternal',
-    get_string('documentserverinternal', 'onlyofficeeditor'), '', '');
+    get_string('documentserverinternal', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor'),
+    '');
     $documentserverinternalurlconfigtext->set_updatedcallback(function () {
         $documentserverinternalurl = get_config('onlyofficeeditor', 'documentserverinternal');
         set_config('documentserverinternal', rtrim($documentserverinternalurl, '/'), 'onlyofficeeditor');
@@ -70,15 +77,19 @@ if ($ADMIN->fulltree) {
     $settings->add($documentserverinternalurlconfigtext);
 
     $storageurlconfigtext = new admin_setting_configtext('onlyofficeeditor/storageurl',
-    get_string('storageurl', 'onlyofficeeditor'), '', '');
+    get_string('storageurl', 'onlyofficeeditor'), get_string('documentserverinternal:description', 'onlyofficeeditor'), '');
     $storageurlconfigtext->set_updatedcallback(function () {
         $storageurl = get_config('onlyofficeeditor', 'storageurl');
         set_config('storageurl', rtrim($storageurl, '/'), 'onlyofficeeditor');
     });
     $settings->add($storageurlconfigtext);
 
+    $settings->add(new admin_setting_heading('onlyofficeeditor/banner', '', $banner));
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',
-        get_string('editor_view', 'onlyofficeeditor'), ''));
+        get_string('editor_view', 'onlyofficeeditor'),
+        get_string('editor_view_description', 'onlyofficeeditor', ['url' => $customizationapiurl])));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/forcesave',
+        get_string('forcesave', 'onlyofficeeditor'), '', 0));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_chat',
         get_string('editor_view_chat', 'onlyofficeeditor'), '', 1));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_help',
