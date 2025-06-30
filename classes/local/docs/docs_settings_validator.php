@@ -50,6 +50,7 @@ class docs_settings_validator {
     /**
      * Validate document settings.
      *
+     * @param array $data Array of settings data to validate.
      * @return array List of errors if any, empty array if validation passed.
      */
     public function validate(array $data): array {

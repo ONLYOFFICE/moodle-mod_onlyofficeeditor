@@ -79,9 +79,9 @@ class check_documentserver_connection extends external_api {
     /**
      * Execute the function to check the connection with the Document Server
      *
-     * @param string $secret JWT secret
+     * @param string $documentserversecret JWT secret
      * @param string $jwtheader JWT Header
-     * @param string $internalurl Document Server internal url
+     * @param string $documentserverinternal Document Server internal url
      * @param string $storageurl Document Storage url
      * @param bool $disableverifyssl Flag for disabling ssl verification
      * @return array
