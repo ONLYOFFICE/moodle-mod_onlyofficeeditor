@@ -156,7 +156,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
             }
         } else {
             foreach ($files as $file) {
-                $extension = pathinfo($file->get_filename(), PATHINFO_EXTENSION);
+                $extension = strtolower(pathinfo($file->get_filename(), PATHINFO_EXTENSION));
 
                 if (!onlyoffice_file_utility::is_format_supported($extension)) {
                     $errors['file'] = get_string('unsupportedfileformat', 'onlyofficeeditor');
