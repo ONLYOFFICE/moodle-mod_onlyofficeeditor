@@ -63,7 +63,7 @@ $string['mentioncontexturlname'] = 'Ссылка на комментарий.';
 $string['mentionnotifier:notification'] = '{$a->notifier} упоминается в {$a->course}';
 $string['messageprovider:mentionnotifier'] = 'Уведомление с упоминанием ONLYOFFICE в модуле Документы.';
 $string['modulename'] = 'Документ ONLYOFFICE';
-$string['modulename_help'] = 'Модуль ONLYOFFICE позволяет пользователям создавать и редактировать офисные документы, которые хранятся локально в Moodle с помощью Сервера документов ONLYOFFICE, а также предоставляет возможность нескольким пользователям работать совместно в режиме реального времени и сохранять изменения в Moodle
+$string['modulename_help'] = 'Модуль ONLYOFFICE позволяет пользователям создавать и редактировать офисные документы, которые хранятся локально, в Moodle с помощью Сервера документов ONLYOFFICE, а также предоставляет возможность нескольким пользователям работать совместно в режиме реального времени и сохранять изменения в Moodle
 
 Чтобы узнать больше, перейдите в <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Справочный центр</a>.';
 $string['modulenameplural'] = 'Документы ONLYOFFICE';
