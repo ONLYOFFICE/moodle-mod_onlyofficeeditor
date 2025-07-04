@@ -110,6 +110,6 @@ $string['validationerror:documentserverunreachable'] = 'Unable to connect to ONL
 $string['validationerror:emptyurl'] = 'ONLYOFFICE Docs URL cannot be empty.';
 $string['validationerror:incorrectjwtheader'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the Authorization header is correct.';
 $string['validationerror:incorrectsecret'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the Secret key is correct.';
-$string['validationerror:invalidurl'] = 'The URL is invalid. Please check the URL format.';
+$string['validationerror:invalidurl'] = 'Document Server URL is invalid. Please check the URL format.';
 $string['validationerror:mixedcontent'] = 'Mixed Active Content is not allowed. HTTPS address for ONLYOFFICE Docs is required.';
 $string['xlsxformname'] = 'Spreadsheet';
