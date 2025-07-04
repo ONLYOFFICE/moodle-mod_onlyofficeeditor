@@ -64,9 +64,9 @@ $string['mentioncontexturlname'] = 'Link to the comment.';
 $string['mentionnotifier:notification'] = '{$a->notifier} mentioned in the {$a->course}';
 $string['messageprovider:mentionnotifier'] = 'ONLYOFFICE mentioning notification in module document.';
 $string['modulename'] = 'ONLYOFFICE document';
-$string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle
+$string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle.
 
-To learn more please visit <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">our blog</a>.';
+For more information, visit <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Help Center</a>.';
 $string['modulenameplural'] = 'ONLYOFFICE Documents';
 $string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on fillable forms online.';
 $string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
