@@ -37,7 +37,7 @@ $string['docserverunreachable'] = 'No se puede acceder al Servidor de Documentos
 $string['documentpermissions'] = 'Permisos para los documentos';
 $string['documentservererror'] = 'No se puede conectar a ONLYOFFICE Docs. Por favor, compruebe si el servidor está funcionando y accesible.';
 $string['documentserverinternal'] = 'Dirección de ONLYOFFICE Docs para solicitudes internas del servidor';
-$string['documentserverinternal:description'] = 'Fill in only when using internal routing between the Moodle server and ONLYOFFICE Docs, without relying on public addresses';
+$string['documentserverinternal:description'] = 'Rellenar solo cuando se utiliza el enrutamiento interno entre el servidor de Moodle y ONLYOFFICE Docs, sin depender de las direcciones públicas';
 $string['documentserversecret'] = 'Secreto del Servidor de Documentos';
 $string['documentserversecret_desc'] = 'El secreto se utiliza para generar el token (una firma cifrada) en el navegador para que el editor de documentos abra y llame a los métodos y las solicitudes al servicio de comando de documentos y al servicio de conversión de documentos. El token bloquea la sustitución de parámetros importantes en las solicitudes del Servidor de Documentos de ONLYOFFICE.';
 $string['documentserverurl'] = 'Dirección del Servicio de Edición de Documentos';
@@ -50,7 +50,7 @@ $string['editor_security_macros'] = 'Ejecutar macros de documentos';
 $string['editor_security_plugin'] = 'Habilitar plugins';
 $string['editor_view'] = 'Ajustes del editor';
 $string['editor_view_chat'] = 'Mostrar el botón de Chat';
-$string['editor_view_description'] = 'Learn more about customizing the editor <a href="{$a->url}" target="_blank">here</a>.';
+$string['editor_view_description'] = 'Más información sobre la personalización del editor <a href="{$a->url}" target="_blank">aquí</a>.';
 $string['editor_view_feedback'] = 'Mostrar el botón de Feedback y Soporte';
 $string['editor_view_header'] = 'Mostrar el encabezado más compacto';
 $string['editor_view_help'] = 'Mostrar el botón de Ayuda';
@@ -65,7 +65,7 @@ $string['messageprovider:mentionnotifier'] = 'Notificación de menciones de ONLY
 $string['modulename'] = 'Documento de ONLYOFFICE';
 $string['modulename_help'] = 'El módulo ONLYOFFICE permite a los usuarios crear y editar documentos de oficina almacenados localmente en Moodle utilizando el Servidor de Documentos de ONLYOFFICE, haciendo posible que varios usuarios colaboren en tiempo real y guarden los cambios en Moodle.
 
-Para más información, visite <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">nuestro Centro de ayuda</a>.';
+Para más información, visite nuestro <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centro de ayuda</a>.';
 $string['modulenameplural'] = 'Documentos de ONLYOFFICE';
 $string['oldversion'] = 'Por favor, actualice ONLYOFFICE Docs a la versión 7.0 para poder trabajar con formularios rellenables en línea';
 $string['onlyofficeactivityicon'] = 'Abrir en ONLYOFFICE';
@@ -97,9 +97,9 @@ $string['saveasbutton'] = 'Seleccionar';
 $string['saveaserror'] = 'Se ha producido un error.';
 $string['saveassuccess'] = 'El documento se ha guardado correctamente.';
 $string['saveastitle'] = 'Elija la sección del curso para guardar el documento';
-$string['savewarning'] = 'Don\'t forget to Save changes at the bottom of the page';
+$string['savewarning'] = 'No se olvide de guardar los cambios al final de la página';
 $string['selectfile'] = 'Seleccione un archivo existente o cree uno nuevo haciendo clic en uno de los iconos';
-$string['settingsintro'] = 'Edit and collaborate on office documents online directly within Moodle course structure. Share documents for viewing or real-time co-editing. Create, share and grade students\' assignments.';
+$string['settingsintro'] = 'Edite y colabore en documentos ofimáticos en línea directamente dentro de la estructura de los cursos Moodle. Comparta documentos para visualizarlos o coeditarlos en tiempo real. Cree, comparta y califique las tareas de los estudiantes.';
 $string['storageurl'] = 'Dirección de servidor para solicitudes internas del ONLYOFFICE Docs';
 $string['suggestfeature'] = 'Sugerir una función';
 $string['unsupportedfileformat'] = 'Formato de archivo no compatible';
@@ -109,6 +109,6 @@ $string['validationerror:documentserverunreachable'] = 'No se puede conectarse a
 $string['validationerror:emptyurl'] = 'La URL de ONLYOFFICE Docs no puede estar vacía.';
 $string['validationerror:incorrectjwtheader'] = 'No se puede conectarse a ONLYOFFICE Docs. Por favor, compruebe si el encabezado de autorización es correcto.';
 $string['validationerror:incorrectsecret'] = 'No se puede conectar a ONLYOFFICE Docs. Por favor, compruebe si la clave secreta es correcta.';
-$string['validationerror:invalidurl'] = 'The URL is invalid. Please check the URL format.';
+$string['validationerror:invalidurl'] = 'La URL no es válida. Por favor, compruebe el formato de la URL.';
 $string['validationerror:mixedcontent'] = 'Contenido mixto activo no está permitido. Se requiere la dirección HTTPS para ONLYOFFICE Docs.';
 $string['xlsxformname'] = 'Libro de Excel';
