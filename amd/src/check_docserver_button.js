@@ -173,7 +173,7 @@ define(
             }
 
             if (!UrlValidator.isValidUrl(url)) {
-                throw new Error(await Str.get_string("validationerror:invalidurl", "onlyofficeeditor"));
+                throw new Error(await Str.get_string("validationerror:docsinvalidurl", "onlyofficeeditor"));
             }
 
             if (UrlValidator.isMixedContent(url)) {
