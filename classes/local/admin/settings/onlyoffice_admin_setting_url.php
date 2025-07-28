@@ -41,7 +41,6 @@ class onlyoffice_admin_setting_url extends onlyoffice_admin_setting_text {
     public function write_setting($data) {
         // Clean up the data before saving.
         $data = rtrim(trim($data), '/');
-        $data = clean_param($data, PARAM_URL);
 
         return parent::write_setting($data);
     }
@@ -53,7 +52,8 @@ class onlyoffice_admin_setting_url extends onlyoffice_admin_setting_text {
      * @return bool|string true for success or error string if invalid.
      */
     public function validate($data) {
-        if (!empty($data) && filter_var($data, FILTER_VALIDATE_URL) === false) {
+        $cleaned = clean_param($data, PARAM_URL);
+        if (!empty($data) && ($data !== $cleaned || filter_var($cleaned, FILTER_VALIDATE_URL) === false)) {
             return get_string('validationerror:invalidurl', 'onlyofficeeditor');
         }
 
