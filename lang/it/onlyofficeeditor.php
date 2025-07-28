@@ -109,6 +109,7 @@ $string['validationerror:documentserverunreachable'] = 'Impossibile connettersi 
 $string['validationerror:emptyurl'] = 'L\'URL di ONLYOFFICE Docs non può essere vuoto.';
 $string['validationerror:incorrectjwtheader'] = 'Impossibile connettersi a ONLYOFFICE Docs. Verifica che l\'intestazione di autorizzazione sia corretta.';
 $string['validationerror:incorrectsecret'] = 'Impossibile connettersi a ONLYOFFICE Docs. Controlla che la chiave segreta sia corretta.';
+$string['validationerror:docsinvalidurl'] = 'L\'URL di Document Server non è valido. Controlla il formato dell\'URL.';
 $string['validationerror:invalidurl'] = 'L\'URL non è valido. Controlla il formato dell\'URL.';
 $string['validationerror:mixedcontent'] = 'Il contenuto attivo misto non è consentito. È richiesto l\'indirizzo HTTPS per ONLYOFFICE Docs.';
 $string['xlsxformname'] = 'Foglio di calcolo';

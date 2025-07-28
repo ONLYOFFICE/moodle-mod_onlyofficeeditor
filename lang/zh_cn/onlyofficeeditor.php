@@ -109,6 +109,7 @@ $string['validationerror:documentserverunreachable'] = '无法连接到 ONLYOFFI
 $string['validationerror:emptyurl'] = 'ONLYOFFICE 文档 URL 不能为空。';
 $string['validationerror:incorrectjwtheader'] = '无法连接到 ONLYOFFICE 文档。请检查 Authorization 请求头是否正确。';
 $string['validationerror:incorrectsecret'] = '无法连接到 ONLYOFFICE 文档。请检查密钥是否正确。';
+$string['validationerror:docsinvalidurl'] = '文档服务器 URL 无效。请检查 URL 格式。';
 $string['validationerror:invalidurl'] = 'URL 无效。请检查 URL 格式。';
 $string['validationerror:mixedcontent'] = '不允许混合活动内容。ONLYOFFICE 文档需要 HTTPS 地址。';
 $string['xlsxformname'] = '电子表格';

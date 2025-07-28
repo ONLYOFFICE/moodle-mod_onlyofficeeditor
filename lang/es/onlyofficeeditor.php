@@ -109,6 +109,7 @@ $string['validationerror:documentserverunreachable'] = 'No se puede conectarse a
 $string['validationerror:emptyurl'] = 'La URL de ONLYOFFICE Docs no puede estar vacía.';
 $string['validationerror:incorrectjwtheader'] = 'No se puede conectarse a ONLYOFFICE Docs. Por favor, compruebe si el encabezado de autorización es correcto.';
 $string['validationerror:incorrectsecret'] = 'No se puede conectar a ONLYOFFICE Docs. Por favor, compruebe si la clave secreta es correcta.';
+$string['validationerror:docsinvalidurl'] = 'La URL del servidor de documentos no es válida. Verifique el formato de la URL.';
 $string['validationerror:invalidurl'] = 'La URL no es válida. Por favor, compruebe el formato de la URL.';
 $string['validationerror:mixedcontent'] = 'Contenido mixto activo no está permitido. Se requiere la dirección HTTPS para ONLYOFFICE Docs.';
 $string['xlsxformname'] = 'Libro de Excel';
