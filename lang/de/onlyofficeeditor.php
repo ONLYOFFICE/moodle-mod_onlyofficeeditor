@@ -109,6 +109,7 @@ $string['validationerror:documentserverunreachable'] = 'Verbindung zu ONLYOFFICE
 $string['validationerror:emptyurl'] = 'Die URL von ONLYOFFICE Docs darf nicht leer sein.';
 $string['validationerror:incorrectjwtheader'] = 'Verbindung zu ONLYOFFICE Docs nicht möglich. Bitte überprüfen Sie, ob der Autorisierungsheader korrekt ist.';
 $string['validationerror:incorrectsecret'] = 'Verbindung zu ONLYOFFICE Docs nicht möglich. Bitte überprüfen Sie, ob der geheime Schlüssel korrekt ist.';
+$string['validationerror:docsinvalidurl'] = 'Document Server URL ist ungültig. Bitte überprüfen Sie das URL-Format.';
 $string['validationerror:invalidurl'] = 'Die URL ist ungültig. Bitte überprüfen Sie das URL-Format.';
 $string['validationerror:mixedcontent'] = 'Mixed Active Content ist nicht möglich. HTTPS-Adresse für ONLYOFFICE Docs ist erforderlich.';
 $string['xlsxformname'] = 'Arbeitsmappe';

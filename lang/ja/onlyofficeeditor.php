@@ -109,6 +109,7 @@ $string['validationerror:documentserverunreachable'] = 'ONLYOFFICE Docsに接続
 $string['validationerror:emptyurl'] = 'ONLYOFFICE DocsのURLは空白にできません。';
 $string['validationerror:incorrectjwtheader'] = 'ONLYOFFICE Docsに接続できません。認証ヘッダーが正しいかどうかご確認ください。';
 $string['validationerror:incorrectsecret'] = 'ONLYOFFICE Docsに接続できません。シークレットキーが正しいかどうかご確認ください。';
+$string['validationerror:docsinvalidurl'] = 'ドキュメントサーバーURLが無効です。URL形式を確認してください。';
 $string['validationerror:invalidurl'] = 'URLが無効です。URL形式を確認してください。';
 $string['validationerror:mixedcontent'] = 'アクティブコンテンツの混在は許可されていません。ONLYOFFICE DocsにはHTTPSアドレスが必要です。';
 $string['xlsxformname'] = 'スプレッドシート';
