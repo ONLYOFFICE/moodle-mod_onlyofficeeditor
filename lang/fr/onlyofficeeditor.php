@@ -109,6 +109,7 @@ $string['validationerror:documentserverunreachable'] = 'Impossible de se connect
 $string['validationerror:emptyurl'] = 'L\'URL de ONLYOFFICE Docs ne peut pas être vide.';
 $string['validationerror:incorrectjwtheader'] = 'Impossible de se connecter à ONLYOFFICE Docs. Veuillez vérifier si l\'en-tête d\'autorisation est correct.';
 $string['validationerror:incorrectsecret'] = 'Impossible de se connecter à ONLYOFFICE Docs. Veuillez vérifier si la clé secrète est correcte.';
+$string['validationerror:docsinvalidurl'] = 'L\'URL de Document Server n\'est pas valide. Veuillez vérifier le format de l\'URL.';
 $string['validationerror:invalidurl'] = 'L\'URL n\'est pas valide. Veuillez vérifier le format de l\'URL.';
 $string['validationerror:mixedcontent'] = 'Le contenu mixte actif n\'est pas autorisé. Une adresse HTTPS pour ONLYOFFICE Docs est requise.';
 $string['xlsxformname'] = 'Classeur';
