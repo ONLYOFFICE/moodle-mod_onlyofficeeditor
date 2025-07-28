@@ -36,7 +36,7 @@ jobs:
           path: ./moodle
       - name: Copy Plugin
         run: |
-          cp -r onlyofficeeditor ./moodle/mod/onlyofficeeditor
+          cp -r onlyofficeeditor ./moodle/public/mod/onlyofficeeditor/
       - name: Build Plugin
         run: |
           cd ./moodle
@@ -45,9 +45,9 @@ jobs:
       - name: Build Artifact
         run: |
           cd ${{ github.workspace }}
-          mv ./moodle/mod/onlyofficeeditor ./moodle/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          mv ./moodle/public/mod/onlyofficeeditor ./moodle/public/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
           mkdir -p ./deploy
-          cp -r ./moodle/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }} ./deploy
+          cp -r ./moodle/public/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }} ./deploy
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
