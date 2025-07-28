@@ -36,7 +36,8 @@ jobs:
           path: ./moodle
       - name: Copy Plugin
         run: |
-          cp -r onlyofficeeditor ./moodle/mod/onlyofficeeditor
+          mkdir -p ./moodle/mod/onlyofficeeditor
+          cp -r onlyofficeeditor ./moodle/mod/onlyofficeeditor/
       - name: Build Plugin
         run: |
           cd ./moodle
