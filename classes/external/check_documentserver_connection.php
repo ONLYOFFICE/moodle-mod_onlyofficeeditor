@@ -108,6 +108,8 @@ class check_documentserver_connection extends external_api {
             configuration_constants::CONFIG_DISABLE_VERIFY_SSL => $disableverifyssl,
         ]);
 
+        $documentserverinternal = rtrim(trim($documentserverinternal), '/');
+        $storageurl = rtrim(trim($storageurl), '/');
         $storageurl = empty($storageurl) ? $CFG->wwwroot : $storageurl;
 
         $validator = new docs_settings_validator();
