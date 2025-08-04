@@ -52,7 +52,7 @@ if (empty($doc)) {
 }
 
 $crypt = new \mod_onlyofficeeditor\hasher();
-list($hash, $error) = $crypt->read_hash($doc);
+[$hash, $error] = $crypt->read_hash($doc);
 
 if ($error || $hash == null) {
     die(json_encode($response));
@@ -133,4 +133,3 @@ if (isset($data['status'])) {
     }
 }
 die(json_encode($response));
-

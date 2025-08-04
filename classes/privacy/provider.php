@@ -35,18 +35,18 @@ use core_privacy\local\metadata\collection;
  * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\provider,
-    \core_privacy\local\request\data_provider {
-
+class provider implements \core_privacy\local\request\data_provider, \core_privacy\local\metadata\provider {
     /**
      * Extends metadata about system.
      * @param collection $collection
      * @return collection
      */
     public static function get_metadata(collection $collection): collection {
-        $collection->add_external_location_link('onlyofficeeditor',
+        $collection->add_external_location_link(
+            'onlyofficeeditor',
             ['userid' => 'privacy:metadata:onlyofficeeditor:userid'],
-            'privacy:metadata:onlyofficeeditor');
+            'privacy:metadata:onlyofficeeditor'
+        );
         $collection->add_subsystem_link('core_files', [], 'privacy:metadata:onlyofficeeditor:core_files');
         return $collection;
     }

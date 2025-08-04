@@ -40,7 +40,6 @@ use mod_onlyofficeeditor\local\exceptions\document_server_exception;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class document_service {
-
     /**
      * Get document conversion url.
      * @param string $documenturi original file source.

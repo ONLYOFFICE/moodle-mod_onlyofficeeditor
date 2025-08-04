@@ -37,7 +37,6 @@ use plugin_renderer_base;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends plugin_renderer_base {
-
     /**
      * Returns html to display the content of mod_folder.
      * @param summary_page $page the summary page to be rendered.
@@ -47,5 +46,4 @@ class renderer extends plugin_renderer_base {
         $data = $page->export_for_template($this);
         return parent::render_from_template('mod_onlyofficeeditor/summary', $data);
     }
-
 }
