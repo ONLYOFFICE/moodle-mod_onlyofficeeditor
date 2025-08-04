@@ -74,7 +74,7 @@ class check_document_server_button extends admin_setting {
      * @param string $query Query string
      * @return string HTML output
      */
-    public function output_html($data, $query='') {
+    public function output_html($data, $query = '') {
         global $OUTPUT, $PAGE;
 
         $PAGE->requires->js_call_amd('mod_onlyofficeeditor/check_docserver_button', 'init');
