@@ -58,6 +58,6 @@ jobs:
         uses: ncipollo/release-action@v1
         id: create_release
         with:
-          artifacts: "$MOODLE_MOD_DIR/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}.zip"
+          artifacts: "${{ env.MOODLE_MOD_DIR }}/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}.zip"
           bodyFile: RELEASE.md
           tag: v${{ steps.info.outputs.version }}
