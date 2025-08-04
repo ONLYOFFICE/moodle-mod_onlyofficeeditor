@@ -34,7 +34,6 @@ use admin_setting_configtext;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class onlyoffice_admin_setting_text extends admin_setting_configtext {
-
     /**
      * Whether the setting is required.
      *
@@ -59,7 +58,7 @@ class onlyoffice_admin_setting_text extends admin_setting_configtext {
         $required = false,
         $defaultsetting = '',
         $paramtype = PARAM_TEXT
-        ) {
+    ) {
         $this->required = $required;
         parent::__construct($name, $visiblename, $description, $defaultsetting, $paramtype);
     }

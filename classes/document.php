@@ -36,7 +36,6 @@ namespace mod_onlyofficeeditor;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class document {
-
     /**
      * Get document key.
      * @param cm_info $cm information about that course-module.
@@ -87,5 +86,4 @@ class document {
 
         return $permissions;
     }
-
 }

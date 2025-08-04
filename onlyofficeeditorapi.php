@@ -50,7 +50,7 @@ switch ($apitype) {
             require_login($courseid);
             $moduleinfo = get_fast_modinfo($courseid);
             $sections = course_get_format($courseid)->get_sections();
-            $data = new stdClass;
+            $data = new stdClass();
             $data->sections = [];
             foreach ($sections as $key => $sectioninfo) {
                 $sectionobject = new stdClass();

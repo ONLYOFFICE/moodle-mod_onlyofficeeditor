@@ -64,9 +64,11 @@ echo html_writer::start_div('', ['class' => 'onlyofficeeditor-container']); // S
 $documentserverurl = get_config('onlyofficeeditor', 'documentserverurl');
 $connectioninfo = \mod_onlyofficeeditor\util::get_connection_info($documentserverurl);
 $httpcode = $connectioninfo['http_code'] ?? null;
-if (!isset($documentserverurl) ||
+if (
+    !isset($documentserverurl) ||
         empty($documentserverurl) ||
-        $httpcode != 200) {
+        $httpcode != 200
+) {
     echo $OUTPUT->notification(get_string('docserverunreachable', 'onlyofficeeditor'), 'error');
 } else {
     echo html_writer::div('', '', ['id' => 'onlyofficeeditor-editor']);
@@ -77,4 +79,3 @@ if (!isset($documentserverurl) ||
 echo html_writer::end_div(); // End onlyofficeeditor-container.
 
 echo $OUTPUT->footer();
-
