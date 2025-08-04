@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ use core_privacy\local\metadata\collection;
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\provider,

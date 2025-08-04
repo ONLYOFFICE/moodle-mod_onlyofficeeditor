@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,13 +27,16 @@ namespace mod_onlyofficeeditor;
 
 use curl;
 use mod_onlyofficeeditor\configuration_manager;
+use mod_onlyofficeeditor\local\exceptions\command_service_exception;
+use mod_onlyofficeeditor\local\exceptions\conversion_service_exception;
+use mod_onlyofficeeditor\local\exceptions\document_server_exception;
 
 /**
  * Document class.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class document_service {
@@ -83,13 +86,18 @@ class document_service {
         $documentserverurl = configuration_manager::get_document_server_internal_url();
         $conversionurl = rtrim($documentserverurl, "/") . '/ConvertService.ashx';
 
-        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
-        $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl == 0]);
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 1;
+
+        if ($disableverifyssl) {
+            $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $curl->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+        }
+
         $response = $curl->post($conversionurl, $conversionbody);
 
         $conversionjson = json_decode($response);
         if (isset($conversionjson->error)) {
-            return '';
+            throw new conversion_service_exception(abs($conversionjson->error));
         }
 
         if (isset($conversionjson->endConvert) && $conversionjson->endConvert) {
@@ -131,11 +139,19 @@ class document_service {
         $documentserverurl = configuration_manager::get_document_server_internal_url();
         $commandurl = rtrim($documentserverurl, "/") . '/coauthoring/CommandService.ashx';
 
-        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
-        $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl == 0]);
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 1;
+
+        if ($disableverifyssl) {
+            $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $curl->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+        }
         $response = $curl->post($commandurl, $commandbody);
 
         $commandjson = json_decode($response);
+
+        if (isset($commandjson->error) && $commandjson->error > 0) {
+            throw new command_service_exception($commandjson->error);
+        }
 
         return $commandjson;
     }
@@ -147,10 +163,35 @@ class document_service {
     public static function get_version() {
         $result = self::command('version');
 
-        if (isset($result->error) && $result->error > 0) {
-            return '';
+        return $result->version;
+    }
+
+    /**
+     * Health check the document server
+     * @param string $url - document server url
+     * @return void
+     */
+    public static function health_check(string $url = ''): void {
+        $documentserverurl = !empty($url) ? $url : configuration_manager::get_document_server_internal_url();
+        $healthcheckurl = "$documentserverurl/healthcheck";
+        $disableverifyssl = configuration_manager::is_ssl_disabled();
+
+        $ch = new curl();
+
+        if ($disableverifyssl) {
+            $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
         }
 
-        return $result->version;
+        try {
+            $response = $ch->get($healthcheckurl);
+        } catch (\Exception $e) {
+            debugging('Connection error: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            throw new document_server_exception('Failed to connect to Document Server.', 0, $e);
+        }
+
+        if ($response !== 'true') {
+            throw new document_server_exception('Document Server has returned bad healthcheck status.');
+        }
     }
 }

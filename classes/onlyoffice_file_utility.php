@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ namespace mod_onlyofficeeditor;
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class onlyoffice_file_utility {
@@ -90,6 +90,25 @@ class onlyoffice_file_utility {
         ));
 
         return $formats;
+    }
+
+
+    /**
+     * Determine if the format is supported by onlyoffice editor
+     *
+     * @param string $extension
+     * @return bool
+     */
+    public static function is_format_supported(string $extension) {
+        $formats = static::get_accepted_formats();
+
+        foreach ($formats as $format) {
+            if ($format === ".$extension") {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

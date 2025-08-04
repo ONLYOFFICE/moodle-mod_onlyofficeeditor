@@ -1,36 +1,42 @@
-/* @copyright  2024 Ascensio System SIA <integration@onlyoffice.com>
+/* @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-#page-content h2,
-#page-content .onlyofficeeditor .activityinstance > a {
+/* Base styles (mobile-first) */
+.path-mod-onlyofficeeditor #page-content h2,
+.path-mod-onlyofficeeditor #page-content .activityinstance > a {
     display: inline-block;
 }
 
-.onlyofficeeditor-container > iframe {
-    height: 95vh;
+.path-mod-onlyofficeeditor .onlyofficeeditor-container > iframe {
+    position: static !important; /* stylelint-disable-line declaration-no-important */
+    height: calc(100dvh - 61px);
+    height: calc(100vh - 61px); /* stylelint-disable-line declaration-block-no-duplicate-properties */
     max-height: 60rem;
 }
 
-.onlyofficeeditor-container.onlyofficeeditor-fullscreen {
+.path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
-    margin: 0 0 0 50px;
+    margin: 0;
+    margin-top: 61px;
+    padding: 0 1px;
     z-index: 100;
 }
 
-.onlyofficeeditor-container.onlyofficeeditor-rightindent {
-    margin-right: 43px;
+.path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
+    margin-right: 0;
 }
 
-#onlyofficeeditor-editor.error {
+.path-mod-onlyofficeeditor #onlyofficeeditor-editor.error {
     color: red;
 }
 
-.onlyofficeeditor-create-button {
+.path-mod-onlyofficeeditor .onlyofficeeditor-create-button {
+    display: flex;
     position: relative;
     justify-content: center;
     min-width: 85px;
@@ -39,39 +45,47 @@
     background-repeat: no-repeat;
 }
 
-.onlyofficeeditor-create-button input[type=radio] {
+.path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[type=radio] {
+    -webkit-appearance: none;
     margin: auto;
     appearance: none;
     position: absolute;
     top: 0;
     opacity: 0.5;
+    width: 30px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0;
+    border: none;
 }
 
-.onlyofficeeditor-create-button input[type=radio]:checked {
+.path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[type=radio]:checked {
     opacity: 1;
 }
 
-.onlyofficeeditor-create-button input[value^="Document"] {
-    content: url([[pix:onlyofficeeditor|file_docx]]);
+.path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="Document"] {
+    background-image: url([[pix:onlyofficeeditor|file_docx]]);
 }
 
-.onlyofficeeditor-create-button input[value^="Presentation"] {
-    content: url([[pix:onlyofficeeditor|file_pptx]]);
+.path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="Presentation"] {
+    background-image: url([[pix:onlyofficeeditor|file_pptx]]);
 }
 
-.onlyofficeeditor-create-button input[value^="Spreadsheet"] {
-    content: url([[pix:onlyofficeeditor|file_xlsx]]);
+.path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="Spreadsheet"] {
+    background-image: url([[pix:onlyofficeeditor|file_xlsx]]);
 }
 
-.onlyofficeeditor-create-button input[value^="PDF form"] {
-    content: url([[pix:onlyofficeeditor|file_pdf]]);
+.path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="PDF form"] {
+    background-image: url([[pix:onlyofficeeditor|file_pdf]]);
 }
 
-.onlyofficeeditor-create-button input[value^="Upload file"] {
-    content: url([[pix:onlyofficeeditor|file_upload]]);
+.path-mod-onlyofficeeditor .onlyofficeeditor-create-button input[value^="Upload file"] {
+    background-image: url([[pix:onlyofficeeditor|file_upload]]);
 }
 
-.onlyofficeeditor-saveas-section {
+.path-mod-onlyofficeeditor .onlyofficeeditor-saveas-section {
     max-width: 100%;
     padding: 0.5rem 0;
     color: rgb(44, 123, 194);
@@ -79,12 +93,12 @@
     cursor: pointer;
 }
 
-.onlyofficeeditor-saveas-section-selected {
+.path-mod-onlyofficeeditor .onlyofficeeditor-saveas-section-selected {
     background-color: rgb(248, 249, 250);
 }
 
-.onlyofficeeditor-saveas-section:before,
-.onlyofficeeditor-saveas-section:last-child:after {
+.path-mod-onlyofficeeditor .onlyofficeeditor-saveas-section:before,
+.path-mod-onlyofficeeditor .onlyofficeeditor-saveas-section:last-child:after {
     position: absolute;
     left: 0;
     content: '';
@@ -93,56 +107,66 @@
     background-color: rgb(222, 226, 230);
     top: 0;
 }
-.onlyofficeeditor-saveas-section:last-child:after {
+
+.path-mod-onlyofficeeditor .onlyofficeeditor-saveas-section:last-child:after {
     top: 100%;
 }
 
-.onlyofficeeditor-editor-fs-button {
+.path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button {
     border: 1px solid rgb(15, 111, 197);
     background: white;
     color: rgb(15, 111, 197);
     float: right;
 }
 
-#onlyofficeeditor-enter-fs-button {
+.path-mod-onlyofficeeditor #onlyofficeeditor-enter-fs-button {
     padding: 5px;
     margin-right: 10px;
+    margin-bottom: 0.5rem;
 }
 
-#onlyofficeeditor-exit-fs-button {
-    margin: 12px;
+.path-mod-onlyofficeeditor #onlyofficeeditor-exit-fs-button {
+    margin: 12px 0;
 }
 
-.onlyoffice-banner {
+.path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button i {
+    display: none;
+}
+
+/* Banner styles - mobile first */
+.path-admin .onlyoffice-banner {
     border: 1px solid #e9e9e9;
     border-radius: 3px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 16px 32px 21px 20px;
+    padding: 16px 20px;
     width: fit-content;
     background-image: url([[pix:onlyofficeeditor|banner_bg]]);
     background-repeat: no-repeat;
     margin: 15px 0;
 }
 
-.banner-body {
+.path-admin .onlyoffice-banner .banner-body {
     max-width: 398px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    column-gap: 35px;
-    padding-right: 24px;
+    justify-items: center;
+    padding-right: 0;
 }
 
-.banner-body h4,
-.banner-body p {
+.path-admin .onlyoffice-banner .banner-body h4,
+.path-admin .onlyoffice-banner .banner-body p {
     margin: 0;
 }
 
-.banner-body h4 {
+.path-admin .onlyoffice-banner .banner-body h4 {
     margin-bottom: 5px;
 }
 
-.banner-icon img {
+.path-admin .onlyoffice-banner .banner-icon img {
     max-width: 82px;
     max-height: 79px;
     width: 82px;
@@ -150,22 +174,25 @@
     margin-right: 0;
 }
 
-.banner-title {
+.path-admin .onlyoffice-banner .banner-title {
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
+    text-align: center;
 }
 
-.banner-description {
+.path-admin .onlyoffice-banner .banner-description {
     font-weight: 300;
     font-size: 14px;
+    text-align: center;
 }
 
-.banner-links {
-    margin-left: 24px;
+.path-admin .onlyoffice-banner .banner-links {
+    margin-left: 0;
+    margin-top: 16px;
 }
 
-.banner-links a {
+.path-admin .onlyoffice-banner .banner-links a {
     background-color: transparent;
     color: #316ab9;
     border: 1px solid #316ab9;
@@ -176,36 +203,94 @@
     font-weight: 500;
 }
 
-.banner-links a:active {
+.path-admin .onlyoffice-banner .banner-links a:active {
     background-color: transparent;
 }
 
-.banner-links a:hover {
+.path-admin .onlyoffice-banner .banner-links a:hover {
     text-decoration: none;
 }
 
-@media (max-width: 603px) {
-    .onlyoffice-banner {
-        flex-direction: column;
+.path-admin .settings-intro {
+    display: flex;
+    flex-direction: column;
+    row-gap: 11px;
+    margin: 24px 0;
+    margin-top: 16px;
+}
+
+.path-admin .settings-intro p {
+    margin: 0;
+}
+
+.path-admin .settings-intro-links {
+    display: flex;
+    column-gap: 24px;
+}
+
+.path-admin .settings-intro-links a {
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    gap: 4px;
+}
+
+.path-admin .settings-intro-links a::after {
+    content: url([[pix:onlyofficeeditor|top_right_arrow]]);
+    width: 12px;
+    height: 12px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .path-admin .onlyoffice-banner {
+        padding: 16px 20px;
+        flex-direction: row;
+        justify-content: flex-start;
     }
 
-    .banner-body {
-        padding-right: 0;
+    .path-admin .onlyoffice-banner .banner-body {
+        flex-direction: row;
+        column-gap: 35px;
+        padding-right: 24px;
+        justify-items: flex-start;
     }
 
-    .banner-links {
-        margin-top: 15px;
+    .path-admin .onlyoffice-banner .banner-title,
+    .path-admin .onlyoffice-banner .banner-description {
+        text-align: left;
+    }
+
+    .path-admin .onlyoffice-banner .banner-links {
+        margin-left: 22px;
+        margin-top: 0;
     }
 }
 
-@media (max-width: 480px) {
-    .banner-body {
-        flex-direction: column;
-        justify-items: center;
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .path-mod-onlyofficeeditor #onlyofficeeditor-exit-fs-button {
+        margin: 12px;
     }
 
-    .banner-title,
-    .banner-description {
-        text-align: center;
+    .path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button i {
+        display: inline-block;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
+        margin: 0 0 0 50px;
+    }
+
+    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
+        margin-right: 43px;
+    }
+
+    .path-admin .onlyoffice-banner {
+        padding: 16px 32px 21px 20px;
     }
 }

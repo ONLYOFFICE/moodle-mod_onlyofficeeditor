@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -37,7 +37,7 @@ use mod_onlyofficeeditor\configuration_manager;
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -168,6 +168,10 @@ class editor {
         $customization['plugins'] = $this->modconfig->editor_security_plugin == 1;
         $customization['macros'] = $this->modconfig->editor_security_macros == 1;
         $customization['integrationMode'] = 'embed';
+        $customization['mobile'] = [
+            'forceView' => false,
+            'standardView' => false,
+        ];
         $editorconfig['customization'] = $customization;
 
         // Device type.

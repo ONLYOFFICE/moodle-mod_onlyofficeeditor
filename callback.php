@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,7 +32,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 
 defined('AJAX_SCRIPT') || define('AJAX_SCRIPT', true);
 
-$doc = required_param('doc', PARAM_RAW);
+$doc = required_param('doc', PARAM_TEXT);
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('X-Robots-Tag: noindex');

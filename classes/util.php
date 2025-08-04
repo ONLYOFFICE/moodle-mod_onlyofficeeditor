@@ -19,12 +19,13 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_onlyofficeeditor;
+use context_user;
 
 defined('MOODLE_INTERNAL') || die();
 require_once("$CFG->dirroot/course/modlib.php");
@@ -34,7 +35,7 @@ require_once("$CFG->dirroot/course/modlib.php");
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -72,6 +73,11 @@ class util {
 
     /** Desktop user agent string */
     const DESKTOP_USER_AGENT = 'AscDesktopEditor';
+
+    /**
+     * File name maximum length
+     */
+    const FILENAME_MAXIMUM_LENGTH = 255;
 
     /**
      * Get plugin key.
@@ -113,11 +119,27 @@ class util {
      * @param \stdClass $data form data for new onlyoffice module.
      */
     public static function save_file($data) {
+        global $USER;
+
         $cmid = $data->coursemodule;
         $draftitemid = $data->file;
 
         $context = \context_module::instance($cmid);
         if ($draftitemid) {
+            $usercontext = context_user::instance($USER->id);
+            $fs = get_file_storage();
+            $draftfiles = $fs->get_area_files($usercontext->id, 'user', 'draft', $draftitemid, 'id');
+
+            foreach ($draftfiles as $file) {
+                if (!$file->is_directory()) {
+                    $extension = pathinfo($file->get_filename(), PATHINFO_EXTENSION);
+                    $newfilename = self::generate_filename($data->name, $extension);
+                    if ($newfilename !== $file->get_filename()) {
+                        $file->rename($file->get_filepath(), $newfilename);
+                    }
+                }
+            }
+
             $options = ['subdirs' => false];
             file_save_draft_area_files($draftitemid, $context->id, 'mod_onlyofficeeditor', 'content', 0, $options);
         }
@@ -132,9 +154,12 @@ class util {
     public static function get_connection_info($url) {
         $ch = new \curl();
 
-        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 0;
-        $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl]);
-        $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => $disableverifyssl]);
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 1;
+
+        if ($disableverifyssl) {
+            $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
+            $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+        }
 
         $ch->get($url);
         $info = $ch->get_info();
@@ -450,5 +475,22 @@ class util {
         }
 
         return false;
+    }
+
+    /**
+     * Generate valid file name
+     *
+     * @param string $name
+     * @param string $ext
+     * @return string
+     */
+    public static function generate_filename($name, $ext) {
+        $filename = "$name.$ext";
+
+        if (strlen($filename) > static::FILENAME_MAXIMUM_LENGTH) {
+            $filename = substr($name, 0, static::FILENAME_MAXIMUM_LENGTH - strlen(".$ext")) . ".$ext";
+        }
+
+        return $filename;
     }
 }

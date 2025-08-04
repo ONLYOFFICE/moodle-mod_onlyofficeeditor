@@ -1,5 +1,18 @@
 # Change Log
 
+## 6.1.0
+## Added
+- add docs check connection button in settings to test connectivity with the document server
+- add admin settings validation for document server related fields
+- ca, cs, da, hu, id, ro, sq, ur language templates
+
+## Changed
+- rewrite admin settings validation logic to validate only for input validity
+- fix unsuccessful file rename
+- fix unsupported file upload
+- fix approval blockers: namespace collisions, superglobals usage
+- fix incorrect disabling of certificate verification in curl
+
 ## 6.0.1
 ## Added
 - fi, he, no, sl language templates

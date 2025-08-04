@@ -19,16 +19,25 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['banner_description'] = 'ダウンロードやインストールをすることなく、クラウド上で簡単にエディタを起動することができます';
 $string['banner_link_title'] = '今すぐ使ってみる';
 $string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['checkdocserverbutton'] = 'Docsの接続を確認';
+$string['connectionerror'] = '接続エラー';
+$string['connectionerror:command'] = 'CommandServiceを確認した際にエラーが発生しました';
+$string['connectionerror:convert'] = 'ConvertServiceを確認した際にエラーが発生しました';
+$string['connectionerror:unexpected'] = '接続を確認した際に不明なエラーが発生しました';
+$string['connectionsuccess'] = '接続に成功しました';
 $string['disable_verify_ssl'] = '証明書の検証を無効にする（安全ではありません)';
+$string['disable_verify_ssl:description'] = '自己署名証明書を使用してドキュメントサーバーにアクセスする場合のみ使用してください';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server にアクセスできません。管理者にご連絡ください。';
 $string['documentpermissions'] = 'ドキュメントの権限';
+$string['documentservererror'] = 'ONLYOFFICE Docsに接続できません。サーバーが起動しており、アクセス可能かどうかご確認ください。';
 $string['documentserverinternal'] = 'サーバーから内部リクエストに利用されるONLYOFFICE Docs アドレス';
+$string['documentserverinternal:description'] = 'MoodleサーバーとONLYOFFICE Docsの間で、パブリックアドレスに依存せず内部ルーティングを使用する場合のみ入力してください';
 $string['documentserversecret'] = 'ドキュメントサーバーのシクレット';
 $string['documentserversecret_desc'] = 'このシクレットは、ドキュメントエディタを開いてメソッドを呼び出したり、ドキュメントコマンドサービスやドキュメント変換サービスへのリクエストのために、ブラウザでトークン（暗号化された署名）を生成するために使われます。トークンはONLYOFFICE Document Serverリクエストの重要なパラメータを置換することを防止します。';
 $string['documentserverurl'] = '文書編集サービスのアドレス';
@@ -41,6 +50,7 @@ $string['editor_security_macros'] = 'ドキュメントマクロを実行する'
 $string['editor_security_plugin'] = 'プラグインを有効にする';
 $string['editor_view'] = 'エディタのカスタム設定';
 $string['editor_view_chat'] = '「チャットメニュー」ボタンを表示する';
+$string['editor_view_description'] = 'エディタのカスタマイズについて詳しくは<a href="{$a->url}" target="_blank">こちら</a>。';
 $string['editor_view_feedback'] = 'フィードバックと「サポートメニュー」ボタンを表示する';
 $string['editor_view_header'] = 'ヘッダーをよりコンパクトに表示する';
 $string['editor_view_help'] = '「ヘルプメニュー」ボタンを表示する';
@@ -53,7 +63,9 @@ $string['mentioncontexturlname'] = 'コメントへのリンク';
 $string['mentionnotifier:notification'] = '{$a->notifier} が{$a->course}でメンションされました';
 $string['messageprovider:mentionnotifier'] = '「文書」モジュール内のONLYOFFICEメンション通知';
 $string['modulename'] = 'ONLYOFFICEの文書';
-$string['modulename_help'] = 'ONLYOFFICEモジュールは、ONLYOFFICE Document Serverを使用して、Moodleにローカルのオフィス文書を作成・編集することができ、複数のユーザーがリアルタイムで共同作業を行い、それらの変更をMoodleに保存することができます。';
+$string['modulename_help'] = 'ONLYOFFICEモジュールは、ONLYOFFICE Document Serverを使用して、Moodleにローカルのオフィス文書を作成・編集することができ、複数のユーザーがリアルタイムで共同作業を行い、それらの変更をMoodleに保存することができます。
+
+詳細については、<a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">ヘルプセンタ</a>をご覧ください。';
 $string['modulenameplural'] = 'ONLYOFFICEドキュメント';
 $string['oldversion'] = 'オンラインで記入式フォームを作成するには、ONLYOFFICE Docs 7.0版まで更新してください';
 $string['onlyofficeactivityicon'] = 'ONLYOFFICEで開く';
@@ -61,7 +73,7 @@ $string['onlyofficeeditor:addinstance'] = '新しいONLYOFFICEドキュメント
 $string['onlyofficeeditor:editdocument'] = 'ONLYOFFICEドキュメントの活動を編集する';
 $string['onlyofficeeditor:view'] = 'ONLYOFFICEドキュメントの活動を表示する';
 $string['onlyofficename'] = '活動名';
-$string['onmentionerror'] = ' メンションのエラー';
+$string['onmentionerror'] = 'メンションのエラー';
 $string['pdfformname'] = 'PDFフォーム';
 $string['pluginadministration'] = 'ONLYOFFICE ドキュメント活動管理';
 $string['pluginname'] = 'ONLYOFFICEの文書';
@@ -79,12 +91,25 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'ドキュメント�
 $string['privacy:metadata:onlyofficeeditor:userid'] = '実際のユーザーIDはONLYOFFICEエディタに送信されません';
 $string['protect'] = '保護タブを隠す';
 $string['protect_help'] = 'このオプションがオフの場合、ユーザーはONLYOFFICEエディタで保護設定にアクセスすることができます。なお、<strong>course:manageactivities</strong> 権を持つユーザーは、常に保護設定にアクセスすることができます。';
+$string['readmore'] = '続きを読む';
 $string['returntodocument'] = 'コースページに戻る';
 $string['saveasbutton'] = '選択する';
 $string['saveaserror'] = 'エラーが発生しました';
 $string['saveassuccess'] = 'ドキュメントは正常に保存されました';
 $string['saveastitle'] = 'ドキュメントを保存するコースセクションを選択する';
+$string['savewarning'] = 'ページ下部の「変更を保存」をお忘れなく';
 $string['selectfile'] = 'アイコンをクリックして、既存のファイルを選択するか、新規ファイルを作成します。';
+$string['settingsintro'] = 'Moodleコース構造内で直接オフィス文書をオンラインで編集し、共同作業をします。閲覧用またはリアルタイム共同編集用に文書を共有できます。学生の課題を作成、共有、採点することもできます。';
 $string['storageurl'] = 'ONLYOFFICE Docsから内部リクエストに利用されるサーバーアドレス';
+$string['suggestfeature'] = '機能を提案する';
+$string['unsupportedfileformat'] = 'ファイル形式がサポートされていません。';
 $string['uploadformname'] = 'ファイルをアップロードする';
+$string['validationerror:apijsunavailable'] = 'APIのJavaScriptファイルを取得できません。';
+$string['validationerror:docsinvalidurl'] = 'ドキュメントサーバーURLが無効です。URL形式を確認してください。';
+$string['validationerror:documentserverunreachable'] = 'ONLYOFFICE Docsに接続できません。サーバーが動作中でアクセス可能かどうかご確認ください。';
+$string['validationerror:emptyurl'] = 'ONLYOFFICE DocsのURLは空白にできません。';
+$string['validationerror:incorrectjwtheader'] = 'ONLYOFFICE Docsに接続できません。認証ヘッダーが正しいかどうかご確認ください。';
+$string['validationerror:incorrectsecret'] = 'ONLYOFFICE Docsに接続できません。シークレットキーが正しいかどうかご確認ください。';
+$string['validationerror:invalidurl'] = 'URLが無効です。URL形式を確認してください。';
+$string['validationerror:mixedcontent'] = 'アクティブコンテンツの混在は許可されていません。ONLYOFFICE DocsにはHTTPSアドレスが必要です。';
 $string['xlsxformname'] = 'スプレッドシート';

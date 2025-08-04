@@ -19,17 +19,26 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['banner_description'] = 'Easily launch the editors in the cloud without downloading and installation';
 $string['banner_link_title'] = 'Get Now';
 $string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['checkdocserverbutton'] = 'Check Docs connection';
+$string['connectionerror'] = 'Connection error';
+$string['connectionerror:command'] = 'Error when trying to check CommandService';
+$string['connectionerror:convert'] = 'Error when trying to check ConvertService';
+$string['connectionerror:unexpected'] = 'Unexpected error occurred while checking connection';
+$string['connectionsuccess'] = 'Connection is stable';
 $string['disable_verify_ssl'] = 'Disable certificate verification (insecure)';
+$string['disable_verify_ssl:description'] = 'Only use when accessing Document Server with a self-signed certificate';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
 $string['documentpermissions'] = 'Document permissions';
+$string['documentservererror'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the server is running and accessible.';
 $string['documentserverinternal'] = 'ONLYOFFICE Docs address for internal requests from the server';
+$string['documentserverinternal:description'] = 'Fill in only when using internal routing between the Moodle server and ONLYOFFICE Docs, without relying on public addresses';
 $string['documentserversecret'] = 'Document Server Secret';
 $string['documentserversecret_desc'] = 'The secret is used to generate the token (an encrypted signature) in the browser for the document editor opening and calling the methods and the requests to the document command service and document conversion service. The token prevents the substitution of important parameters in ONLYOFFICE Document Server requests.';
 $string['documentserverurl'] = 'Document Editing Service Address';
@@ -42,6 +51,7 @@ $string['editor_security_macros'] = 'Run document macros';
 $string['editor_security_plugin'] = 'Enable plugins';
 $string['editor_view'] = 'Editor customization settings';
 $string['editor_view_chat'] = 'Display Chat menu button';
+$string['editor_view_description'] = 'Learn more about customizing the editor <a href="{$a->url}" target="_blank">here</a>.';
 $string['editor_view_feedback'] = 'Display Feedback & Support menu button';
 $string['editor_view_header'] = 'Display the header more compact';
 $string['editor_view_help'] = 'Display Help menu button';
@@ -54,8 +64,10 @@ $string['mentioncontexturlname'] = 'Link to the comment.';
 $string['mentionnotifier:notification'] = '{$a->notifier} mentioned in the {$a->course}';
 $string['messageprovider:mentionnotifier'] = 'ONLYOFFICE mentioning notification in module document.';
 $string['modulename'] = 'ONLYOFFICE document';
-$string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
-$string['modulenameplural'] = 'ONLYOFFICE documents';
+$string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle.
+
+For more information, visit <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Help Center</a>.';
+$string['modulenameplural'] = 'ONLYOFFICE Documents';
 $string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on fillable forms online.';
 $string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
 $string['onlyofficeeditor:addinstance'] = 'Add a new ONLYOFFICE document activity';
@@ -80,12 +92,25 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Document permissions
 $string['privacy:metadata:onlyofficeeditor:userid'] = 'Actual user ID is not sent to the ONLYOFFICE editor.';
 $string['protect'] = 'Hide Protection tab';
 $string['protect_help'] = 'If this off, users have access to protection settings in the ONLYOFFICE editor. Note, users with <strong>course:manageactivities</strong> capability always have access to protection settings.';
+$string['readmore'] = 'Read more';
 $string['returntodocument'] = 'Return to course page';
 $string['saveasbutton'] = 'Choose';
 $string['saveaserror'] = 'Something went wrong.';
 $string['saveassuccess'] = 'Document was successfully saved.';
 $string['saveastitle'] = 'Choose Course Section to Save the document';
+$string['savewarning'] = 'Don\'t forget to Save changes at the bottom of the page';
 $string['selectfile'] = 'Select existing file or create new by clicking one of the icons';
+$string['settingsintro'] = 'Edit and collaborate on office documents online directly within Moodle course structure. Share documents for viewing or real-time co-editing. Create, share and grade students\' assignments.';
 $string['storageurl'] = 'Server address for internal requests from ONLYOFFICE Docs';
+$string['suggestfeature'] = 'Suggest a feature';
+$string['unsupportedfileformat'] = 'File format is not supported';
 $string['uploadformname'] = 'Upload file';
+$string['validationerror:apijsunavailable'] = 'Cannot fetch the API JavaScript file.  Please check the Document Server URL.';
+$string['validationerror:docsinvalidurl'] = 'Document Server URL is invalid. Please check the URL format.';
+$string['validationerror:documentserverunreachable'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the server is running and accessible.';
+$string['validationerror:emptyurl'] = 'ONLYOFFICE Docs URL cannot be empty.';
+$string['validationerror:incorrectjwtheader'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the Authorization header is correct.';
+$string['validationerror:incorrectsecret'] = 'Unable to connect to ONLYOFFICE Docs. Please check if the Secret key is correct.';
+$string['validationerror:invalidurl'] = 'The URL is invalid. Please check the URL format.';
+$string['validationerror:mixedcontent'] = 'Mixed Active Content is not allowed. HTTPS address for ONLYOFFICE Docs is required.';
 $string['xlsxformname'] = 'Spreadsheet';
