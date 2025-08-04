@@ -35,7 +35,6 @@ namespace mod_onlyofficeeditor;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class jwt_wrapper {
-
     /**
      * Encrypting payload.
      * @param array $payload payload to crypt.

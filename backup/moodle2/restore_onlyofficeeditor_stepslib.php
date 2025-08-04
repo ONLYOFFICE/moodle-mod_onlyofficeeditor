@@ -27,7 +27,6 @@
  * Define all the restore steps.
  */
 class restore_onlyofficeeditor_activity_structure_step extends restore_activity_structure_step {
-
     /**
      * Define structure.
      */

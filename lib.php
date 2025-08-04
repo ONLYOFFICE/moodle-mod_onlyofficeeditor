@@ -177,8 +177,13 @@ function onlyofficeeditor_get_coursemodule_info($coursemodule) {
 
     $context = \context_module::instance($coursemodule->id);
 
-    if (!$onlyoffice = $DB->get_record('onlyofficeeditor', ['id' => $coursemodule->instance],
-        'id, name, display, displayoptions, intro, introformat')) {
+    if (
+        !$onlyoffice = $DB->get_record(
+            'onlyofficeeditor',
+            ['id' => $coursemodule->instance],
+            'id, name, display, displayoptions, intro, introformat'
+        )
+    ) {
         return null;
     }
 
@@ -208,8 +213,12 @@ function onlyofficeeditor_get_coursemodule_info($coursemodule) {
  */
 function onlyofficeeditor_cm_info_view(cm_info $cm) {
     global $OUTPUT;
-    $icon = $OUTPUT->pix_icon('monologo', get_string('onlyofficeactivityicon', 'onlyofficeeditor'), 'onlyofficeeditor',
-        ['class' => 'onlyofficeactivityicon']);
+    $icon = $OUTPUT->pix_icon(
+        'monologo',
+        get_string('onlyofficeactivityicon', 'onlyofficeeditor'),
+        'onlyofficeeditor',
+        ['class' => 'onlyofficeactivityicon']
+    );
 }
 
 /**
@@ -375,7 +384,7 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     $doc = required_param('doc', PARAM_RAW);
 
     $crypt = new \mod_onlyofficeeditor\hasher();
-    list($hash, $error) = $crypt->read_hash($doc);
+    [$hash, $error] = $crypt->read_hash($doc);
     if ($error || ($hash == null)) {
         return false;
     }
@@ -397,12 +406,14 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     $files = $fs->get_area_files($context->id, 'mod_onlyofficeeditor', $filearea, false, 'sortorder DESC, id ASC', false, 0, 0, 1);
     if (count($files) >= 1) {
         $file = reset($files);
-        if ($hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true)
+        if (
+            $hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true)
                 || has_any_capability([
                     'moodle/course:manageactivities',
                     'mod/onlyofficeeditor:editdocument',
                     'mod/onlyofficeeditor:view',
-                ], $context, $hash->userid))) {
+                ], $context, $hash->userid))
+        ) {
             send_stored_file($file, null, 0, true);
         }
     }

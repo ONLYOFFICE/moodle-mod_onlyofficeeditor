@@ -32,7 +32,6 @@ require_once($CFG->dirroot . '/mod/onlyofficeeditor/backup/moodle2/backup_onlyof
  * Provides the steps to perform one complete backup of the onlyofficeeditor instance
  */
 class backup_onlyofficeeditor_activity_task extends backup_activity_task {
-
     /**
      * Define (add) particular settings this activity can have
      */
@@ -58,11 +57,11 @@ class backup_onlyofficeeditor_activity_task extends backup_activity_task {
         $base = preg_quote($CFG->wwwroot, '/');
 
         // Link to instances list.
-        $search = "/(".$base."\/mod\/onlyofficeeditor\/index.php\?id\=)([0-9]+)/";
+        $search = "/(" . $base . "\/mod\/onlyofficeeditor\/index.php\?id\=)([0-9]+)/";
         $content = preg_replace($search, '$@ONLYOFFICEEDITORINDEX*$2@$', $content);
 
         // Link to the editor page.
-        $search = "/(".$base."\/mod\/onlyofficeeditor\/view.php\?id\=)([0-9]+)/";
+        $search = "/(" . $base . "\/mod\/onlyofficeeditor\/view.php\?id\=)([0-9]+)/";
         $content = preg_replace($search, '$@ONLYOFFICEEDITORVIEWBYID*$2@$', $content);
 
         return $content;

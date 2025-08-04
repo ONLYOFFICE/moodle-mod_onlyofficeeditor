@@ -38,7 +38,6 @@ use mod_onlyofficeeditor\util;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class hasher {
-
     /**
      * The plugin key from the plugin configuration.
      *
@@ -106,5 +105,4 @@ class hasher {
         $base64str = base64_encode($payload);
         return $base64str;
     }
-
 }

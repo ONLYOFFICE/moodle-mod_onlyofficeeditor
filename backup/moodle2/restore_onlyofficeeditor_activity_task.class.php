@@ -31,7 +31,6 @@ require_once($CFG->dirroot . '/mod/onlyofficeeditor/backup/moodle2/restore_onlyo
  * Restore task that provides all the settings and steps to perform one complete restore of the activity
  */
 class restore_onlyofficeeditor_activity_task extends restore_activity_task {
-
     /**
      * Define (add) particular settings this activity can have
      */
@@ -65,13 +64,18 @@ class restore_onlyofficeeditor_activity_task extends restore_activity_task {
     public static function define_decode_rules() {
         $rules = [];
 
-        $rules[] = new restore_decode_rule('ONLYOFFICEEDITORVIEWBYID',
-                '/mod/onlyofficeeditor/view.php?id=$1', 'course_module');
-        $rules[] = new restore_decode_rule('ONLYOFFICEEDITORINDEX',
-                '/mod/onlyofficeeditor/index.php?id=$1', 'course');
+        $rules[] = new restore_decode_rule(
+            'ONLYOFFICEEDITORVIEWBYID',
+            '/mod/onlyofficeeditor/view.php?id=$1',
+            'course_module'
+        );
+        $rules[] = new restore_decode_rule(
+            'ONLYOFFICEEDITORINDEX',
+            '/mod/onlyofficeeditor/index.php?id=$1',
+            'course'
+        );
 
         return $rules;
-
     }
 
     /**
@@ -80,14 +84,30 @@ class restore_onlyofficeeditor_activity_task extends restore_activity_task {
     public static function define_restore_log_rules() {
         $rules = [];
 
-        $rules[] = new restore_log_rule('onlyofficeeditor', 'add',
-                'view.php?id={course_module}', '{onlyofficeeditor}');
-        $rules[] = new restore_log_rule('onlyofficeeditor', 'update',
-                'view.php?id={course_module}', '{onlyofficeeditor}');
-        $rules[] = new restore_log_rule('onlyofficeeditor', 'view',
-                'view.php?id={course_module}', '{onlyofficeeditor}');
-        $rules[] = new restore_log_rule('onlyofficeeditor', 'preview',
-                'view.php?id={course_module}', '{onlyofficeeditor}');
+        $rules[] = new restore_log_rule(
+            'onlyofficeeditor',
+            'add',
+            'view.php?id={course_module}',
+            '{onlyofficeeditor}'
+        );
+        $rules[] = new restore_log_rule(
+            'onlyofficeeditor',
+            'update',
+            'view.php?id={course_module}',
+            '{onlyofficeeditor}'
+        );
+        $rules[] = new restore_log_rule(
+            'onlyofficeeditor',
+            'view',
+            'view.php?id={course_module}',
+            '{onlyofficeeditor}'
+        );
+        $rules[] = new restore_log_rule(
+            'onlyofficeeditor',
+            'preview',
+            'view.php?id={course_module}',
+            '{onlyofficeeditor}'
+        );
 
         return $rules;
     }

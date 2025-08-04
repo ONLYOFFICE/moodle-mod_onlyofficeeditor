@@ -41,7 +41,6 @@ use mod_onlyofficeeditor\local\docs\docs_settings_validator;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class check_documentserver_connection extends external_api {
-
     /**
      * Returns description of method parameters
      * @return external_function_parameters
@@ -52,27 +51,32 @@ class check_documentserver_connection extends external_api {
                 PARAM_TEXT,
                 'Document server secret',
                 VALUE_DEFAULT,
-                ''),
+                ''
+            ),
             configuration_constants::CONFIG_JWT_HEADER => new external_value(
                 PARAM_TEXT,
                 'JWT header',
                 VALUE_DEFAULT,
-                ''),
+                ''
+            ),
             configuration_constants::CONFIG_DOCS_INTERNAL_URL => new external_value(
                 PARAM_URL,
                 'Internal URL for the document server',
                 VALUE_DEFAULT,
-                ''),
+                ''
+            ),
             configuration_constants::CONFIG_STORAGE_INTERNAL_URL => new external_value(
                 PARAM_URL,
                 'Storage URL for the document server',
                 VALUE_DEFAULT,
-                ''),
+                ''
+            ),
             configuration_constants::CONFIG_DISABLE_VERIFY_SSL => new external_value(
                 PARAM_BOOL,
                 'Disable SSL verification',
                 VALUE_DEFAULT,
-                false),
+                false
+            ),
         ]);
     }
 
@@ -123,7 +127,7 @@ class check_documentserver_connection extends external_api {
 
         return self::return_errors(
             empty($validationerrors) ? 'success' : 'error',
-            array_map(function($key, $message) {
+            array_map(function ($key, $message) {
                 return [
                     'field' => $key,
                     'message' => $message,

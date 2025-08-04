@@ -40,7 +40,6 @@ require_once("$CFG->dirroot/course/modlib.php");
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class util {
-
     /** No doc with the specified key can be found. */
     const STATUS_NOTFOUND = 0;
 
@@ -221,22 +220,18 @@ class util {
      */
     public static function create_from_onlyoffice_template($fileformat, $user, $contextid, $fileid, $name) {
         switch ($fileformat) {
-            case 'Document': {
+            case 'Document':
                 $fileformat = 'docx';
                 break;
-            }
-            case 'Spreadsheet': {
+            case 'Spreadsheet':
                 $fileformat = 'xlsx';
                 break;
-            }
-            case 'Presentation': {
+            case 'Presentation':
                 $fileformat = 'pptx';
                 break;
-            }
-            case 'PDF form': {
+            case 'PDF form':
                 $fileformat = 'pdf';
                 break;
-            }
         }
 
         $pathname = self::get_template_path($fileformat, $user);
@@ -373,7 +368,7 @@ class util {
             $moduleinfo = (object)$DB->get_record('onlyofficeeditor', ['id' => $cm->instance]);
             $course = get_course($courseid);
             $modulename = (object) ['modulename' => 'onlyofficeeditor'];
-            list($module, $cntxt, $cw) = can_add_moduleinfo($course, $modulename->modulename, $section);
+            [$module, $cntxt, $cw] = can_add_moduleinfo($course, $modulename->modulename, $section);
 
             $moduleinfo->module = $module->id;
             $moduleinfo->modulename = $modulename->modulename;

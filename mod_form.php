@@ -44,7 +44,6 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_onlyofficeeditor_mod_form extends moodleform_mod {
-
     /**
      * Defines forms elements
      */
@@ -87,21 +86,61 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         if (!$this->_instance) {
             $attr = ['class' => 'onlyofficeeditor-create-button'];
             $createbuttons = [];
-            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
-                get_string('docxformname', 'onlyofficeeditor'), 'Document', $attr);
-            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
-                get_string('xlsxformname', 'onlyofficeeditor'), 'Spreadsheet', $attr);
-            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
-                get_string('pptxformname', 'onlyofficeeditor'), 'Presentation', $attr);
-            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
-                get_string('pdfformname', 'onlyofficeeditor'), 'PDF form', $attr);
-            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
-                get_string('uploadformname', 'onlyofficeeditor'), 'Upload file', $attr);
+            $createbuttons[] =& $mform->createElement(
+                'radio',
+                'onlyofficetemplateformat',
+                '',
+                get_string('docxformname', 'onlyofficeeditor'),
+                'Document',
+                $attr
+            );
+            $createbuttons[] =& $mform->createElement(
+                'radio',
+                'onlyofficetemplateformat',
+                '',
+                get_string('xlsxformname', 'onlyofficeeditor'),
+                'Spreadsheet',
+                $attr
+            );
+            $createbuttons[] =& $mform->createElement(
+                'radio',
+                'onlyofficetemplateformat',
+                '',
+                get_string('pptxformname', 'onlyofficeeditor'),
+                'Presentation',
+                $attr
+            );
+            $createbuttons[] =& $mform->createElement(
+                'radio',
+                'onlyofficetemplateformat',
+                '',
+                get_string('pdfformname', 'onlyofficeeditor'),
+                'PDF form',
+                $attr
+            );
+            $createbuttons[] =& $mform->createElement(
+                'radio',
+                'onlyofficetemplateformat',
+                '',
+                get_string('uploadformname', 'onlyofficeeditor'),
+                'Upload file',
+                $attr
+            );
 
-            $mform->addGroup($createbuttons, 'create_buttons',
-                get_string('selectfile', 'onlyofficeeditor'), [' '], false);
-            $mform->addRule('create_buttons', get_string('required'), 'required',
-                null, 'client');
+            $mform->addGroup(
+                $createbuttons,
+                'create_buttons',
+                get_string('selectfile', 'onlyofficeeditor'),
+                [' '],
+                false
+            );
+            $mform->addRule(
+                'create_buttons',
+                get_string('required'),
+                'required',
+                null,
+                'client'
+            );
 
             $mform->disabledIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
             $mform->hideIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
@@ -149,8 +188,13 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         if (!$files) {
             $fileformat = $data['onlyofficetemplateformat'];
             if ($fileformat != null && $fileformat != 'Upload file') {
-                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id,
-                    $data['file'], $data['name']);
+                util::create_from_onlyoffice_template(
+                    $fileformat,
+                    $USER,
+                    $this->context->id,
+                    $data['file'],
+                    $data['name']
+                );
             } else {
                 $errors['file'] = get_string('required');
             }
@@ -198,5 +242,4 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
             }
         }
     }
-
 }

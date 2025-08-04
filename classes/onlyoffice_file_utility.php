@@ -34,7 +34,6 @@ namespace mod_onlyofficeeditor;
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class onlyoffice_file_utility {
-
     /**
      * Get accepted spreadsheets exntensions.
      * @return string[] Accepted extensions of spreadsheet files
@@ -139,5 +138,4 @@ class onlyoffice_file_utility {
     public static function get_editable_extensions() {
         return ['.docx', '.xlsx', '.pptx', '.docxf', '.oform', '.pdf'];
     }
-
 }

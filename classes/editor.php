@@ -42,7 +42,6 @@ use mod_onlyofficeeditor\configuration_manager;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class editor {
-
     /**
      * @var int the course id.
      */
@@ -82,8 +81,17 @@ class editor {
         $this->modconfig = $modconfig;
 
         $fs = get_file_storage();
-        $files = $fs->get_area_files($this->context->id, 'mod_onlyofficeeditor', 'content', 0,
-            'sortorder DESC, id ASC', false, 0, 0, 1);
+        $files = $fs->get_area_files(
+            $this->context->id,
+            'mod_onlyofficeeditor',
+            'content',
+            0,
+            'sortorder DESC, id ASC',
+            false,
+            0,
+            0,
+            1
+        );
 
         if (count($files) >= 1) {
             $this->file = reset($files);
@@ -195,5 +203,4 @@ class editor {
         }
         return $config;
     }
-
 }
