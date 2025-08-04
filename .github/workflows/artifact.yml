@@ -6,6 +6,10 @@ on:
     types: [opened, reopened]
     branches: [master]
 
+env:
+  MOODLE_MOD_DIR: moodle/public/mod
+  PLUGIN_DIR: onlyofficeeditor
+
 jobs:
   artifact:
     runs-on: ubuntu-latest
@@ -23,9 +27,9 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           git submodule update --init --recursive
-          mkdir -p ./onlyofficeeditor
-          rsync -av --exclude='onlyofficeeditor' ./ ./onlyofficeeditor
-          cd ./onlyofficeeditor
+          mkdir -p "./$PLUGIN_DIR"
+          rsync -av --exclude='$PLUGIN_DIR' ./ "./$PLUGIN_DIR"
+          cd "./$PLUGIN_DIR"
           rm -rf ./.github/
           rm -rf ./.git/
           rm -f ./.gitmodules
@@ -36,7 +40,7 @@ jobs:
           path: ./moodle
       - name: Copy Plugin
         run: |
-          cp -r onlyofficeeditor ./moodle/public/mod/onlyofficeeditor/
+          cp -r "$PLUGIN_DIR" "./$MOODLE_MOD_DIR/$PLUGIN_DIR/"
       - name: Build Plugin
         run: |
           cd ./moodle
@@ -45,9 +49,9 @@ jobs:
       - name: Build Artifact
         run: |
           cd ${{ github.workspace }}
-          mv ./moodle/public/mod/onlyofficeeditor ./moodle/public/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          mv "./$MOODLE_MOD_DIR/$PLUGIN_DIR/" ./$MOODLE_MOD_DIR/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
           mkdir -p ./deploy
-          cp -r ./moodle/public/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }} ./deploy
+          cp -r ./$MOODLE_MOD_DIR/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }} ./deploy
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
