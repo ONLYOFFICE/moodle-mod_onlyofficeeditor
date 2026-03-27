@@ -34,7 +34,7 @@ Community Edition vs Enterprise Edition comparison can be found [here](#onlyoffi
 
 #### ☁️ Cloud
 
-If you prefer not to host and maintain your own server, use **ONLYOFFICE Docs Cloud**, which requires neither installation nor configuration.  
+If you prefer not to host and maintain your own server, use **ONLYOFFICE Docs Cloud**, which requires neither installation nor configuration.
 
 👉 [Get started here](https://www.onlyoffice.com/docs-registration)
 
