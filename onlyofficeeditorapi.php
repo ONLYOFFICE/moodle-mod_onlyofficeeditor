@@ -36,7 +36,7 @@ switch ($apitype) {
             $courseid = required_param('courseid', PARAM_INT);
             require_login($courseid);
             $actionlink = required_param('link', PARAM_URL);
-            $emails = required_param('emails', PARAM_TEXT);
+            $emails = required_param_array('emails', PARAM_EMAIL);
             $comment = required_param('comment', PARAM_TEXT);
             \mod_onlyofficeeditor\util::mention_user_in_comment($actionlink, $comment, $emails, $context);
             echo json_encode($comment);
