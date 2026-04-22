@@ -76,7 +76,6 @@ define(['jquery'], function($) {
                         $(editorContainer).addClass('onlyofficeeditor-rightindent');
                     }
                     $(editorContainer).addClass('onlyofficeeditor-fullscreen');
-                    editorContainer.children[0].style.height = '93vh';
                     $('#onlyofficeeditor-enter-fs-button').hide();
                     $('#onlyofficeeditor-exit-fs-button').show();
                 };
