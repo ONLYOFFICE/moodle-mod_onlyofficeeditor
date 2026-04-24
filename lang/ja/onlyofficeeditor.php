@@ -66,7 +66,8 @@ $string['messageprovider:mentionnotifier'] = '「文書」モジュール内のO
 $string['modulename'] = 'ONLYOFFICEの文書';
 $string['modulename_help'] = 'ONLYOFFICEモジュールは、ONLYOFFICE Document Serverを使用して、Moodleにローカルのオフィス文書を作成・編集することができ、複数のユーザーがリアルタイムで共同作業を行い、それらの変更をMoodleに保存することができます。
 
-詳細については、<a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">ヘルプセンタ</a>をご覧ください。';
+ONLYOFFICEプラグインの改善にご協力ください - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">フィードバックを共有</a>。
+詳細は<a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">ヘルプセンター</a>をご覧ください。';
 $string['modulenameplural'] = 'ONLYOFFICEドキュメント';
 $string['oldversion'] = 'オンラインで記入式フォームを作成するには、ONLYOFFICE Docs 7.0版まで更新してください';
 $string['onlyofficeactivityicon'] = 'ONLYOFFICEで開く';

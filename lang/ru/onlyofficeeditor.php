@@ -66,7 +66,8 @@ $string['messageprovider:mentionnotifier'] = 'Уведомление с упом
 $string['modulename'] = 'Документ ONLYOFFICE';
 $string['modulename_help'] = 'Модуль ONLYOFFICE позволяет пользователям создавать и редактировать офисные документы, которые хранятся локально, в Moodle с помощью Сервера документов ONLYOFFICE, а также предоставляет возможность нескольким пользователям работать совместно в режиме реального времени и сохранять изменения в Moodle
 
-Чтобы узнать больше, перейдите в <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Справочный центр</a>.';
+Помогите нам улучшить плагин ONLYOFFICE - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Поделитесь отзывом</a>.
+Для получения дополнительной информации обратитесь в <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Справочный центр</a>.';
 $string['modulenameplural'] = 'Документы ONLYOFFICE';
 $string['oldversion'] = 'Обновите сервер ONLYOFFICE Docs до версии 7.0 для работы с формами онлайн';
 $string['onlyofficeactivityicon'] = 'Открыть в ONLYOFFICE';

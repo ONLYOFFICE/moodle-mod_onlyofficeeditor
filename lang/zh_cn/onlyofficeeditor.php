@@ -66,7 +66,8 @@ $string['messageprovider:mentionnotifier'] = '在模块文件中 ONLYOFFICE 提�
 $string['modulename'] = 'ONLYOFFICE 文档';
 $string['modulename_help'] = 'ONLYOFFICE模块让用户能够使用ONLYOFFICE文档服务器创建并编辑存储在Moodle本地的办公文件，允许多个用户实时协作，并将所做的更改保存到Moodle。
 
-想要了解更多，请访问 <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">帮助中心</a>.';
+帮助我们改进 ONLYOFFICE 插件 - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">分享反馈</a>。
+更多信息请访问 <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">帮助中心</a>。';
 $string['modulenameplural'] = 'ONLYOFFICE 文档';
 $string['oldversion'] = '请将ONLYOFFICE Docs更新到7.0版本，以便在线编辑可填写的表单。';
 $string['onlyofficeactivityicon'] = '用 ONLYOFFICE 打开';

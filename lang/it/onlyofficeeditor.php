@@ -66,7 +66,8 @@ $string['messageprovider:mentionnotifier'] = 'Notifica della menzione di ONLYOFF
 $string['modulename'] = 'Documento ONLYOFFICE';
 $string['modulename_help'] = 'Modulo ONLYOFFICE consente di creare e modificare i documenti di office archiviati localmente in Moodle utilizzando ONLYOFFICE Document Server, permette a più utenti di collaborare in tempo reale e di salvare le modifiche in Moodle
 
-Per scoprire di più, visita <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centro Assistenza</a>.';
+Aiutaci a migliorare il plugin ONLYOFFICE - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Lascia un feedback</a>.
+Per maggiori informazioni visita il <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centro assistenza</a>.';
 $string['modulenameplural'] = 'Documenti ONLYOFFICE';
 $string['oldversion'] = 'Si prega di aggiornare ONLYOFFICE Docs alla versione 7.0 per lavorare su moduli compilabili online';
 $string['onlyofficeactivityicon'] = 'Aprire in ONLYOFFICE';
