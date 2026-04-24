@@ -35,6 +35,7 @@ if ($ADMIN->fulltree) {
     $customizationapiurl =
     'https://api.onlyoffice.com/docs/docs-api/usage-api/config/editor/customization/customization-standard-branding';
     $helpcentermoodleurl = 'https://helpcenter.onlyoffice.com/integration/moodle.aspx';
+    $feedbackurl = 'https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288';
     $defaultjwtheader = 'Authorization';
     $bannerdata = [
         'title' => get_string('banner_title', 'onlyofficeeditor'),
@@ -47,7 +48,7 @@ if ($ADMIN->fulltree) {
     $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerdata);
     $intro = $OUTPUT->render_from_template('mod_onlyofficeeditor/settings_intro', [
         'learnmoreurl' => $helpcentermoodleurl,
-        'suggesturl' => '#',
+        'suggesturl' => $feedbackurl,
     ]);
 
     $settings->add(new admin_setting_heading('onlyofficeeditor/intro', '', $intro));
