@@ -46,7 +46,7 @@ if ($ADMIN->fulltree) {
     ];
     $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerdata);
     $intro = $OUTPUT->render_from_template('mod_onlyofficeeditor/settings_intro', [
-        'readmoreurl' => $helpcentermoodleurl,
+        'learnmoreurl' => $helpcentermoodleurl,
         'suggesturl' => '#',
     ]);
 
