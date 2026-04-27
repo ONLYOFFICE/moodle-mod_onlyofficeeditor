@@ -1,5 +1,9 @@
 # Change Log
 
+##
+## Changed
+- no longer supports Moodle v4.4 and earlier
+
 ## 6.1.0
 ## Added
 - add docs check connection button in settings to test connectivity with the document server
