@@ -59,13 +59,15 @@ $string['editorenterfullscreen'] = 'Vollbildmodus aktivieren';
 $string['editorexitfullscreen'] = 'Vollbildmodus verlassen';
 $string['forcesave'] = 'Force Save aktivieren';
 $string['jwtheader'] = 'Authorization-Header';
+$string['learnmore'] = 'Mehr erfahren';
 $string['mentioncontexturlname'] = 'Link zum Kommentar.';
 $string['mentionnotifier:notification'] = '{$a->notifier} wurde in {$a->course} erwähnt';
 $string['messageprovider:mentionnotifier'] = 'Benachrichtigung über ONLYOFFICE im Modul Dokumente.';
 $string['modulename'] = 'ONLYOFFICE-Dokument';
 $string['modulename_help'] = 'Das ONLYOFFICE-Modul ermöglicht die Erstellung und gemeinsame Bearbeitung von lokal in Moodle gespeicherten Office-Dokumenten mithilfe ONLYOFFICE Document Server
 
-Weitere Informationen finden Sie <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Hilfe-Center</a>.';
+Helfen Sie uns, das ONLYOFFICE-Plugin zu verbessern - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Feedback teilen</a>.
+Weitere Informationen finden Sie im <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Hilfe-Center</a>.';
 $string['modulenameplural'] = 'ONLYOFFICE-Dokumente';
 $string['oldversion'] = 'Für Online-Arbeit mit Formularen ist Version 7.0 von ONLYOFFICE Docs erforderlich';
 $string['onlyofficeactivityicon'] = 'In ONLYOFFICE öffnen';
@@ -91,7 +93,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Zugriffsrechte auf D
 $string['privacy:metadata:onlyofficeeditor:userid'] = 'Diese Benutzer-ID wird nicht an den ONLYOFFICE-Editor gesendet.';
 $string['protect'] = 'Registerkarte Schutz ausblenden';
 $string['protect_help'] = 'Wenn deaktiviert, Benutzer haben Zugriff auf die Schutzeinstellungen im ONLYOFFICE-Editor. Für Benutzer mit der Zugriffsebene <strong>course:manageactivities</strong> sind diese Einstellungen immer verfügbar.';
-$string['readmore'] = 'Weiter lesen';
 $string['returntodocument'] = 'Zur Kursseite';
 $string['saveasbutton'] = 'Wählen';
 $string['saveaserror'] = 'Ein Fehler ist aufgetreten.';

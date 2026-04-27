@@ -59,13 +59,15 @@ $string['editorenterfullscreen'] = 'Ouvrir en mode plein écran';
 $string['editorexitfullscreen'] = 'Quitter le mode plein écran';
 $string['forcesave'] = 'Activer Sauvegarde Force';
 $string['jwtheader'] = 'En-tête d\'autorisation';
+$string['learnmore'] = 'En savoir plus';
 $string['mentioncontexturlname'] = 'Lien vers le commentaire.';
 $string['mentionnotifier:notification'] = '{$a->notifiant} mentionné dans le {$a->cours}';
 $string['messageprovider:mentionnotifier'] = 'Notification de mention ONLYOFFICE dans le module Documents.';
 $string['modulename'] = 'Document ONLYOFFICE';
 $string['modulename_help'] = 'Le module ONLYOFFICE permet aux utilisateurs de créer et de modifier des documents bureautiques stockés localement dans Moodle à l\'aide de ONLYOFFICE Document Server. Il permet à plusieurs utilisateurs de collaborer en temps réel et d\'enregistrer ces modifications dans Moodle
 
-Pour en savoir plus, visitez <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centre d\'aide</a>.';
+Aidez-nous à améliorer le plugin ONLYOFFICE - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Partager vos retours</a>.
+Pour plus d\'informations, visitez <a href="https://helpcenter.onlyoffice.com/fr/integration/moodle.aspx" target="_blank">le Centre d\'aide</a>.';
 $string['modulenameplural'] = 'Documents ONLYOFFICE';
 $string['oldversion'] = 'Veuillez mettre à jour ONLYOFFICE Docs vers la version 7.0 pour travailler sur les formulaires à remplir en ligne.';
 $string['onlyofficeactivityicon'] = 'Ouvrir dans ONLYOFFICE';
@@ -91,7 +93,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Autorisations de doc
 $string['privacy:metadata:onlyofficeeditor:userid'] = 'L\'ID de l\'utilisateur actuel n\'est pas envoyé à l\'éditeur ONLYOFFICE.';
 $string['protect'] = 'Masquer l\'onglet Protection';
 $string['protect_help'] = 'Si cette option est désactivée, les utilisateurs ont accès aux paramètres de protection dans l\'éditeur ONLYOFFICE. Veuillez noter que les utilisateurs ayant la capacité <strong>course:manageactivities</strong> ont toujours accès aux paramètres de protection.';
-$string['readmore'] = 'En savoir plus';
 $string['returntodocument'] = 'Retour à la page de cours';
 $string['saveasbutton'] = 'Sélectionner';
 $string['saveaserror'] = 'Un problème est survenu.';

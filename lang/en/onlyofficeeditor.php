@@ -60,13 +60,15 @@ $string['editorenterfullscreen'] = 'Open full screen';
 $string['editorexitfullscreen'] = 'Exit full screen';
 $string['forcesave'] = 'Enable Force Save';
 $string['jwtheader'] = 'Authorization header';
+$string['learnmore'] = 'Learn more';
 $string['mentioncontexturlname'] = 'Link to the comment.';
 $string['mentionnotifier:notification'] = '{$a->notifier} mentioned in the {$a->course}';
 $string['messageprovider:mentionnotifier'] = 'ONLYOFFICE mentioning notification in module document.';
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle.
 
-For more information, visit <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Help Center</a>.';
+Help us improve ONLYOFFICE plugin - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Share feedback</a>.
+For more information visit <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Help Center</a>.';
 $string['modulenameplural'] = 'ONLYOFFICE Documents';
 $string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on fillable forms online.';
 $string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
@@ -92,7 +94,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Document permissions
 $string['privacy:metadata:onlyofficeeditor:userid'] = 'Actual user ID is not sent to the ONLYOFFICE editor.';
 $string['protect'] = 'Hide Protection tab';
 $string['protect_help'] = 'If this off, users have access to protection settings in the ONLYOFFICE editor. Note, users with <strong>course:manageactivities</strong> capability always have access to protection settings.';
-$string['readmore'] = 'Read more';
 $string['returntodocument'] = 'Return to course page';
 $string['saveasbutton'] = 'Choose';
 $string['saveaserror'] = 'Something went wrong.';
