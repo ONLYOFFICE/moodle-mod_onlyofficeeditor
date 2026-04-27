@@ -59,13 +59,15 @@ $string['editorenterfullscreen'] = 'Apri la modalità schermo intero';
 $string['editorexitfullscreen'] = 'Esci dalla modalità schermo intero';
 $string['forcesave'] = 'Abilita salvataggio forzato';
 $string['jwtheader'] = 'Intestazione di autorizzazione';
+$string['learnmore'] = 'Scopri di più';
 $string['mentioncontexturlname'] = 'Link al commento.';
 $string['mentionnotifier:notification'] = '{$a->notifier} menzionato nel {$a->course}';
 $string['messageprovider:mentionnotifier'] = 'Notifica della menzione di ONLYOFFICE nel modulo Documenti.';
 $string['modulename'] = 'Documento ONLYOFFICE';
 $string['modulename_help'] = 'Modulo ONLYOFFICE consente di creare e modificare i documenti di office archiviati localmente in Moodle utilizzando ONLYOFFICE Document Server, permette a più utenti di collaborare in tempo reale e di salvare le modifiche in Moodle
 
-Per scoprire di più, visita <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centro Assistenza</a>.';
+Aiutaci a migliorare il plugin ONLYOFFICE - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Lascia un feedback</a>.
+Per maggiori informazioni visita il <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centro assistenza</a>.';
 $string['modulenameplural'] = 'Documenti ONLYOFFICE';
 $string['oldversion'] = 'Si prega di aggiornare ONLYOFFICE Docs alla versione 7.0 per lavorare su moduli compilabili online';
 $string['onlyofficeactivityicon'] = 'Aprire in ONLYOFFICE';
@@ -91,7 +93,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Autorizzazioni per d
 $string['privacy:metadata:onlyofficeeditor:userid'] = 'L\'effettivo ID utente non viene inviato all\'editor ONLYOFFICE.';
 $string['protect'] = 'Nascondere la scheda Protezione';
 $string['protect_help'] = 'Se è disabilitata, gli utenti hanno accesso alle impostazioni di protezione nell\'editor ONLYOFFICE. Nota: gli utenti con la funzionalità <strong>course:manageactivities</strong> hanno sempre accesso alle impostazioni di protezione.';
-$string['readmore'] = 'Più informazioni';
 $string['returntodocument'] = 'Torna alla pagina del corso';
 $string['saveasbutton'] = 'Seleziona';
 $string['saveaserror'] = 'Qualcosa è andato storto.';

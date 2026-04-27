@@ -59,13 +59,15 @@ $string['editorenterfullscreen'] = '打开全屏';
 $string['editorexitfullscreen'] = '退出全屏';
 $string['forcesave'] = '启用强制保存';
 $string['jwtheader'] = '授权标头';
+$string['learnmore'] = '了解更多';
 $string['mentioncontexturlname'] = '评论的链接';
 $string['mentionnotifier:notification'] = '{$a->notifier}在{$a->course}被提及。';
 $string['messageprovider:mentionnotifier'] = '在模块文件中 ONLYOFFICE 提及通知。';
 $string['modulename'] = 'ONLYOFFICE 文档';
 $string['modulename_help'] = 'ONLYOFFICE模块让用户能够使用ONLYOFFICE文档服务器创建并编辑存储在Moodle本地的办公文件，允许多个用户实时协作，并将所做的更改保存到Moodle。
 
-想要了解更多，请访问 <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">帮助中心</a>.';
+帮助我们改进 ONLYOFFICE 插件 - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">分享反馈</a>。
+更多信息请访问 <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">帮助中心</a>。';
 $string['modulenameplural'] = 'ONLYOFFICE 文档';
 $string['oldversion'] = '请将ONLYOFFICE Docs更新到7.0版本，以便在线编辑可填写的表单。';
 $string['onlyofficeactivityicon'] = '用 ONLYOFFICE 打开';
@@ -91,7 +93,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = '文件权限。';
 $string['privacy:metadata:onlyofficeeditor:userid'] = '实际用户ID没有发送到ONLYOFFICE编辑器。';
 $string['protect'] = '隐藏保护选项卡';
 $string['protect_help'] = '如果该功能被禁用，用户可以在ONLYOFFICE编辑器中访问保护设置。请注意，具有<strong>course:manageactivities</strong> 能力的用户总是能够访问保护设置。';
-$string['readmore'] = '了解更多';
 $string['returntodocument'] = '返回到课程页面';
 $string['saveasbutton'] = '选择';
 $string['saveaserror'] = '出了问题。';

@@ -59,13 +59,15 @@ $string['editorenterfullscreen'] = 'Открыть в полноэкранном
 $string['editorexitfullscreen'] = 'Выйти из полноэкранного режима';
 $string['forcesave'] = 'Включить Force Save';
 $string['jwtheader'] = 'Заголовок авторизации';
+$string['learnmore'] = 'Узнать больше';
 $string['mentioncontexturlname'] = 'Ссылка на комментарий.';
 $string['mentionnotifier:notification'] = '{$a->notifier} упоминается в {$a->course}';
 $string['messageprovider:mentionnotifier'] = 'Уведомление с упоминанием ONLYOFFICE в модуле Документы.';
 $string['modulename'] = 'Документ ONLYOFFICE';
 $string['modulename_help'] = 'Модуль ONLYOFFICE позволяет пользователям создавать и редактировать офисные документы, которые хранятся локально, в Moodle с помощью Сервера документов ONLYOFFICE, а также предоставляет возможность нескольким пользователям работать совместно в режиме реального времени и сохранять изменения в Moodle
 
-Чтобы узнать больше, перейдите в <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Справочный центр</a>.';
+Помогите нам улучшить плагин ONLYOFFICE - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Поделитесь отзывом</a>.
+Для получения дополнительной информации обратитесь в <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Справочный центр</a>.';
 $string['modulenameplural'] = 'Документы ONLYOFFICE';
 $string['oldversion'] = 'Обновите сервер ONLYOFFICE Docs до версии 7.0 для работы с формами онлайн';
 $string['onlyofficeactivityicon'] = 'Открыть в ONLYOFFICE';
@@ -91,7 +93,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Разрешения
 $string['privacy:metadata:onlyofficeeditor:userid'] = 'Текущий ID пользователя не отправлен в ONLYOFFICE editor.';
 $string['protect'] = 'Скрыть вкладку Защита';
 $string['protect_help'] = 'Если данная функция отключена, пользователям предоставляется доступ к настройкам защиты в ONLYOFFICE editor. Пожалуйста, обратите внимание, что пользователям с уровнем доступа <strong>course:manageactivities</strong> при этом предоставлен доступ к настройкам защиты.';
-$string['readmore'] = 'Подробнее';
 $string['returntodocument'] = 'Вернуться к странице курса';
 $string['saveasbutton'] = 'Выбрать';
 $string['saveaserror'] = 'Что-то пошло не так.';

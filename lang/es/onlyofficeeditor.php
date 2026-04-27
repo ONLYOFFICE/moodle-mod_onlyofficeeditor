@@ -59,13 +59,15 @@ $string['editorenterfullscreen'] = 'Abrir pantalla completa';
 $string['editorexitfullscreen'] = 'Salir de pantalla completa';
 $string['forcesave'] = 'Habilitar Forzar guardar';
 $string['jwtheader'] = 'Encabezado de autenticación';
+$string['learnmore'] = 'Más información';
 $string['mentioncontexturlname'] = 'Enlace al comentario.';
 $string['mentionnotifier:notification'] = '{$a->notifier} mencionó en {$a->course}';
 $string['messageprovider:mentionnotifier'] = 'Notificación de menciones de ONLYOFFICE en el documento del módulo.';
 $string['modulename'] = 'Documento de ONLYOFFICE';
 $string['modulename_help'] = 'El módulo ONLYOFFICE permite a los usuarios crear y editar documentos de oficina almacenados localmente en Moodle utilizando el Servidor de Documentos de ONLYOFFICE, haciendo posible que varios usuarios colaboren en tiempo real y guarden los cambios en Moodle.
 
-Para más información, visite nuestro <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centro de ayuda</a>.';
+Ayúdenos a mejorar el plugin ONLYOFFICE - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Compartir comentarios</a>.
+Para más información, visite el <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centro de ayuda</a>.';
 $string['modulenameplural'] = 'Documentos de ONLYOFFICE';
 $string['oldversion'] = 'Por favor, actualice ONLYOFFICE Docs a la versión 7.0 para poder trabajar con formularios rellenables en línea';
 $string['onlyofficeactivityicon'] = 'Abrir en ONLYOFFICE';
@@ -91,7 +93,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Permisos para los do
 $string['privacy:metadata:onlyofficeeditor:userid'] = 'El ID de usuario actual no se envía al editor ONLYOFFICE.';
 $string['protect'] = 'Ocultar la pestaña Protección';
 $string['protect_help'] = 'Si está desactivado, los usuarios tienen acceso a la configuración de protección en el editor ONLYOFFICE. Tenga en cuenta que los usuarios con capacidad para <strong>course:manageactivities</strong> siempre tienen acceso a la configuración de protección.';
-$string['readmore'] = 'Más información';
 $string['returntodocument'] = 'Volver a la página del curso';
 $string['saveasbutton'] = 'Seleccionar';
 $string['saveaserror'] = 'Se ha producido un error.';

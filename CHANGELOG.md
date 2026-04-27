@@ -3,6 +3,7 @@
 ##
 ## Changed
 - no longer supports Moodle v4.4 and earlier
+- update the user-voice texts in the settings and plugin description
 - update file format icons
 
 ## 6.1.0
