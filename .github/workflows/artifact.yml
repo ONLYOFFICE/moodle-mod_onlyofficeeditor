@@ -28,7 +28,7 @@ jobs:
           cd ${{ github.workspace }}
           git submodule update --init --recursive
           mkdir -p "./$PLUGIN_DIR"
-          rsync -av --exclude='$PLUGIN_DIR' ./ "./$PLUGIN_DIR"
+          rsync -av --exclude="$PLUGIN_DIR" ./ "./$PLUGIN_DIR"
           cd "./$PLUGIN_DIR"
           rm -rf ./.github/
           rm -rf ./.git/
