@@ -1,6 +1,6 @@
 # Change Log
 
-## 5.1.0
+## 6.1.0
 ## Added
 - add docs check connection button in settings to test connectivity with the document server
 - add admin settings validation for document server related fields
@@ -13,16 +13,15 @@
 - fix approval blockers: namespace collisions, superglobals usage
 - fix incorrect disabling of certificate verification in curl
 
-## 5.0.1
+## 6.0.1
 ## Added
 - fi, he, no, sl language templates
-- default empty templates
 
 ## Changed
 - fix JWT header issue
 - remove trailing slashes from setting urls after update
 
-## 5.0.0
+## 6.0.0
 ## Added
 - link to docs cloud
 - certificate verification setting
@@ -35,7 +34,11 @@
 - disable scrolling page to editor
 - disable chat in editor for guest
 
-## 4.3.0
+## 4.4.0
+## Changed
+- fixed saveas dialog
+- support moodle v4.3
+
 ## Added
 - desktop mode
 - disable plugins setting

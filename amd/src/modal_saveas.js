@@ -20,8 +20,8 @@
  * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
-define(['jquery', 'core/notification', 'core/custom_interaction_events', 'core/modal', 'core/modal_registry', 'core/templates'],
-    function($, Notification, CustomEvents, Modal, ModalRegistry, Templates) {
+define(['jquery', 'core/modal', 'core/templates', 'core/str'],
+    function($, Modal, Templates, Str) {
 
         var displayNotification = function(error, type) {
             require(['core/notification'], function(notification) {
@@ -37,129 +37,78 @@ define(['jquery', 'core/notification', 'core/custom_interaction_events', 'core/m
             });
         };
 
-        var SELECTORS = {
-            LOADING_ICON_CONTAINER: '[data-region="overlay-icon-container"]',
-            SECTION: '.onlyofficeeditor-saveas-section',
-            BUTTON: '#onlyofficeeditor-saveas-button',
-            CONTAINER: '.container'
-        };
+        const SaveAsDialog = Object;
 
-        /**
-         * Show the loading spinner.
-         *
-         * @param  {jquery} body The body element.
-         */
-        var showLoadingIcon = function(body) {
-            body.find(SELECTORS.LOADING_ICON_CONTAINER).removeClass('hidden');
-        };
+        SaveAsDialog.modal = null;
 
-        /**
-         * Hide the loading spinner.
-         *
-         * @param  {jquery} body The body element.
-         */
-        var hideLoadingIcon = function(body) {
-            body.find(SELECTORS.LOADING_ICON_CONTAINER).addClass('hidden');
-        };
+        SaveAsDialog.build = async(cmid, courseid, saveAsData) => {
+            var self = this;
 
-        /**
-         * Constructor for the Modal.
-         *
-         * @param {object} root The root jQuery element for the modal
-         */
-        var ModalSaveas = function(root) {
-            Modal.call(this, root);
-            this.selectedSection = null;
-            this.saveAsData = null;
-            this.CMID = null;
-            this.courseid = null;
-        };
-
-        ModalSaveas.TYPE = 'mod_onlyofficeeditor-modal_saveas';
-        ModalSaveas.prototype = Object.create(Modal.prototype);
-        ModalSaveas.prototype.constructor = ModalSaveas;
-
-        /**
-         * Set up all of the event handling for the modal.
-         *
-         * @method registerEventListeners
-         */
-        ModalSaveas.prototype.registerEventListeners = function() {
-            Modal.prototype.registerEventListeners.call(this);
-
-            var modal = this;
-            this.getModal().on('click', SELECTORS.SECTION, function(e) {
-                var selected = modal.selectedSection;
-                if (selected !== null) {
-                    var previousSection = modal.getBody().find('#saveas-section-' + selected)[0];
-                    previousSection.classList.remove('onlyofficeeditor-saveas-section-selected');
+            var stringkeys = [
+                {
+                    key: 'saveastitle',
+                    component: 'mod_onlyofficeeditor'
                 }
-                var button = modal.getFooter().find(SELECTORS.BUTTON)[0];
-                button.removeAttribute('disabled');
-                e.target.classList.add('onlyofficeeditor-saveas-section-selected');
-                modal.selectedSection = parseInt(e.target.id.split('-')[2]);
-            }).bind(this);
+            ];
+            // eslint-disable-next-line promise/catch-or-return
+            Str.get_strings(stringkeys).then(async([title]) => {
+                this.modal = await Modal.create({
+                    title: title,
+                    show: true
+                });
 
-            this.getModal().on('click', SELECTORS.BUTTON, function() {
-                modal.saveAsData.section = modal.selectedSection;
-                $.ajax(M.cfg.wwwroot +
-                    `/mod/onlyofficeeditor/onlyofficeeditorapi.php?apiType=saveas&cmid=${modal.CMID}`, {
-                    type: 'POST',
+                $.ajax(M.cfg.wwwroot + `/mod/onlyofficeeditor/onlyofficeeditorapi.php?apiType=sections&cmid=${cmid}`, {
+                    type: 'GET',
                     dataType: 'json',
-                    data: modal.saveAsData,
-                }).done(() => {
-                    displayNotification('saveassuccess', 'success');
+                    data: {courseid: courseid}
+                }).done((response) => {
+                    var sections = response.sections;
+
+                    var body = Templates.render('mod_onlyofficeeditor/modal_saveas_sections_list', {sections: sections});
+                    var footer = Templates.render('mod_onlyofficeeditor/modal_saveas_footer');
+
+                    self.modal.setBody(body);
+                    self.modal.setFooter(footer);
+
+                    self.modal.getRoot().on('click', SELECTORS.SECTION, (e) => {
+                        var selected = self.modal.selectedSection;
+                        if (selected !== undefined) {
+                            var previousSection = self.modal.getBody().find('#saveas-section-' + selected)[0];
+                            previousSection.classList.remove('onlyofficeeditor-saveas-section-selected');
+                        }
+                        var button = self.modal.getFooter().find(SELECTORS.BUTTON)[0];
+                        button.removeAttribute('disabled');
+                        e.target.classList.add('onlyofficeeditor-saveas-section-selected');
+                        self.modal.selectedSection = parseInt(e.target.id.split('-')[2]);
+                    });
+
+                    self.modal.getRoot().on('click', SELECTORS.BUTTON, () => {
+                        saveAsData.section = self.modal.selectedSection;
+                        $.ajax(M.cfg.wwwroot +
+                            `/mod/onlyofficeeditor/onlyofficeeditorapi.php?apiType=saveas&cmid=${cmid}`, {
+                            type: 'POST',
+                            dataType: 'json',
+                            data: saveAsData,
+                        }).done(() => {
+                            displayNotification('saveassuccess', 'success');
+                        }).fail(() => {
+                            displayNotification('saveaserror', 'error');
+                        }).always(() => {
+                            self.modal.hide();
+                        });
+                    });
+
                 }).fail(() => {
                     displayNotification('saveaserror', 'error');
-                }).always(() => {
-                    modal.hide();
                 });
-            }).bind(this);
-        };
-
-        ModalSaveas.prototype.renderSections = function(body, cmid, courseid) {
-            var modal = this;
-            showLoadingIcon(body);
-            $.ajax(M.cfg.wwwroot + `/mod/onlyofficeeditor/onlyofficeeditorapi.php?apiType=sections&cmid=${cmid}`, {
-                type: 'GET',
-                dataType: 'json',
-                data: {courseid: courseid}
-            }).done((response) => {
-                var sections = response.sections;
-                // eslint-disable-next-line promise/catch-or-return
-                Templates.render('mod_onlyofficeeditor/modal_saveas_sections_list', {sections: sections})
-                    .then((html, js) => {
-                        var container = body.find(SELECTORS.CONTAINER)[0];
-                        Templates.replaceNode(container, html, js);
-                        return;
-                    })
-                    .always(() => {
-                        hideLoadingIcon(body);
-                    });
-            }).fail(() => {
-                modal.hide();
-                displayNotification('saveaserror', 'error');
+                return;
             });
         };
 
-        /**
-         * Override the modal show function to load the form when this modal is first shown.
-         *
-         * @method show
-         */
-        ModalSaveas.prototype.show = function() {
-            Modal.prototype.show.call(this);
-
-            if (this.selectedSection !== null) {
-                this.selectedSection = null;
-            }
-            var button = this.getFooter().find(SELECTORS.BUTTON)[0];
-            button.setAttribute('disabled', '');
+        var SELECTORS = {
+            SECTION: '.onlyofficeeditor-saveas-section',
+            BUTTON: '#onlyofficeeditor-saveas-button'
         };
 
-        if (!ModalRegistry.get(ModalSaveas.TYPE)) {
-            ModalRegistry.register(ModalSaveas.TYPE, ModalSaveas, 'mod_onlyofficeeditor/modal_saveas');
-        }
-
-        return ModalSaveas;
+        return SaveAsDialog;
     });

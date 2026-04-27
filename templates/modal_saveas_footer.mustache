@@ -33,14 +33,7 @@
     {}
 }}
 
-{{< core/modal }}
-    {{$title}}{{#str}} saveastitle, mod_onlyofficeeditor {{/str}}{{/title}}
-    {{$body}}
-        <div class="container"></div>
-        {{> core/overlay_loading}}
-    {{/body}}
-    {{$footer}}
-        <button type="button" class="btn btn-primary" id="onlyofficeeditor-saveas-button" data-action="saveas-choose">{{#str}}
-            saveasbutton, mod_onlyofficeeditor {{/str}}</button>
-    {{/footer}}
-{{/ core/modal }}
+<div>
+    <button type="button" class="btn btn-primary" id="onlyofficeeditor-saveas-button" data-action="saveas-choose">{{#str}}
+        saveasbutton, mod_onlyofficeeditor {{/str}}</button>
+</div>

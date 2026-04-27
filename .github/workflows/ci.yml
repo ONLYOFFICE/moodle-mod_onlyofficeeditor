@@ -36,41 +36,40 @@ jobs:
       matrix:
         include:
           # Highest php versions supported by each branch
-          - php: 8.2
-            moodle-branch: MOODLE_402_STABLE
+          - php: 8.3
+            moodle-branch: MOODLE_404_STABLE
             database: pgsql
             port: 5432
-          - php: 8.2
-            moodle-branch: MOODLE_402_STABLE
+          - php: 8.3
+            moodle-branch: MOODLE_404_STABLE
             database: mariadb
             port: 3306
-          - php: 8.1
-            moodle-branch: MOODLE_401_STABLE
+          - php: 8.2
+            moodle-branch: MOODLE_403_STABLE
             database: pgsql
             port: 5432
-          - php: 8.1
-            moodle-branch: MOODLE_401_STABLE
+          - php: 8.2
+            moodle-branch: MOODLE_403_STABLE
             database: mariadb
             port: 3306
 
           # Lowest php versions supported by each branch
+          - php: 8.1
+            moodle-branch: MOODLE_404_STABLE
+            database: pgsql
+            port: 5432
+          - php: 8.1
+            moodle-branch: MOODLE_404_STABLE
+            database: mariadb
+            port: 3306
           - php: 8.0
-            moodle-branch: MOODLE_402_STABLE
+            moodle-branch: MOODLE_403_STABLE
             database: pgsql
             port: 5432
           - php: 8.0
-            moodle-branch: MOODLE_402_STABLE
+            moodle-branch: MOODLE_403_STABLE
             database: mariadb
             port: 3306
-          - php: 7.4
-            moodle-branch: MOODLE_401_STABLE
-            database: pgsql
-            port: 5432
-          - php: 7.4
-            moodle-branch: MOODLE_401_STABLE
-            database: mariadb
-            port: 3306
-
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
