@@ -121,7 +121,7 @@ class util {
         global $USER;
 
         $cmid = $data->coursemodule;
-        $draftitemid = $data->file;
+        $draftitemid = $data->file ?? null;
 
         $context = \context_module::instance($cmid);
         if ($draftitemid) {
