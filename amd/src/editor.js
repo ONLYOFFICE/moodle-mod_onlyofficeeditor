@@ -42,6 +42,17 @@ define(['jquery'], function($) {
             var navRightButton = $('.drawertoggle')[2];
             var editorContainer = $('.onlyofficeeditor-container')[0];
 
+            var page = document.getElementById('page');
+            var syncDrawerMargins = function() {
+                const leftDrawerOpened = page && page.classList.contains('show-drawer-left');
+                const rightDrawerOpened = page && page.classList.contains('show-drawer-right');
+                editorContainer.style.marginLeft = leftDrawerOpened ? '0' : '';
+                editorContainer.style.marginRight = rightDrawerOpened ? '0' : '';
+            };
+            if (page) {
+                new MutationObserver(syncDrawerMargins).observe(page, {attributes: true, attributeFilter: ['class']});
+            }
+
             $.when(enterFullScreenText).done(function(localized) {
                 enterFullScreenText = localized;
                 var enterButton = document.createElement('button');
@@ -65,7 +76,6 @@ define(['jquery'], function($) {
                         $(editorContainer).addClass('onlyofficeeditor-rightindent');
                     }
                     $(editorContainer).addClass('onlyofficeeditor-fullscreen');
-                    editorContainer.children[0].style.height = '93vh';
                     $('#onlyofficeeditor-enter-fs-button').hide();
                     $('#onlyofficeeditor-exit-fs-button').show();
                 };

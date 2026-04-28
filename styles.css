@@ -13,7 +13,6 @@
     position: static !important; /* stylelint-disable-line declaration-no-important */
     height: calc(100dvh - 61px);
     height: calc(100vh - 61px); /* stylelint-disable-line declaration-block-no-duplicate-properties */
-    max-height: 60rem;
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
@@ -23,7 +22,7 @@
     top: 0;
     margin: 0;
     margin-top: 61px;
-    padding: 0 1px;
+    padding: 0;
     z-index: 100;
 }
 
@@ -271,8 +270,12 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    .path-mod-onlyofficeeditor #onlyofficeeditor-exit-fs-button {
-        margin: 12px;
+    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
+        margin-left: 48px;
+    }
+
+    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
+        margin-right: 48px;
     }
 
     .path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button i {
@@ -283,11 +286,7 @@
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
-        margin: 0 0 0 50px;
-    }
-
-    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
-        margin-right: 43px;
+        margin-top: 0;
     }
 
     .path-admin .onlyoffice-banner {
