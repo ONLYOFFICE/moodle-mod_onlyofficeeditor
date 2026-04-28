@@ -72,7 +72,7 @@ function onlyofficeeditor_add_instance(stdClass $data, ?mod_onlyofficeeditor_mod
     $cmid = $data->coursemodule;
     $data->timecreated = time();
     $data->timemodified = $data->timecreated;
-    $fileformat = $data->onlyofficetemplateformat;
+    $fileformat = $data->onlyofficetemplateformat ?? null;
 
     util::save_document_permissions($data);
     util::save_file($data);
