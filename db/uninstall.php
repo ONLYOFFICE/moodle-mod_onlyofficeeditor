@@ -18,7 +18,7 @@
  * Uninstall onlyoffice xmldb.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

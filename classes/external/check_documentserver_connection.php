@@ -18,7 +18,7 @@
  * Check document server connection ws function.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ use mod_onlyofficeeditor\local\docs\docs_settings_validator;
  * Check document server connection ws function.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class check_documentserver_connection extends external_api {

@@ -15,7 +15,7 @@
 
 /**
  * @module mod_onlyofficeeditor/docs_integration_api
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 /* eslint-disable no-console, no-undef */
