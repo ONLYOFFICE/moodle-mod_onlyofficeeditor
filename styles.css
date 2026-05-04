@@ -16,18 +16,18 @@
 }
 
 .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
-    position: absolute;
+    position: fixed;
+    top: var(--oo-navbar-height, 0px); /* stylelint-disable-line length-zero-no-unit */
     left: 0;
     right: 0;
-    top: 0;
+    bottom: 0;
     margin: 0;
-    margin-top: 61px;
     padding: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
-.path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
-    margin-right: 0;
+.path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen > iframe {
+    height: 100%;
 }
 
 .path-mod-onlyofficeeditor #onlyofficeeditor-editor.error {
@@ -270,14 +270,6 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
-        margin-left: 48px;
-    }
-
-    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
-        margin-right: 48px;
-    }
-
     .path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button i {
         display: inline-block;
     }
@@ -285,10 +277,6 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
-        margin-top: 0;
-    }
-
     .path-admin .onlyoffice-banner {
         padding: 16px 32px 21px 20px;
     }

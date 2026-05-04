@@ -42,17 +42,6 @@ define(['jquery'], function($) {
             var navRightButton = $('.drawertoggle')[2];
             var editorContainer = $('.onlyofficeeditor-container')[0];
 
-            var page = document.getElementById('page');
-            var syncDrawerMargins = function() {
-                const leftDrawerOpened = page && page.classList.contains('show-drawer-left');
-                const rightDrawerOpened = page && page.classList.contains('show-drawer-right');
-                editorContainer.style.marginLeft = leftDrawerOpened ? '0' : '';
-                editorContainer.style.marginRight = rightDrawerOpened ? '0' : '';
-            };
-            if (page) {
-                new MutationObserver(syncDrawerMargins).observe(page, {attributes: true, attributeFilter: ['class']});
-            }
-
             $.when(enterFullScreenText).done(function(localized) {
                 enterFullScreenText = localized;
                 var enterButton = document.createElement('button');
@@ -64,16 +53,16 @@ define(['jquery'], function($) {
                 enterButton.innerHTML += enterFullScreenText;
 
                 enterButton.onclick = function() {
-                    $('header').hide();
-                    $('footer').hide();
+                    var navbarEl = document.querySelector('#nav-bar') ||
+                        document.querySelector('.navbar');
+                    var navbarHeight = navbarEl ? navbarEl.offsetHeight : 0;
+                    editorContainer.style.setProperty('--oo-navbar-height', navbarHeight + 'px');
+                    document.body.style.overflow = 'hidden';
                     if (navLeftButton && navLeftButton.getAttribute('data-aria-hidden-tab-index') === null) {
                         $(navLeftButton).click();
                     }
                     if (navRightButton && navRightButton.getAttribute('data-aria-hidden-tab-index') === null) {
                         $(navRightButton).click();
-                    }
-                    if ($('.editmode-switch-form').length > 0 && $('.editmode-switch-form')[0][0].checked) {
-                        $(editorContainer).addClass('onlyofficeeditor-rightindent');
                     }
                     $(editorContainer).addClass('onlyofficeeditor-fullscreen');
                     $('#onlyofficeeditor-enter-fs-button').hide();
@@ -93,10 +82,9 @@ define(['jquery'], function($) {
 
                 exitButton.onclick = function() {
                     $(editorContainer).removeClass('onlyofficeeditor-fullscreen');
-                    $(editorContainer).removeClass('onlyofficeeditor-rightindent');
-                    editorContainer.children[0].style.height = '95vh';
-                    $('header').show();
-                    $('footer').show();
+                    editorContainer.style.removeProperty('--oo-navbar-height');
+                    editorContainer.children[0].style.height = '';
+                    document.body.style.overflow = '';
                     $('#onlyofficeeditor-enter-fs-button').show();
                     $('#onlyofficeeditor-exit-fs-button').hide();
                 };
