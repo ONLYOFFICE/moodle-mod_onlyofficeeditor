@@ -5,6 +5,7 @@
 - no longer supports Moodle v4.4 and earlier
 - update the user-voice texts in the settings and plugin description
 - update file format icons
+- fix fullscreen mode to fill the entire viewport with correct navbar offset
 
 ## 6.1.0
 ## Added
