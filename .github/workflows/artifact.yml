@@ -32,7 +32,9 @@ jobs:
           cd "./$PLUGIN_DIR"
           rm -rf ./.github/
           rm -rf ./.git/
+          rm -f ./.gitignore
           rm -f ./.gitmodules
+          rm -rf ./tests/
       - name: Checkout Moodle
         uses: actions/checkout@v4
         with:
