@@ -169,4 +169,201 @@ final class util_test extends \advanced_testcase {
         $this->assertSame($key, util::get_appkey(),
             'Subsequent calls should return the same key.');
     }
+
+    /**
+     * Maps a known user lang to the corresponding template directory.
+     */
+    public function test_get_template_path_returns_mapped_locale(): void {
+        global $CFG;
+        $user = (object) ['lang' => 'en_us'];
+
+        $this->assertSame(
+            $CFG->dirroot . '/mod/onlyofficeeditor/newdocs/en/new.docx',
+            util::get_template_path('docx', $user)
+        );
+    }
+
+    /**
+     * Falls back to the 'default' locale folder when the requested template doesn't exist for the user's lang.
+     */
+    public function test_get_template_path_falls_back_to_default_when_file_missing(): void {
+        global $CFG;
+        $user = (object) ['lang' => 'en_us'];
+
+        $this->assertSame(
+            $CFG->dirroot . '/mod/onlyofficeeditor/newdocs/default/new.unknown',
+            util::get_template_path('unknown', $user)
+        );
+    }
+
+    /**
+     * Uses the global $USER when no user is passed.
+     */
+    public function test_get_template_path_uses_global_user_when_param_null(): void {
+        global $CFG, $USER;
+        $this->setAdminUser();
+        $USER->lang = 'en_us';
+
+        $this->assertSame(
+            $CFG->dirroot . '/mod/onlyofficeeditor/newdocs/en/new.docx',
+            util::get_template_path('docx')
+        );
+    }
+
+    /**
+     * Each supported template format maps to the correct file extension.
+     *
+     * @dataProvider create_from_onlyoffice_template_format_provider
+     */
+    public function test_create_from_onlyoffice_template_maps_format_to_extension(
+        string $format,
+        string $expectedext
+    ): void {
+        global $USER;
+        $this->setAdminUser();
+        $USER->lang = 'en_us';
+        $contextid = \context_user::instance($USER->id)->id;
+        $itemid = file_get_unused_draft_itemid();
+
+        util::create_from_onlyoffice_template($format, $USER, $contextid, $itemid, 'NewDoc');
+
+        $fs = get_file_storage();
+        $file = $fs->get_file($contextid, 'mod_onlyofficeeditor', 'content', $itemid, '/', "NewDoc.$expectedext");
+        $this->assertNotFalse($file, "File NewDoc.$expectedext should be created.");
+        $this->assertGreaterThan(0, $file->get_filesize());
+    }
+
+    /**
+     * Cases for {@see test_create_from_onlyoffice_template_maps_format_to_extension}.
+     */
+    public static function create_from_onlyoffice_template_format_provider(): array {
+        return [
+            'Document maps to docx'     => ['Document', 'docx'],
+            'Spreadsheet maps to xlsx'  => ['Spreadsheet', 'xlsx'],
+            'Presentation maps to pptx' => ['Presentation', 'pptx'],
+            'PDF form maps to pdf'      => ['PDF form', 'pdf'],
+        ];
+    }
+
+    /**
+     * Copies draft-area files into the activity's content area, renaming to <data->name>.<ext>.
+     */
+    public function test_save_file_copies_draft_to_content_area_with_renamed_filename(): void {
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
+        $course = $this->getDataGenerator()->create_course();
+        $oo = $this->getDataGenerator()->create_module('onlyofficeeditor', ['course' => $course]);
+        $cm = get_coursemodule_from_instance('onlyofficeeditor', $oo->id);
+
+        $draftitemid = file_get_unused_draft_itemid();
+        $usercontext = \context_user::instance($user->id);
+        $fs = get_file_storage();
+        $fs->create_file_from_string([
+            'contextid' => $usercontext->id,
+            'component' => 'user',
+            'filearea'  => 'draft',
+            'itemid'    => $draftitemid,
+            'filepath'  => '/',
+            'filename'  => 'original.docx',
+        ], 'fake content');
+
+        $data = (object) [
+            'coursemodule' => $cm->id,
+            'file'         => $draftitemid,
+            'name'         => 'My document',
+        ];
+        util::save_file($data);
+
+        $modulecontext = \context_module::instance($cm->id);
+        $file = $fs->get_file(
+            $modulecontext->id,
+            'mod_onlyofficeeditor',
+            'content',
+            0,
+            '/',
+            'My document.docx'
+        );
+        $this->assertNotFalse($file, 'Renamed file should be in the activity content area.');
+    }
+
+    /**
+     * Without a draft itemid the function leaves the content area untouched.
+     */
+    public function test_save_file_is_noop_without_draft_itemid(): void {
+        $course = $this->getDataGenerator()->create_course();
+        $oo = $this->getDataGenerator()->create_module('onlyofficeeditor', ['course' => $course]);
+        $cm = get_coursemodule_from_instance('onlyofficeeditor', $oo->id);
+
+        $data = (object) [
+            'coursemodule' => $cm->id,
+            'name'         => 'Empty activity',
+        ];
+
+        util::save_file($data);
+
+        $modulecontext = \context_module::instance($cm->id);
+        $files = get_file_storage()->get_area_files(
+            $modulecontext->id,
+            'mod_onlyofficeeditor',
+            'content',
+            0,
+            'id',
+            false
+        );
+        $this->assertEmpty($files);
+    }
+
+    /**
+     * Excludes the current user from the mention list and includes other capable users with name+email.
+     */
+    public function test_get_users_to_mention_excludes_current_user(): void {
+        $course = $this->getDataGenerator()->create_course();
+        $alice = $this->getDataGenerator()->create_user([
+            'firstname' => 'Alice', 'lastname' => 'Smith', 'email' => 'alice@test.local',
+        ]);
+        $bob = $this->getDataGenerator()->create_user([
+            'firstname' => 'Bob', 'lastname' => 'Jones', 'email' => 'bob@test.local',
+        ]);
+        $this->getDataGenerator()->enrol_user($alice->id, $course->id, 'student');
+        $this->getDataGenerator()->enrol_user($bob->id, $course->id, 'student');
+        $oo = $this->getDataGenerator()->create_module('onlyofficeeditor', ['course' => $course]);
+        $cm = get_coursemodule_from_instance('onlyofficeeditor', $oo->id);
+        $context = \context_module::instance($cm->id);
+
+        $this->setUser($alice);
+        $result = util::get_users_to_mention_in_comments($context);
+
+        $emails = array_column($result, 'email');
+        $this->assertNotContains('alice@test.local', $emails, 'Current user should be excluded.');
+        $this->assertContains('bob@test.local', $emails, 'Other enrolled users should be included.');
+
+        $bobindex = array_search('bob@test.local', $emails, true);
+        $this->assertSame('Bob Jones', $result[$bobindex]['name']);
+    }
+
+    /**
+     * Creates a new onlyofficeeditor instance in the given section, propagating download/print flags.
+     */
+    public function test_generate_new_module_info_creates_new_activity(): void {
+        global $DB;
+        $this->setAdminUser();
+        $course = $this->getDataGenerator()->create_course();
+        $oo = $this->getDataGenerator()->create_module('onlyofficeeditor', ['course' => $course]);
+        $cm = get_coursemodule_from_instance('onlyofficeeditor', $oo->id);
+
+        $moduleinfo = $DB->get_record('onlyofficeeditor', ['id' => $oo->id]);
+        $moduleinfo->modulename = 'onlyofficeeditor';
+        $moduleinfo->module = $DB->get_field('modules', 'id', ['name' => 'onlyofficeeditor']);
+
+        $before = $DB->count_records('onlyofficeeditor', ['course' => $course->id]);
+        $result = util::generate_new_module_info($moduleinfo, $course, $cm, 0);
+
+        $this->assertSame(
+            $before + 1,
+            $DB->count_records('onlyofficeeditor', ['course' => $course->id]),
+            'A new onlyofficeeditor instance should exist in the course.'
+        );
+        $this->assertNotEmpty($result->coursemodule);
+        $this->assertNotSame($cm->id, $result->coursemodule);
+    }
 }
