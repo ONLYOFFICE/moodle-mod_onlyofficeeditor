@@ -99,15 +99,8 @@ class onlyoffice_file_utility {
      * @return bool
      */
     public static function is_format_supported(string $extension) {
-        $formats = static::get_accepted_formats();
-
-        foreach ($formats as $format) {
-            if ($format === ".$extension") {
-                return true;
-            }
-        }
-
-        return false;
+        $extension = strtolower(ltrim($extension, '.'));
+        return \in_array(".$extension", static::get_accepted_formats(), true);
     }
 
     /**
