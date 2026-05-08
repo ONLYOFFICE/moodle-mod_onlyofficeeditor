@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 6.2.0
 ## Changed
 - support moodle v5.2
 - no longer supports Moodle v4.4 and earlier
