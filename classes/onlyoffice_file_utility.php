@@ -108,17 +108,18 @@ class onlyoffice_file_utility {
      * @param string $ext File extension.
      * @return string|null
      */
-    public static function get_document_type($ext) {
-        if (in_array($ext, self::get_accepted_document_formats())) {
+    public static function get_document_type(string $ext) {
+        $ext = '.' . strtolower(ltrim($ext, '.'));
+        if (\in_array($ext, self::get_accepted_document_formats())) {
             return 'word';
         }
-        if (in_array($ext, self::get_accepted_spreadsheet_formats())) {
+        if (\in_array($ext, self::get_accepted_spreadsheet_formats())) {
             return 'cell';
         }
-        if (in_array($ext, self::get_accepted_presentation_formats())) {
+        if (\in_array($ext, self::get_accepted_presentation_formats())) {
             return 'slide';
         }
-        if (in_array($ext, self::get_accepted_pdf_formats())) {
+        if (\in_array($ext, self::get_accepted_pdf_formats())) {
             return 'pdf';
         }
         return 'word';
