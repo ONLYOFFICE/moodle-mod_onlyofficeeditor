@@ -24,7 +24,7 @@
 
 namespace mod_onlyofficeeditor\local\docs;
 
-use curl;
+use core\http_client;
 use Exception;
 use mod_onlyofficeeditor\configuration_constants;
 use mod_onlyofficeeditor\jwt_wrapper;
@@ -46,6 +46,22 @@ class docs_settings_validator {
      * @var array
      */
     protected array $errors = [];
+
+    /**
+     * HTTP client used for Document Server requests.
+     *
+     * @var http_client
+     */
+    private http_client $client;
+
+    /**
+     * Constructor.
+     *
+     * @param http_client|null $client HTTP client to use.
+     */
+    public function __construct(?http_client $client = null) {
+        $this->client = $client ?? new http_client();
+    }
 
     /**
      * Validate document settings.
@@ -94,15 +110,13 @@ class docs_settings_validator {
     private function check_document_server($internalurl, $disableverifyssl) {
         $healthcheckurl = "$internalurl/healthcheck";
 
-        $ch = new curl();
-
+        $options = ['http_errors' => false];
         if ($disableverifyssl) {
-            $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
-            $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+            $options['verify'] = false;
         }
 
         try {
-            $response = $ch->get($healthcheckurl);
+            $response = (string) $this->client->get($healthcheckurl, $options)->getBody();
         } catch (Exception $e) {
             throw new docs_validation_exception('general', get_string('connectionerror:unexpected', 'onlyofficeeditor'));
         }
@@ -124,26 +138,29 @@ class docs_settings_validator {
      * @return void
      */
     private function check_command_service($docserverurl, $secret, $disableverifyssl) {
-        $curl = new curl();
-        $curl->setHeader(['Content-type: application/json']);
-        $curl->setHeader(['Accept: application/json']);
-
         $commandbody = [
             'c' => 'version',
         ];
 
         $token = jwt_wrapper::encode($commandbody, $secret);
         $commandbody['token'] = $token;
-        $commandbody = json_encode($commandbody);
+        $jsonbody = json_encode($commandbody);
 
         $commandurl = "$docserverurl/command";
 
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ],
+            'body' => $jsonbody,
+            'http_errors' => false,
+        ];
         if ($disableverifyssl) {
-            $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
-            $curl->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+            $options['verify'] = false;
         }
 
-        $response = $curl->post($commandurl, $commandbody);
+        $response = (string) $this->client->post($commandurl, $options)->getBody();
         $commandjson = json_decode($response);
 
         if (isset($commandjson->error) && abs($commandjson->error) > 0) {
@@ -175,10 +192,6 @@ class docs_settings_validator {
     private function check_conversion_service($internalurl, $jwtheader, $secret, $storageurl, $disableverifyssl) {
         $temporaryfileurl = $this->get_temp_file_url($storageurl);
 
-        $curl = new curl();
-        $curl->setHeader(['Content-type: application/json']);
-        $curl->setHeader(['Accept: application/json']);
-
         $key = 'key_' . time();
         $extension = 'docx';
 
@@ -191,23 +204,32 @@ class docs_settings_validator {
             "key" => $key,
         ];
 
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ];
+
         if (!empty($secret)) {
             $params = [
                 'payload' => $conversionbody,
             ];
             $token = jwt_wrapper::encode($params, $secret);
-            $curl->setHeader([$jwtheader . ': Bearer ' . $token]);
+            $headers[$jwtheader] = 'Bearer ' . $token;
         }
 
-        $conversionbody = json_encode($conversionbody);
+        $jsonbody = json_encode($conversionbody);
         $conversionurl = "$internalurl/converter";
 
+        $options = [
+            'headers' => $headers,
+            'body' => $jsonbody,
+            'http_errors' => false,
+        ];
         if ($disableverifyssl) {
-            $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => 0]);
-            $curl->setopt(['CURLOPT_SSL_VERIFYHOST' => 0]);
+            $options['verify'] = false;
         }
 
-        $response = $curl->post($conversionurl, $conversionbody);
+        $response = (string) $this->client->post($conversionurl, $options)->getBody();
         $conversionjson = json_decode($response);
 
         if (isset($conversionjson->error) && abs($conversionjson->error) > 0) {
