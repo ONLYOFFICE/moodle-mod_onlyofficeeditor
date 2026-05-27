@@ -54,7 +54,6 @@ $string['editor_view_description'] = 'Más información sobre la personalizació
 $string['editor_view_feedback'] = 'Mostrar el botón de Feedback y Soporte';
 $string['editor_view_header'] = 'Mostrar el encabezado más compacto';
 $string['editor_view_help'] = 'Mostrar el botón de Ayuda';
-$string['editor_view_toolbar'] = 'Mostrar el encabezado monocromático de la barra de herramientas';
 $string['editorenterfullscreen'] = 'Abrir pantalla completa';
 $string['editorexitfullscreen'] = 'Salir de pantalla completa';
 $string['forcesave'] = 'Habilitar Forzar guardar';

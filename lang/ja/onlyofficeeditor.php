@@ -54,7 +54,6 @@ $string['editor_view_description'] = 'エディタのカスタマイズについ
 $string['editor_view_feedback'] = 'フィードバックと「サポートメニュー」ボタンを表示する';
 $string['editor_view_header'] = 'ヘッダーをよりコンパクトに表示する';
 $string['editor_view_help'] = '「ヘルプメニュー」ボタンを表示する';
-$string['editor_view_toolbar'] = '白黒のツールバーヘッダーを表示する';
 $string['editorenterfullscreen'] = '全画面表示で開く';
 $string['editorexitfullscreen'] = '全画面表示の終了';
 $string['forcesave'] = '強制保存を有効にする';

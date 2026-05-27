@@ -55,7 +55,6 @@ $string['editor_view_description'] = 'Learn more about customizing the editor <a
 $string['editor_view_feedback'] = 'Display Feedback & Support menu button';
 $string['editor_view_header'] = 'Display the header more compact';
 $string['editor_view_help'] = 'Display Help menu button';
-$string['editor_view_toolbar'] = 'Display monochrome toolbar header';
 $string['editorenterfullscreen'] = 'Open full screen';
 $string['editorexitfullscreen'] = 'Exit full screen';
 $string['forcesave'] = 'Enable Force Save';

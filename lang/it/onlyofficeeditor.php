@@ -54,7 +54,6 @@ $string['editor_view_description'] = 'Scopri di più sulla personalizzazione del
 $string['editor_view_feedback'] = 'Visualizza il pulsante del menu Feedback e Supporto';
 $string['editor_view_header'] = 'Visualizza l\'intestazione più compatta';
 $string['editor_view_help'] = 'Visualizza il pulsante del menu Guida';
-$string['editor_view_toolbar'] = 'Visualizza intestazione della barra degli strumenti monocromatica';
 $string['editorenterfullscreen'] = 'Apri la modalità schermo intero';
 $string['editorexitfullscreen'] = 'Esci dalla modalità schermo intero';
 $string['forcesave'] = 'Abilita salvataggio forzato';
