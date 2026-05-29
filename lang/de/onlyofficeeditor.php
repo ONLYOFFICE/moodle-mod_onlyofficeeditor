@@ -54,7 +54,6 @@ $string['editor_view_description'] = 'Weitere Informationen zum Anpassen des Edi
 $string['editor_view_feedback'] = 'Feedback-& Support-Taste anzeigen';
 $string['editor_view_header'] = 'Kompakte Kopfzeile anzeigen';
 $string['editor_view_help'] = 'Hilfetaste anzeigen';
-$string['editor_view_toolbar'] = 'Monochromen Kopfbereich der Symbolleiste anzeigen';
 $string['editorenterfullscreen'] = 'Vollbildmodus aktivieren';
 $string['editorexitfullscreen'] = 'Vollbildmodus verlassen';
 $string['forcesave'] = 'Force Save aktivieren';

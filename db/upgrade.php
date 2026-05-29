@@ -30,5 +30,11 @@
  * @return bool
  */
 function xmldb_onlyofficeeditor_upgrade($oldversion) {
+    if ($oldversion < 2026052700) {
+        unset_config('editor_view_toolbar', 'onlyofficeeditor');
+
+        upgrade_mod_savepoint(true, 2026052700, 'onlyofficeeditor');
+    }
+
     return true;
 }

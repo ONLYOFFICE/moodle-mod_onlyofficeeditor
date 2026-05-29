@@ -126,13 +126,6 @@ if ($ADMIN->fulltree) {
         '',
         1
     ));
-    $settings->add(new admin_setting_configcheckbox(
-        'onlyofficeeditor/editor_view_toolbar',
-        get_string('editor_view_toolbar', 'onlyofficeeditor'),
-        '',
-        0
-    ));
-
     $settings->add(new admin_setting_heading(
         'onlyofficeeditor/editor_security',
         get_string('editor_security', 'onlyofficeeditor'),

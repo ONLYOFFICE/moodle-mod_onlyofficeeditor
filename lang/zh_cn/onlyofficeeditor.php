@@ -54,7 +54,6 @@ $string['editor_view_description'] = '了解如何自定义编辑器，请点击
 $string['editor_view_feedback'] = '显示反馈及支持菜单按钮';
 $string['editor_view_header'] = '更紧致地显示菜单栏';
 $string['editor_view_help'] = '显示帮助菜单按钮';
-$string['editor_view_toolbar'] = '显示单色工具栏标题';
 $string['editorenterfullscreen'] = '打开全屏';
 $string['editorexitfullscreen'] = '退出全屏';
 $string['forcesave'] = '启用强制保存';

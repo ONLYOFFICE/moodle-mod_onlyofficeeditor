@@ -54,7 +54,6 @@ $string['editor_view_description'] = 'Pour en savoir plus sur la personnalisatio
 $string['editor_view_feedback'] = 'Afficher le bouton du menu Feedback & Support';
 $string['editor_view_header'] = 'Afficher l\'en-tête plus compact';
 $string['editor_view_help'] = 'Afficher le bouton du menu Aide';
-$string['editor_view_toolbar'] = 'Afficher un en-tête monochrome de la barre d\'outils';
 $string['editorenterfullscreen'] = 'Ouvrir en mode plein écran';
 $string['editorexitfullscreen'] = 'Quitter le mode plein écran';
 $string['forcesave'] = 'Activer Sauvegarde Force';

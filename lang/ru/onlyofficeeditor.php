@@ -54,7 +54,6 @@ $string['editor_view_description'] = 'Узнайте больше о настр�
 $string['editor_view_feedback'] = 'Отображать кнопку Обратной связи и поддержки';
 $string['editor_view_header'] = 'Отображать заголовок компактным';
 $string['editor_view_help'] = 'Отображать кнопку справки';
-$string['editor_view_toolbar'] = 'Отображать монохромный заголовок панели инструментов';
 $string['editorenterfullscreen'] = 'Открыть в полноэкранном режиме';
 $string['editorexitfullscreen'] = 'Выйти из полноэкранного режима';
 $string['forcesave'] = 'Включить Force Save';
