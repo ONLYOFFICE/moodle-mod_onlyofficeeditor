@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_onlyofficeeditor';
-$plugin->version = 2026050800;
+$plugin->version = 2026052700;
 $plugin->release = 'v6.2.0';
 $plugin->requires = 2024100700;
 $plugin->maturity = MATURITY_STABLE;
