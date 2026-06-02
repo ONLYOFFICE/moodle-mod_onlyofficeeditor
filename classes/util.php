@@ -480,6 +480,10 @@ class util {
      * @return string
      */
     public static function generate_filename($name, $ext) {
+        $name = clean_param($name, PARAM_FILE);
+        if ($name === '') {
+            $name = 'document';
+        }
         $filename = "$name.$ext";
 
         if (strlen($filename) > static::FILENAME_MAXIMUM_LENGTH) {
