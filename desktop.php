@@ -36,7 +36,7 @@ $wantsurl = !empty($SESSION->wantsurl) ? $SESSION->wantsurl : $CFG->wwwroot;
 
 $domain = "'" . $CFG->wwwroot . "'";
 $displayname = "'" . \fullname($USER) . "'";
-$provider = "'Moodle'";
+$provider = "'moodle'";
 $redirecturl = "'" . $wantsurl . "'";
 
 if (!util::desktop_detect()) {
