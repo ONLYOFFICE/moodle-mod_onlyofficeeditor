@@ -1,0 +1,68 @@
+name: Publish to Moodle Marketplace
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish (e.g. v6.2.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  PLUGIN_DIR: onlyofficeeditor
+  MARKETPLACE_URL: https://marketplace.moodle.com/api/plugins/mod_onlyofficeeditor/versions
+  TAG: ${{ inputs.tag }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: marketplace
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+          submodules: recursive
+          persist-credentials: false
+      - name: Validate Version
+        run: |
+          release=$(sed -n "s/^\$plugin->release = '\(.*\)';$/\1/p" version.php)
+          if [ "$release" != "$TAG" ]; then
+            echo "::error::version.php release '$release' does not match tag '$TAG'"
+            exit 1
+          fi
+      - name: Build Package
+        run: |
+          mkdir -p ./build
+          git archive --prefix="$PLUGIN_DIR/" HEAD | tar -x -C ./build
+          git submodule foreach --quiet 'git archive --prefix="$PLUGIN_DIR/$sm_path/" HEAD | tar -x -C "$toplevel/build"'
+          cd ./build
+          zip -qr "../$PLUGIN_DIR.zip" "$PLUGIN_DIR"
+      - name: Get Release Notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          notes=$(gh release view "$TAG" --json body -q '.body // ""' || true)
+          if [ -z "$notes" ]; then
+            notes=$(awk -v heading="## ${TAG#v}" '$0 == heading { found = 1; next } /^## / { found = 0 } found' CHANGELOG.md)
+          fi
+          if [ -z "$notes" ]; then
+            echo "::error::No release notes for '$TAG' in the GitHub release or CHANGELOG.md"
+            exit 1
+          fi
+          printf '%s\n' "$notes" > RELEASE.md
+      - name: Publish
+        env:
+          MOODLE_MARKETPLACE_TOKEN: ${{ secrets.MOODLE_MARKETPLACE_TOKEN }}
+        run: |
+          status=$(printf 'Authorization: Bearer %s\n' "$MOODLE_MARKETPLACE_TOKEN" | curl -s -o response.json -w '%{http_code}' \
+            -H @- \
+            -F "file=@$PLUGIN_DIR.zip" \
+            -F "releaseNotes=<RELEASE.md" \
+            --form-string "vcsTag=$TAG" \
+            "$MARKETPLACE_URL")
+          jq . response.json || cat response.json
+          [ "$status" = 201 ]
