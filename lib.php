@@ -25,7 +25,7 @@
  * Moodle is performing actions across all modules.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -72,7 +72,7 @@ function onlyofficeeditor_add_instance(stdClass $data, ?mod_onlyofficeeditor_mod
     $cmid = $data->coursemodule;
     $data->timecreated = time();
     $data->timemodified = $data->timecreated;
-    $fileformat = $data->onlyofficetemplateformat;
+    $fileformat = $data->onlyofficetemplateformat ?? null;
 
     util::save_document_permissions($data);
     util::save_file($data);

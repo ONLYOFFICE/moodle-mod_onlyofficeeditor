@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['banner_description'] = 'Lancez facilement les éditeurs dans le cloud sans téléchargement ni installation';
@@ -54,18 +54,19 @@ $string['editor_view_description'] = 'Pour en savoir plus sur la personnalisatio
 $string['editor_view_feedback'] = 'Afficher le bouton du menu Feedback & Support';
 $string['editor_view_header'] = 'Afficher l\'en-tête plus compact';
 $string['editor_view_help'] = 'Afficher le bouton du menu Aide';
-$string['editor_view_toolbar'] = 'Afficher un en-tête monochrome de la barre d\'outils';
 $string['editorenterfullscreen'] = 'Ouvrir en mode plein écran';
 $string['editorexitfullscreen'] = 'Quitter le mode plein écran';
 $string['forcesave'] = 'Activer Sauvegarde Force';
 $string['jwtheader'] = 'En-tête d\'autorisation';
+$string['learnmore'] = 'En savoir plus';
 $string['mentioncontexturlname'] = 'Lien vers le commentaire.';
 $string['mentionnotifier:notification'] = '{$a->notifiant} mentionné dans le {$a->cours}';
 $string['messageprovider:mentionnotifier'] = 'Notification de mention ONLYOFFICE dans le module Documents.';
 $string['modulename'] = 'Document ONLYOFFICE';
 $string['modulename_help'] = 'Le module ONLYOFFICE permet aux utilisateurs de créer et de modifier des documents bureautiques stockés localement dans Moodle à l\'aide de ONLYOFFICE Document Server. Il permet à plusieurs utilisateurs de collaborer en temps réel et d\'enregistrer ces modifications dans Moodle
 
-Pour en savoir plus, visitez <a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">Centre d\'aide</a>.';
+Aidez-nous à améliorer le plugin ONLYOFFICE - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">Partager vos retours</a>.
+Pour plus d\'informations, visitez <a href="https://helpcenter.onlyoffice.com/fr/integration/moodle.aspx" target="_blank">le Centre d\'aide</a>.';
 $string['modulenameplural'] = 'Documents ONLYOFFICE';
 $string['oldversion'] = 'Veuillez mettre à jour ONLYOFFICE Docs vers la version 7.0 pour travailler sur les formulaires à remplir en ligne.';
 $string['onlyofficeactivityicon'] = 'Ouvrir dans ONLYOFFICE';
@@ -74,6 +75,7 @@ $string['onlyofficeeditor:editdocument'] = 'Modifier l\'activité du document ON
 $string['onlyofficeeditor:view'] = 'Afficher l\'activité du document ONLYOFFICE';
 $string['onlyofficename'] = 'Nom de l\'activité';
 $string['onmentionerror'] = 'Erreur de mention.';
+$string['onmentionsuccess'] = 'Notification a été envoyée avec succès';
 $string['pdfformname'] = 'Formulaire PDF';
 $string['pluginadministration'] = 'Administration de l\'activité documentaire ONLYOFFICE';
 $string['pluginname'] = 'Document ONLYOFFICE';
@@ -91,7 +93,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Autorisations de doc
 $string['privacy:metadata:onlyofficeeditor:userid'] = 'L\'ID de l\'utilisateur actuel n\'est pas envoyé à l\'éditeur ONLYOFFICE.';
 $string['protect'] = 'Masquer l\'onglet Protection';
 $string['protect_help'] = 'Si cette option est désactivée, les utilisateurs ont accès aux paramètres de protection dans l\'éditeur ONLYOFFICE. Veuillez noter que les utilisateurs ayant la capacité <strong>course:manageactivities</strong> ont toujours accès aux paramètres de protection.';
-$string['readmore'] = 'En savoir plus';
 $string['returntodocument'] = 'Retour à la page de cours';
 $string['saveasbutton'] = 'Sélectionner';
 $string['saveaserror'] = 'Un problème est survenu.';

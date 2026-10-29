@@ -18,7 +18,7 @@
  * Url admin setting.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ namespace mod_onlyofficeeditor\local\admin\settings;
  * Url admin setting.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class onlyoffice_admin_setting_url extends onlyoffice_admin_setting_text {

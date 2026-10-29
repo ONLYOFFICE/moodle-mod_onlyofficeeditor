@@ -1,4 +1,4 @@
-/* @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+/* @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -13,22 +13,6 @@
     position: static !important; /* stylelint-disable-line declaration-no-important */
     height: calc(100dvh - 61px);
     height: calc(100vh - 61px); /* stylelint-disable-line declaration-block-no-duplicate-properties */
-    max-height: 60rem;
-}
-
-.path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    margin: 0;
-    margin-top: 61px;
-    padding: 0 1px;
-    z-index: 100;
-}
-
-.path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
-    margin-right: 0;
 }
 
 .path-mod-onlyofficeeditor #onlyofficeeditor-editor.error {
@@ -52,8 +36,8 @@
     position: absolute;
     top: 0;
     opacity: 0.5;
-    width: 30px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -112,25 +96,85 @@
     top: 100%;
 }
 
-.path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button {
-    border: 1px solid rgb(15, 111, 197);
-    background: white;
-    color: rgb(15, 111, 197);
+/* Fullscreen mode of mod_onlyofficeeditor/fullscreen. */
+.onlyofficeeditor-fullscreen-button {
     float: right;
-}
-
-.path-mod-onlyofficeeditor #onlyofficeeditor-enter-fs-button {
-    padding: 5px;
-    margin-right: 10px;
     margin-bottom: 0.5rem;
 }
 
-.path-mod-onlyofficeeditor #onlyofficeeditor-exit-fs-button {
-    margin: 12px 0;
+.onlyofficeeditor-fullscreen-navbar {
+    display: none;
 }
 
-.path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button i {
-    display: none;
+.onlyofficeeditor-fullscreen-open {
+    overflow: hidden;
+}
+
+/* Above the Boost drawers (1035) and below the modal backdrop (1040 in Bootstrap 4, 1050 in Bootstrap 5). */
+.onlyofficeeditor-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 1039;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bs-body-bg, #fff);
+}
+
+.onlyofficeeditor-fullscreen > .onlyofficeeditor-fullscreen-navbar {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+/* Header colours of the ONLYOFFICE editors. */
+.onlyofficeeditor-fullscreen-navbar[data-document-type="word"] {
+    background-color: #5a7dc9;
+}
+
+.onlyofficeeditor-fullscreen-navbar[data-document-type="cell"] {
+    background-color: #8ca946;
+}
+
+.onlyofficeeditor-fullscreen-navbar[data-document-type="slide"] {
+    background-color: #dd682b;
+}
+
+.onlyofficeeditor-fullscreen-navbar[data-document-type="pdf"] {
+    background-color: #d45757;
+}
+
+.onlyofficeeditor-fullscreen > .onlyofficeeditor-fullscreen-navbar:is(
+[data-document-type="word"],
+[data-document-type="cell"],
+[data-document-type="slide"],
+[data-document-type="pdf"]
+) {
+    border-bottom: 0;
+    --onlyofficeeditor-navbar-color: #fff;
+}
+
+.onlyofficeeditor-fullscreen-navbar .btn-icon {
+    color: var(--onlyofficeeditor-navbar-color, inherit);
+}
+
+.onlyofficeeditor-fullscreen-navbar .btn-icon:hover,
+.onlyofficeeditor-fullscreen-navbar .btn-icon:focus {
+    color: var(--onlyofficeeditor-navbar-color, inherit);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Overrides the iframe position set by the mobile editor and the iframe height set by the host page. */
+.onlyofficeeditor-fullscreen > iframe {
+    position: static !important; /* stylelint-disable-line declaration-no-important */
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto !important; /* stylelint-disable-line declaration-no-important */
+    max-height: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* Banner styles - mobile first */
@@ -269,27 +313,8 @@
     }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    .path-mod-onlyofficeeditor #onlyofficeeditor-exit-fs-button {
-        margin: 12px;
-    }
-
-    .path-mod-onlyofficeeditor .onlyofficeeditor-editor-fs-button i {
-        display: inline-block;
-    }
-}
-
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-fullscreen {
-        margin: 0 0 0 50px;
-    }
-
-    .path-mod-onlyofficeeditor .onlyofficeeditor-container.onlyofficeeditor-rightindent {
-        margin-right: 43px;
-    }
-
     .path-admin .onlyoffice-banner {
         padding: 16px 32px 21px 20px;
     }

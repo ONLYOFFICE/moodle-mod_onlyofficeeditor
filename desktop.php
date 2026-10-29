@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ $wantsurl = !empty($SESSION->wantsurl) ? $SESSION->wantsurl : $CFG->wwwroot;
 
 $domain = "'" . $CFG->wwwroot . "'";
 $displayname = "'" . \fullname($USER) . "'";
-$provider = "'Moodle'";
+$provider = "'moodle'";
 $redirecturl = "'" . $wantsurl . "'";
 
 if (!util::desktop_detect()) {

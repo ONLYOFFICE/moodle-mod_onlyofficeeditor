@@ -1,12 +1,20 @@
 # Change Log
 
+## 6.2.0
+### Changed
+- support moodle v5.3
+- no longer supports Moodle v4.4 and earlier
+- update the user-voice texts in the settings and plugin description
+- update file format icons
+- fix fullscreen mode to fill the entire viewport with correct navbar offset
+
 ## 6.1.0
-## Added
+### Added
 - add docs check connection button in settings to test connectivity with the document server
 - add admin settings validation for document server related fields
 - ca, cs, da, hu, id, ro, sq, ur language templates
 
-## Changed
+### Changed
 - rewrite admin settings validation logic to validate only for input validity
 - fix unsuccessful file rename
 - fix unsupported file upload
@@ -14,32 +22,32 @@
 - fix incorrect disabling of certificate verification in curl
 
 ## 6.0.1
-## Added
+### Added
 - fi, he, no, sl language templates
 
-## Changed
+### Changed
 - fix JWT header issue
 - remove trailing slashes from setting urls after update
 
 ## 6.0.0
-## Added
+### Added
 - link to docs cloud
 - certificate verification setting
 - advanced server settings for specifying internal addresses
 - check the url address of the save as document
 
-## Changed
+### Changed
 - replace docxf with pdf as a form template
 - fix exit full screan
 - disable scrolling page to editor
 - disable chat in editor for guest
 
 ## 4.4.0
-## Changed
+### Changed
 - fixed saveas dialog
 - support moodle v4.3
 
-## Added
+### Added
 - desktop mode
 - disable plugins setting
 - macro launch setting
@@ -47,16 +55,16 @@
 - service for checking editor versions
 
 ## 4.1.0
-## Added
+### Added
 - support Moodle AssignSubmission ONLYOFFICE Integration plugin
 - the ability to change the JWT header
 
 ## 3.0.0
-## Changed
+### Changed
 - redesign to moodle 4.*
 
 ## 2.2.0
-## Added
+### Added
 - add protect option for editor
 - add ability to open editor in fullscreen mode
 - add mentions in comments in editor
@@ -66,23 +74,23 @@
 - editor interface customization
 - de, es, fr, it, ja, ru, zh_cn translations
 
-## Changed
+### Changed
 - set editor interface language
 - fixes building backup and restore
 
 ## 2.1.0
-## Added
+### Added
 - backup api
 - privacy api
 
-## Changed
+### Changed
 - fixes according to markets code prechecks
 
 ## 2.0.0
-## Changed
+### Changed
 - fixes according to markets code prechecks
 - renaming module name
 
 ## 1.0.0
-## Changed
+### Changed
 - fix saving intermediate versions when editing (forcesave)

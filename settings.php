@@ -18,7 +18,7 @@
  * ONLYOFFICE module admin settings and defaults
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,6 +35,7 @@ if ($ADMIN->fulltree) {
     $customizationapiurl =
     'https://api.onlyoffice.com/docs/docs-api/usage-api/config/editor/customization/customization-standard-branding';
     $helpcentermoodleurl = 'https://helpcenter.onlyoffice.com/integration/moodle.aspx';
+    $feedbackurl = 'https://community.onlyoffice.com/c/suggestions/integrations/56';
     $defaultjwtheader = 'Authorization';
     $bannerdata = [
         'title' => get_string('banner_title', 'onlyofficeeditor'),
@@ -46,8 +47,8 @@ if ($ADMIN->fulltree) {
     ];
     $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerdata);
     $intro = $OUTPUT->render_from_template('mod_onlyofficeeditor/settings_intro', [
-        'readmoreurl' => $helpcentermoodleurl,
-        'suggesturl' => '#',
+        'learnmoreurl' => $helpcentermoodleurl,
+        'suggesturl' => $feedbackurl,
     ]);
 
     $settings->add(new admin_setting_heading('onlyofficeeditor/intro', '', $intro));
@@ -125,13 +126,6 @@ if ($ADMIN->fulltree) {
         '',
         1
     ));
-    $settings->add(new admin_setting_configcheckbox(
-        'onlyofficeeditor/editor_view_toolbar',
-        get_string('editor_view_toolbar', 'onlyofficeeditor'),
-        '',
-        0
-    ));
-
     $settings->add(new admin_setting_heading(
         'onlyofficeeditor/editor_security',
         get_string('editor_security', 'onlyofficeeditor'),

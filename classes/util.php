@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,7 +35,7 @@ require_once("$CFG->dirroot/course/modlib.php");
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -121,7 +121,7 @@ class util {
         global $USER;
 
         $cmid = $data->coursemodule;
-        $draftitemid = $data->file;
+        $draftitemid = $data->file ?? null;
 
         $context = \context_module::instance($cmid);
         if ($draftitemid) {
@@ -446,6 +446,7 @@ class util {
             $message->userfrom = \core_user::get_noreply_user();
             $message->userto = $user;
             $message->subject = get_string('mentionnotifier:notification', 'onlyofficeeditor', $messagedata);
+            $message->fullmessage = $comment;
             $message->fullmessageformat = FORMAT_HTML;
             $message->fullmessagehtml = '<p>' . $comment . '</p>';
             $message->notification = 1;
@@ -480,6 +481,10 @@ class util {
      * @return string
      */
     public static function generate_filename($name, $ext) {
+        $name = clean_param($name, PARAM_FILE);
+        if ($name === '') {
+            $name = 'document';
+        }
         $filename = "$name.$ext";
 
         if (strlen($filename) > static::FILENAME_MAXIMUM_LENGTH) {

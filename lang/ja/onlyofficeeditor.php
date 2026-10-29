@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['banner_description'] = 'ダウンロードやインストールをすることなく、クラウド上で簡単にエディタを起動することができます';
@@ -54,18 +54,19 @@ $string['editor_view_description'] = 'エディタのカスタマイズについ
 $string['editor_view_feedback'] = 'フィードバックと「サポートメニュー」ボタンを表示する';
 $string['editor_view_header'] = 'ヘッダーをよりコンパクトに表示する';
 $string['editor_view_help'] = '「ヘルプメニュー」ボタンを表示する';
-$string['editor_view_toolbar'] = '白黒のツールバーヘッダーを表示する';
 $string['editorenterfullscreen'] = '全画面表示で開く';
 $string['editorexitfullscreen'] = '全画面表示の終了';
 $string['forcesave'] = '強制保存を有効にする';
 $string['jwtheader'] = '認証ヘッダー';
+$string['learnmore'] = '詳細を見る';
 $string['mentioncontexturlname'] = 'コメントへのリンク';
 $string['mentionnotifier:notification'] = '{$a->notifier} が{$a->course}でメンションされました';
 $string['messageprovider:mentionnotifier'] = '「文書」モジュール内のONLYOFFICEメンション通知';
 $string['modulename'] = 'ONLYOFFICEの文書';
 $string['modulename_help'] = 'ONLYOFFICEモジュールは、ONLYOFFICE Document Serverを使用して、Moodleにローカルのオフィス文書を作成・編集することができ、複数のユーザーがリアルタイムで共同作業を行い、それらの変更をMoodleに保存することができます。
 
-詳細については、<a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">ヘルプセンタ</a>をご覧ください。';
+ONLYOFFICEプラグインの改善にご協力ください - <a href="https://feedback.onlyoffice.com/forums/966080-your-voice-matters?category_id=519288" target="_blank">フィードバックを共有</a>。
+詳細は<a href="https://helpcenter.onlyoffice.com/integration/moodle.aspx" target="_blank">ヘルプセンター</a>をご覧ください。';
 $string['modulenameplural'] = 'ONLYOFFICEドキュメント';
 $string['oldversion'] = 'オンラインで記入式フォームを作成するには、ONLYOFFICE Docs 7.0版まで更新してください';
 $string['onlyofficeactivityicon'] = 'ONLYOFFICEで開く';
@@ -74,6 +75,7 @@ $string['onlyofficeeditor:editdocument'] = 'ONLYOFFICEドキュメントの活�
 $string['onlyofficeeditor:view'] = 'ONLYOFFICEドキュメントの活動を表示する';
 $string['onlyofficename'] = '活動名';
 $string['onmentionerror'] = 'メンションのエラー';
+$string['onmentionsuccess'] = '通知を送信しました';
 $string['pdfformname'] = 'PDFフォーム';
 $string['pluginadministration'] = 'ONLYOFFICE ドキュメント活動管理';
 $string['pluginname'] = 'ONLYOFFICEの文書';
@@ -91,7 +93,6 @@ $string['privacy:metadata:onlyofficeeditor:permissions'] = 'ドキュメント�
 $string['privacy:metadata:onlyofficeeditor:userid'] = '実際のユーザーIDはONLYOFFICEエディタに送信されません';
 $string['protect'] = '保護タブを隠す';
 $string['protect_help'] = 'このオプションがオフの場合、ユーザーはONLYOFFICEエディタで保護設定にアクセスすることができます。なお、<strong>course:manageactivities</strong> 権を持つユーザーは、常に保護設定にアクセスすることができます。';
-$string['readmore'] = '続きを読む';
 $string['returntodocument'] = 'コースページに戻る';
 $string['saveasbutton'] = '選択する';
 $string['saveaserror'] = 'エラーが発生しました';

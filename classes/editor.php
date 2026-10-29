@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -37,7 +37,7 @@ use mod_onlyofficeeditor\configuration_manager;
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -171,7 +171,6 @@ class editor {
         $customization['help'] = $this->modconfig->editor_view_help == 1;
         $customization['compactHeader'] = $this->modconfig->editor_view_header == 1;
         $customization['feedback'] = $this->modconfig->editor_view_feedback == 1;
-        $customization['toolbarNoTabs'] = $this->modconfig->editor_view_toolbar == 1;
         $customization['commentAuthorOnly'] = true;
         $customization['plugins'] = $this->modconfig->editor_security_plugin == 1;
         $customization['macros'] = $this->modconfig->editor_security_macros == 1;

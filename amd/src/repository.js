@@ -17,7 +17,7 @@
  * Repository to perform WS calls for mod_onlyofficeeditor.
  *
  * @module     mod_onlyofficeeditor/repository
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

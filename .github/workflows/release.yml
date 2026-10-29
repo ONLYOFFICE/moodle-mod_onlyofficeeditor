@@ -30,12 +30,8 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           git submodule update --init --recursive
-          mkdir -p "./$PLUGIN_DIR"
-          rsync -av --exclude='$PLUGIN_DIR' ./ "./$PLUGIN_DIR"
-          cd "./$PLUGIN_DIR"
-          rm -rf ./.github/
-          rm -rf ./.git/
-          rm -f ./.gitmodules
+          git archive --prefix="$PLUGIN_DIR/" HEAD | tar -x
+          git submodule foreach --quiet 'git archive --prefix="$PLUGIN_DIR/$sm_path/" HEAD | tar -x -C "$toplevel"'
       - name: Checkout Moodle
         uses: actions/checkout@v4
         with:
@@ -47,8 +43,8 @@ jobs:
       - name: Build Plugin
         run: |
           cd ./moodle
-          npm install
-          grunt
+          npm ci
+          npx grunt
       - name: Zip Artifact
         run: |
           cd "$MOODLE_MOD_DIR/"

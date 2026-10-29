@@ -18,7 +18,7 @@
  * Upgrade code for the onlyoffice.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2025 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,5 +30,11 @@
  * @return bool
  */
 function xmldb_onlyofficeeditor_upgrade($oldversion) {
+    if ($oldversion < 2026052700) {
+        unset_config('editor_view_toolbar', 'onlyofficeeditor');
+
+        upgrade_mod_savepoint(true, 2026052700, 'onlyofficeeditor');
+    }
+
     return true;
 }

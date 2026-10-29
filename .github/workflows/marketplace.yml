@@ -1,0 +1,20 @@
+name: Publish to Moodle Marketplace
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish (e.g. v6.2.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    uses: ONLYOFFICE/moodle-plugin-release/.github/workflows/onlyoffice-release.yml@onlyoffice
+    with:
+      tag: ${{ inputs.tag }}
+    secrets:
+      MOODLE_MARKETPLACE_TOKEN: ${{ secrets.MOODLE_MARKETPLACE_TOKEN }}
