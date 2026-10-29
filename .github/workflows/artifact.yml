@@ -41,7 +41,7 @@ jobs:
         run: |
           cd ./moodle
           npm ci
-          grunt
+          npx grunt
       - name: Build Artifact
         run: |
           cd ${{ github.workspace }}

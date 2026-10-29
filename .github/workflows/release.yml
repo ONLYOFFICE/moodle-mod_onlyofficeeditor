@@ -44,7 +44,7 @@ jobs:
         run: |
           cd ./moodle
           npm ci
-          grunt
+          npx grunt
       - name: Zip Artifact
         run: |
           cd "$MOODLE_MOD_DIR/"
