@@ -12,7 +12,7 @@ Frozen facts live in [version.php](version.php): component `mod_onlyofficeeditor
 
 ## Commands
 
-A local Moodle + Document Server stand with this repo mounted in runs from [dev/stand.sh](dev/stand.sh) (see [dev/README.md](dev/README.md)); `dev/` is `export-ignore`d out of release packages.
+A local Moodle + Document Server stand with this repo mounted in runs from [dev/stand.sh](dev/stand.sh) (see [dev/README.md](dev/README.md)); it also mounts a sibling `moodle-assignsubmission_onlyoffice` checkout, which depends on this plugin. `dev/` is `export-ignore`d out of release packages.
 
 All checks run through [moodle-plugin-ci](https://moodlehq.github.io/moodle-plugin-ci/) v4 against a Moodle checkout (see [.github/workflows/ci.yml](.github/workflows/ci.yml) for the exact matrix of PHP versions, Moodle branches and databases):
 

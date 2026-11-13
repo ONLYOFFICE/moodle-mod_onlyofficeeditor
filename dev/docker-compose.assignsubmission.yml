@@ -1,0 +1,9 @@
+# Added by dev/stand.sh when a moodle-assignsubmission_onlyoffice checkout is found.
+services:
+  webserver:
+    volumes:
+      - ${ASSIGNSUBMISSION_DIR}:/var/www/html/${MOODLE_MOD_DIR:-public/mod}/assign/submission/onlyoffice
+
+  node:
+    volumes:
+      - ${ASSIGNSUBMISSION_DIR}:/var/www/html/${MOODLE_MOD_DIR:-public/mod}/assign/submission/onlyoffice

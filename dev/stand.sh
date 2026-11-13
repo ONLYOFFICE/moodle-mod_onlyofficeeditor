@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
-# Local development stand: Moodle + ONLYOFFICE Docs with this plugin mounted into Moodle.
-# Usage: dev/stand.sh [up|down|destroy|grunt|upgrade|php <script> [args]|shell|logs [service]]
+# Local development stand: Moodle + ONLYOFFICE Docs with this plugin mounted into Moodle,
+# plus moodle-assignsubmission_onlyoffice when a checkout of it is found (ASSIGNSUBMISSION_DIR).
+# Usage: dev/stand.sh [up|down|destroy|grunt [assign]|upgrade|php <script> [args]|shell|logs [service]]
 
 set -euo pipefail
 # Git Bash would otherwise rewrite container paths such as /var/www/html into Windows paths.
@@ -22,9 +23,19 @@ export DS_PORT="${DS_PORT:-8080}"
 export DS_JWT_SECRET="${DS_JWT_SECRET:-secret}"
 ADMIN_USER="${ADMIN_USER:-admin}"
 ADMIN_PASS="${ADMIN_PASS:-admin}"
+# Relative to dev/; set it empty in .env to leave the subplugin out.
+export ASSIGNSUBMISSION_DIR="${ASSIGNSUBMISSION_DIR-../../moodle-assignsubmission_onlyoffice}"
+
+with_assignsubmission() {
+    [ -n "$ASSIGNSUBMISSION_DIR" ] && [ -f "$ASSIGNSUBMISSION_DIR/version.php" ]
+}
 
 compose() {
-    docker compose "$@"
+    if with_assignsubmission; then
+        docker compose -f docker-compose.yml -f docker-compose.assignsubmission.yml "$@"
+    else
+        docker compose "$@"
+    fi
 }
 
 log() {
@@ -135,6 +146,11 @@ Moodle:          http://localhost:$MOODLE_PORT  ($ADMIN_USER / $ADMIN_PASS)
 ONLYOFFICE Docs: http://localhost:$DS_PORT
 Plugin mounted:  /var/www/html/${MOODLE_MOD_DIR}/onlyofficeeditor
 EOF
+    if with_assignsubmission; then
+        echo "Subplugin:       /var/www/html/${MOODLE_MOD_DIR}/assign/submission/onlyoffice (from $ASSIGNSUBMISSION_DIR)"
+    else
+        echo "Subplugin:       not mounted, no checkout at '$ASSIGNSUBMISSION_DIR'"
+    fi
 }
 
 cmd_grunt() {
@@ -143,7 +159,16 @@ cmd_grunt() {
         log "Installing Moodle's npm dependencies"
         compose run --rm --no-deps -T -w /var/www/html node npm ci
     fi
-    compose run --rm --no-deps -T node npx grunt amd "$@"
+    local workdir=""
+    if [ "${1:-}" = "assign" ]; then
+        shift
+        if ! with_assignsubmission; then
+            echo "No assignsubmission checkout at '$ASSIGNSUBMISSION_DIR'" >&2
+            exit 1
+        fi
+        workdir="/var/www/html/$MOODLE_MOD_DIR/assign/submission/onlyoffice"
+    fi
+    compose run --rm --no-deps -T ${workdir:+-w "$workdir"} node npx grunt amd "$@"
 }
 
 command="${1:-up}"
@@ -159,7 +184,7 @@ case "$command" in
     shell)   compose exec webserver bash ;;
     logs)    compose logs -f "$@" ;;
     *)
-        echo "Usage: $0 [up|down|destroy|grunt|upgrade|php <script> [args]|shell|logs [service]]" >&2
+        echo "Usage: $0 [up|down|destroy|grunt [assign]|upgrade|php <script> [args]|shell|logs [service]]" >&2
         exit 1
         ;;
 esac
