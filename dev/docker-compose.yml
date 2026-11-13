@@ -1,0 +1,72 @@
+# Local development stand. Start it with dev/stand.sh, which exports the variables below.
+name: onlyofficeeditor-dev
+
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: moodle
+      POSTGRES_DB: moodle
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "moodle"]
+      interval: 2s
+      retries: 30
+
+  webserver:
+    image: moodlehq/moodle-php-apache:${PHP_VERSION:-8.3}
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APACHE_DOCUMENT_ROOT: ${APACHE_DOCUMENT_ROOT:-/var/www/html/public}
+    ports:
+      - "${MOODLE_PORT:-8000}:80"
+    volumes:
+      - moodle:/var/www/html
+      - moodledata:/var/www/moodledata
+      - ..:/var/www/html/${MOODLE_MOD_DIR:-public/mod}/onlyofficeeditor
+
+  # view.php and save-as call the *public* Document Server URL (http://localhost:DS_PORT)
+  # from PHP, so localhost:DS_PORT must also lead to Document Server inside the webserver container.
+  ds-proxy:
+    image: alpine/socat
+    network_mode: service:webserver
+    command: tcp-listen:${DS_PORT:-8080},fork,reuseaddr tcp-connect:documentserver:80
+
+  documentserver:
+    image: onlyoffice/documentserver:${DS_VERSION:-latest}
+    environment:
+      JWT_ENABLED: "true"
+      JWT_SECRET: ${DS_JWT_SECRET:-secret}
+      # Moodle is reached at http://webserver, a private docker address Docs refuses by default.
+      ALLOW_PRIVATE_IP_ADDRESS: "true"
+    ports:
+      - "${DS_PORT:-8080}:80"
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://localhost/healthcheck"]
+      interval: 5s
+      start_period: 60s
+      retries: 60
+
+  git:
+    image: alpine/git
+    profiles: [tools]
+    working_dir: /git
+    volumes:
+      - moodle:/git
+
+  node:
+    image: node:${NODE_VERSION:-22}
+    profiles: [tools]
+    working_dir: /var/www/html/${MOODLE_MOD_DIR:-public/mod}/onlyofficeeditor
+    volumes:
+      - moodle:/var/www/html
+      - ..:/var/www/html/${MOODLE_MOD_DIR:-public/mod}/onlyofficeeditor
+
+volumes:
+  moodle:
+  moodledata:
+  pgdata:

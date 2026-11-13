@@ -2,3 +2,5 @@
 .github export-ignore
 .gitmodules export-ignore
 CLAUDE.md export-ignore
+dev export-ignore
+*.sh text eol=lf
